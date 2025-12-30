@@ -268,3 +268,34 @@
 .stagger-3 { animation-delay: 0.3s; }
 .stagger-4 { animation-delay: 0.4s; }
 .stagger-5 { animation-delay: 0.5s; }
+
+/* Accessibility Styles */
+body.high-contrast {
+  filter: contrast(1.4);
+}
+
+body.high-contrast * {
+  border-color: currentColor !important;
+}
+
+body.highlight-links a {
+  background-color: hsl(60 100% 50%) !important;
+  color: hsl(0 0% 0%) !important;
+  text-decoration: underline !important;
+  padding: 2px 4px;
+}
+
+body.big-cursor,
+body.big-cursor * {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24' fill='black' stroke='white' stroke-width='1'%3E%3Cpath d='M4 4l7 19 2.5-6.5L20 14 4 4z'/%3E%3C/svg%3E"), auto !important;
+}
+
+body.invert-colors {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+body.invert-colors img,
+body.invert-colors video,
+body.invert-colors picture {
+  filter: invert(1) hue-rotate(180deg);
+}
