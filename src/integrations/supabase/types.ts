@@ -14,7 +14,78 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      contact_submissions: {
+        Row: {
+          created_at: string
+          email: string | null
+          event_date: string | null
+          event_type: string | null
+          id: string
+          message: string | null
+          name: string
+          phone: string | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          event_date?: string | null
+          event_type?: string | null
+          id?: string
+          message?: string | null
+          name: string
+          phone?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          event_date?: string | null
+          event_type?: string | null
+          id?: string
+          message?: string | null
+          name?: string
+          phone?: string | null
+        }
+        Relationships: []
+      }
+      wedding_submissions: {
+        Row: {
+          bride_name: string
+          created_at: string
+          event_date: string | null
+          favorite_songs: string | null
+          groom_name: string
+          id: string
+          music_genres: string[] | null
+          notes: string | null
+          phone: string
+          venue: string | null
+        }
+        Insert: {
+          bride_name: string
+          created_at?: string
+          event_date?: string | null
+          favorite_songs?: string | null
+          groom_name: string
+          id?: string
+          music_genres?: string[] | null
+          notes?: string | null
+          phone: string
+          venue?: string | null
+        }
+        Update: {
+          bride_name?: string
+          created_at?: string
+          event_date?: string | null
+          favorite_songs?: string | null
+          groom_name?: string
+          id?: string
+          music_genres?: string[] | null
+          notes?: string | null
+          phone?: string
+          venue?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
