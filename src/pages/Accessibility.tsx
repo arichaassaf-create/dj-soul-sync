@@ -27,7 +27,7 @@ export default function Accessibility() {
             </ul>
             <h2 className="text-xl font-bold text-primary">הממונה על הנגישות</h2>
             <p><strong>שם:</strong> אסף אריכא</p>
-            <p><strong>אימייל:</strong> <a href="mailto:assaf@homelix.co" className="text-primary">assaf@homelix.co</a></p>
+            <p><strong>אימייל:</strong> <a href="mailto:arichaassaf@gmail.com" className="text-primary">arichaassaf@gmail.com</a></p>
             <p>אם נתקלתם בבעיית נגישות, אנא פנו אלינו ונטפל בהקדם.</p>
           </div>
         </div>

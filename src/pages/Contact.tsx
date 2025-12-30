@@ -128,7 +128,6 @@ export default function Contact() {
                         >
                           <option value="">בחרו סוג אירוע</option>
                           <option value="wedding">חתונה</option>
-                          <option value="bar-mitzvah">בר/בת מצווה</option>
                           <option value="birthday">יום הולדת</option>
                           <option value="corporate">אירוע חברה</option>
                           <option value="other">אחר</option>
@@ -229,7 +228,7 @@ export default function Contact() {
                 </a>
 
                 <a
-                  href="mailto:assaf@homelix.co"
+                  href="mailto:arichaassaf@gmail.com"
                   className="flex items-center gap-4 p-4 bg-card rounded-xl border border-border/50 hover:border-primary/50 transition-all card-hover"
                 >
                   <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
@@ -237,7 +236,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <div className="font-bold">אימייל</div>
-                    <div className="text-muted-foreground">assaf@homelix.co</div>
+                    <div className="text-muted-foreground">arichaassaf@gmail.com</div>
                   </div>
                 </a>
 
