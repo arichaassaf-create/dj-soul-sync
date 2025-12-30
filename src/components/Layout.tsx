@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { MobileCTA } from "./MobileCTA";
+import { AccessibilityToolbar } from "./AccessibilityToolbar";
 
 interface LayoutProps {
   children: ReactNode;
@@ -16,6 +17,7 @@ export function Layout({ children }: LayoutProps) {
       </main>
       <Footer />
       <MobileCTA />
+      <AccessibilityToolbar />
     </div>
   );
 }
