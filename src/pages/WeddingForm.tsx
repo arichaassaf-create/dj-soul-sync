@@ -8,6 +8,7 @@ import { SEO } from "@/components/SEO";
 import { Layout } from "@/components/Layout";
 import { Send, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 export default function WeddingForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -17,8 +18,40 @@ export default function WeddingForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+
+    const formData = new FormData(e.currentTarget);
+    const brideName = formData.get("bride") as string;
+    const groomName = formData.get("groom") as string;
+    const phone = formData.get("phone") as string;
+    const dateStr = formData.get("date") as string;
+    const venue = formData.get("venue") as string;
+    const genres = formData.get("genres") as string;
+    const songs = formData.get("songs") as string;
+    const notes = formData.get("notes") as string;
+
+    const { error } = await supabase.from("wedding_submissions").insert({
+      bride_name: brideName,
+      groom_name: groomName,
+      phone,
+      event_date: dateStr || null,
+      venue: venue || null,
+      music_genres: genres ? genres.split(",").map((g) => g.trim()) : null,
+      favorite_songs: songs || null,
+      notes: notes || null,
+    });
+
     setIsSubmitting(false);
+
+    if (error) {
+      console.error("Error submitting wedding form:", error);
+      toast({
+        title: "שגיאה בשליחה",
+        description: "אנא נסו שוב מאוחר יותר.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitted(true);
     toast({ title: "השאלון נשלח בהצלחה!", description: "אצור איתכם קשר בקרוב." });
   };

@@ -8,6 +8,7 @@ import { SEO } from "@/components/SEO";
 import { Layout } from "@/components/Layout";
 import { Phone, Mail, MapPin, MessageCircle, Send, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -18,10 +19,35 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get("name") as string;
+    const phone = formData.get("phone") as string;
+    const email = formData.get("email") as string;
+    const eventType = formData.get("event-type") as string;
+    const eventDateStr = formData.get("event-date") as string;
+    const message = formData.get("message") as string;
+
+    const { error } = await supabase.from("contact_submissions").insert({
+      name,
+      phone,
+      email: email || null,
+      event_type: eventType || null,
+      event_date: eventDateStr || null,
+      message: message || null,
+    });
 
     setIsSubmitting(false);
+
+    if (error) {
+      console.error("Error submitting contact form:", error);
+      toast({
+        title: "שגיאה בשליחה",
+        description: "אנא נסו שוב מאוחר יותר.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitted(true);
     toast({
       title: "הטופס נשלח בהצלחה!",
