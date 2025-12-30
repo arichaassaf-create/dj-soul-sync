@@ -55,13 +55,13 @@ export function Footer() {
               >
                 <Phone className="h-5 w-5" />
               </a>
-              <a
-                href="mailto:arichaassaf@gmail.com"
+              <Link
+                to="/contact"
                 className="p-3 bg-card rounded-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300"
-                aria-label="אימייל"
+                aria-label="צור קשר"
               >
                 <Mail className="h-5 w-5" />
-              </a>
+              </Link>
             </div>
           </div>
 
