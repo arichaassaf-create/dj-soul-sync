@@ -2,16 +2,7 @@ import { Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { Layout } from "@/components/Layout";
 import { Calendar, ArrowLeft } from "lucide-react";
-
-const blogPosts = [
-  {
-    slug: "5-tips-choosing-wedding-dj",
-    title: "5 טיפים לבחירת די ג'יי מקצועי לחתונה",
-    excerpt: "בחירת התקליטן הנכון יכולה להפוך את החתונה שלכם לבלתי נשכחת. הנה 5 טיפים שיעזרו לכם לבחור נכון.",
-    date: "2024-12-15",
-    image: null,
-  },
-];
+import { blogPosts } from "@/data/blogPosts";
 
 export default function Blog() {
   return (

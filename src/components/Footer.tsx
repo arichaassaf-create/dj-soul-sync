@@ -56,7 +56,7 @@ export function Footer() {
                 <Phone className="h-5 w-5" />
               </a>
               <a
-                href="mailto:assaf@homelix.co"
+                href="mailto:arichaassaf@gmail.com"
                 className="p-3 bg-card rounded-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                 aria-label="אימייל"
               >
@@ -123,10 +123,10 @@ export function Footer() {
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-primary flex-shrink-0" />
                 <a
-                  href="mailto:assaf@homelix.co"
+                  href="mailto:arichaassaf@gmail.com"
                   className="text-foreground hover:text-primary transition-colors"
                 >
-                  assaf@homelix.co
+                  arichaassaf@gmail.com
                 </a>
               </li>
               <li className="flex items-center gap-3">

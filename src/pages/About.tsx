@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/SEO";
 import { Layout } from "@/components/Layout";
 import { MapPin, Music, Users, Calendar } from "lucide-react";
-import djPortrait from "@/assets/dj-portrait.jpg";
+import djPortrait from "@/assets/assaf.jpg";
 
 export default function About() {
   return (
@@ -31,7 +31,7 @@ export default function About() {
               <div className="relative rounded-2xl overflow-hidden aspect-square max-w-md mx-auto lg:max-w-none">
                 <img
                   src={djPortrait}
-                  alt="אסף אריכא - די ג'יי מקצועי"
+                  alt="די ג'יי אסף אריכא"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
