@@ -9,37 +9,75 @@ import { Layout } from "@/components/Layout";
 import { Phone, Mail, MapPin, MessageCircle, Send, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { contactSchema, checkRateLimit, recordSubmission } from "@/lib/formValidation";
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    setErrors({});
+
+    // Check rate limiting
+    const { allowed, remainingSeconds } = checkRateLimit();
+    if (!allowed) {
+      toast({
+        title: "נא להמתין",
+        description: `ניתן לשלוח טופס נוסף בעוד ${remainingSeconds} שניות`,
+        variant: "destructive",
+      });
+      return;
+    }
 
     const formData = new FormData(e.currentTarget);
-    const name = formData.get("name") as string;
-    const phone = formData.get("phone") as string;
-    const email = formData.get("email") as string;
-    const eventType = formData.get("event-type") as string;
-    const eventDateStr = formData.get("event-date") as string;
-    const message = formData.get("message") as string;
+    const rawData = {
+      name: formData.get("name") as string,
+      phone: formData.get("phone") as string,
+      email: formData.get("email") as string,
+      eventType: formData.get("event-type") as string,
+      eventDate: formData.get("event-date") as string,
+      message: formData.get("message") as string,
+    };
+
+    // Validate with zod
+    const result = contactSchema.safeParse(rawData);
+    if (!result.success) {
+      const fieldErrors: Record<string, string> = {};
+      result.error.errors.forEach((err) => {
+        if (err.path[0]) {
+          fieldErrors[err.path[0] as string] = err.message;
+        }
+      });
+      setErrors(fieldErrors);
+      toast({
+        title: "שגיאה בנתונים",
+        description: "אנא בדקו את השדות ונסו שוב",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
 
     const { error } = await supabase.from("contact_submissions").insert({
-      name,
-      phone,
-      email: email || null,
-      event_type: eventType || null,
-      event_date: eventDateStr || null,
-      message: message || null,
+      name: result.data.name,
+      phone: result.data.phone,
+      email: result.data.email || null,
+      event_type: result.data.eventType || null,
+      event_date: result.data.eventDate || null,
+      message: result.data.message || null,
     });
 
     setIsSubmitting(false);
 
     if (error) {
-      console.error("Error submitting contact form:", error);
+      // Only log in development to prevent info leakage
+      if (import.meta.env.DEV) {
+        console.error("Error submitting contact form:", error);
+      }
       toast({
         title: "שגיאה בשליחה",
         description: "אנא נסו שוב מאוחר יותר.",
@@ -48,6 +86,8 @@ export default function Contact() {
       return;
     }
 
+    // Record successful submission for rate limiting
+    recordSubmission();
     setIsSubmitted(true);
     toast({
       title: "הטופס נשלח בהצלחה!",
@@ -116,9 +156,11 @@ export default function Contact() {
                           id="name"
                           name="name"
                           required
+                          maxLength={100}
                           placeholder="הכניסו את שמכם"
-                          className="bg-background"
+                          className={`bg-background ${errors.name ? "border-destructive" : ""}`}
                         />
+                        {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="phone">טלפון *</Label>
@@ -127,9 +169,11 @@ export default function Contact() {
                           name="phone"
                           type="tel"
                           required
+                          maxLength={20}
                           placeholder="050-0000000"
-                          className="bg-background"
+                          className={`bg-background ${errors.phone ? "border-destructive" : ""}`}
                         />
+                        {errors.phone && <p className="text-sm text-destructive">{errors.phone}</p>}
                       </div>
                     </div>
 
@@ -139,9 +183,11 @@ export default function Contact() {
                         id="email"
                         name="email"
                         type="email"
+                        maxLength={255}
                         placeholder="your@email.com"
-                        className="bg-background"
+                        className={`bg-background ${errors.email ? "border-destructive" : ""}`}
                       />
+                      {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
                     </div>
 
                     <div className="grid sm:grid-cols-2 gap-4">
@@ -176,9 +222,11 @@ export default function Contact() {
                         id="message"
                         name="message"
                         rows={4}
+                        maxLength={2000}
                         placeholder="ספרו לי קצת על האירוע שלכם..."
-                        className="bg-background resize-none"
+                        className={`bg-background resize-none ${errors.message ? "border-destructive" : ""}`}
                       />
+                      {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}
                     </div>
 
                     <Button
