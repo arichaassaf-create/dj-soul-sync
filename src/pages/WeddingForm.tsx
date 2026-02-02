@@ -11,6 +11,38 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { weddingSchema, checkRateLimit, recordSubmission } from "@/lib/formValidation";
 
+function buildWhatsAppMessage(data: {
+  brideName: string;
+  groomName: string;
+  phone: string;
+  eventDate?: string;
+  venue?: string;
+  genres?: string;
+  songs?: string;
+  notes?: string;
+}): string {
+  let msg = `*שאלון חתונה חדש מהאתר*\n\n`;
+  msg += `*שם הכלה:* ${data.brideName}\n`;
+  msg += `*שם החתן:* ${data.groomName}\n`;
+  msg += `*טלפון:* ${data.phone}\n`;
+  if (data.eventDate) {
+    msg += `*תאריך החתונה:* ${data.eventDate}\n`;
+  }
+  if (data.venue) {
+    msg += `*מקום האירוע:* ${data.venue}\n`;
+  }
+  if (data.genres) {
+    msg += `\n*סגנונות מוזיקה:*\n${data.genres}\n`;
+  }
+  if (data.songs) {
+    msg += `\n*שירים שחייבים להיות:*\n${data.songs}\n`;
+  }
+  if (data.notes) {
+    msg += `\n*הערות נוספות:*\n${data.notes}`;
+  }
+  return encodeURIComponent(msg);
+}
+
 export default function WeddingForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -64,6 +96,7 @@ export default function WeddingForm() {
 
     setIsSubmitting(true);
 
+    // Save to database
     const { error } = await supabase.from("wedding_submissions").insert({
       bride_name: result.data.brideName,
       groom_name: result.data.groomName,
@@ -75,25 +108,31 @@ export default function WeddingForm() {
       notes: result.data.notes || null,
     });
 
-    setIsSubmitting(false);
-
     if (error) {
-      // Only log in development to prevent info leakage
       if (import.meta.env.DEV) {
         console.error("Error submitting wedding form:", error);
       }
-      toast({
-        title: "שגיאה בשליחה",
-        description: "אנא נסו שוב מאוחר יותר.",
-        variant: "destructive",
-      });
-      return;
     }
+
+    // Build WhatsApp message and open
+    const whatsappMessage = buildWhatsAppMessage({
+      brideName: result.data.brideName,
+      groomName: result.data.groomName,
+      phone: result.data.phone,
+      eventDate: result.data.eventDate,
+      venue: result.data.venue,
+      genres: result.data.genres,
+      songs: result.data.songs,
+      notes: result.data.notes,
+    });
+
+    window.open(`https://wa.me/972505567078?text=${whatsappMessage}`, "_blank");
 
     // Record successful submission for rate limiting
     recordSubmission();
+    setIsSubmitting(false);
     setIsSubmitted(true);
-    toast({ title: "השאלון נשלח בהצלחה!", description: "אצור איתכם קשר בקרוב." });
+    toast({ title: "השאלון נשלח בהצלחה!", description: "הפרטים נשלחו ל-WhatsApp." });
   };
 
   return (

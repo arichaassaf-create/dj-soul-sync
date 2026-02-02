@@ -1,11 +1,31 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/SEO";
 import { Layout } from "@/components/Layout";
 import { MapPin, Music, Users, Calendar } from "lucide-react";
-import djPortrait from "@/assets/assaf.jpg";
+
+// Import all DJ photos for carousel
+import djPhoto1 from "@/assets/dj-photo-1.webp";
+import djPhoto2 from "@/assets/dj-photo-2.jpg";
+import djPhoto3 from "@/assets/dj-photo-3.jpg";
+import djPhoto4 from "@/assets/dj-photo-4.jpg";
+import djPhoto5 from "@/assets/dj-photo-5.jpg";
+import djPhoto6 from "@/assets/dj-photo-6.jpg";
+import djPhoto7 from "@/assets/dj-photo-7.jpg";
+
+const djPhotos = [djPhoto1, djPhoto2, djPhoto3, djPhoto4, djPhoto5, djPhoto6, djPhoto7];
 
 export default function About() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % djPhotos.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <Layout>
       <SEO
@@ -27,14 +47,19 @@ export default function About() {
           </nav>
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Image */}
+            {/* Image Carousel */}
             <div className="relative">
               <div className="relative rounded-2xl overflow-hidden aspect-square max-w-md mx-auto lg:max-w-none">
-                <img
-                  src={djPortrait}
-                  alt="די ג'יי אסף אריכא"
-                  className="w-full h-full object-cover"
-                />
+                {djPhotos.map((photo, index) => (
+                  <img
+                    key={index}
+                    src={photo}
+                    alt={`די ג'יי אסף אריכא - תמונה ${index + 1}`}
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                      index === currentImageIndex ? "opacity-100" : "opacity-0"
+                    }`}
+                  />
+                ))}
                 <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
               </div>
               {/* Floating Badge */}
@@ -42,6 +67,21 @@ export default function About() {
                 <span className="text-2xl">שנים</span>
                 <br />
                 <span className="text-sm">של ניסיון</span>
+              </div>
+              {/* Carousel Indicators */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                {djPhotos.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentImageIndex(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      index === currentImageIndex 
+                        ? "bg-primary w-6" 
+                        : "bg-primary/40 hover:bg-primary/60"
+                    }`}
+                    aria-label={`עבור לתמונה ${index + 1}`}
+                  />
+                ))}
               </div>
             </div>
 

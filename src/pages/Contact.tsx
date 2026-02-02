@@ -6,10 +6,39 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { SEO } from "@/components/SEO";
 import { Layout } from "@/components/Layout";
-import { Phone, Mail, MapPin, MessageCircle, Send, CheckCircle } from "lucide-react";
+import { Phone, MapPin, MessageCircle, Send, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { contactSchema, checkRateLimit, recordSubmission } from "@/lib/formValidation";
+
+const EVENT_TYPE_LABELS: Record<string, string> = {
+  wedding: "חתונה",
+  birthday: "יום הולדת",
+  corporate: "אירוע חברה",
+  other: "אחר",
+};
+
+function buildWhatsAppMessage(data: {
+  name: string;
+  phone: string;
+  eventType?: string;
+  eventDate?: string;
+  message?: string;
+}): string {
+  let msg = `*פנייה חדשה מהאתר*\n\n`;
+  msg += `*שם:* ${data.name}\n`;
+  msg += `*טלפון:* ${data.phone}\n`;
+  if (data.eventType) {
+    msg += `*סוג אירוע:* ${EVENT_TYPE_LABELS[data.eventType] || data.eventType}\n`;
+  }
+  if (data.eventDate) {
+    msg += `*תאריך:* ${data.eventDate}\n`;
+  }
+  if (data.message) {
+    msg += `\n*הודעה:*\n${data.message}`;
+  }
+  return encodeURIComponent(msg);
+}
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -36,7 +65,7 @@ export default function Contact() {
     const rawData = {
       name: formData.get("name") as string,
       phone: formData.get("phone") as string,
-      email: formData.get("email") as string,
+      email: "", // No longer collecting email in form
       eventType: formData.get("event-type") as string,
       eventDate: formData.get("event-date") as string,
       message: formData.get("message") as string,
@@ -62,36 +91,40 @@ export default function Contact() {
 
     setIsSubmitting(true);
 
+    // Save to database
     const { error } = await supabase.from("contact_submissions").insert({
       name: result.data.name,
       phone: result.data.phone,
-      email: result.data.email || null,
+      email: null,
       event_type: result.data.eventType || null,
       event_date: result.data.eventDate || null,
       message: result.data.message || null,
     });
 
-    setIsSubmitting(false);
-
     if (error) {
-      // Only log in development to prevent info leakage
       if (import.meta.env.DEV) {
         console.error("Error submitting contact form:", error);
       }
-      toast({
-        title: "שגיאה בשליחה",
-        description: "אנא נסו שוב מאוחר יותר.",
-        variant: "destructive",
-      });
-      return;
     }
+
+    // Build WhatsApp message and open
+    const whatsappMessage = buildWhatsAppMessage({
+      name: result.data.name,
+      phone: result.data.phone,
+      eventType: result.data.eventType,
+      eventDate: result.data.eventDate,
+      message: result.data.message,
+    });
+
+    window.open(`https://wa.me/972505567078?text=${whatsappMessage}`, "_blank");
 
     // Record successful submission for rate limiting
     recordSubmission();
+    setIsSubmitting(false);
     setIsSubmitted(true);
     toast({
       title: "הטופס נשלח בהצלחה!",
-      description: "נחזור אליכם בהקדם האפשרי.",
+      description: "הפרטים נשלחו ל-WhatsApp.",
     });
   };
 
@@ -177,19 +210,6 @@ export default function Contact() {
                       </div>
                     </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="email">אימייל</Label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        maxLength={255}
-                        placeholder="your@email.com"
-                        className={`bg-background ${errors.email ? "border-destructive" : ""}`}
-                      />
-                      {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
-                    </div>
-
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="event-type">סוג האירוע</Label>
@@ -255,7 +275,7 @@ export default function Contact() {
               <div>
                 <h2 className="text-2xl font-heading font-bold mb-6">דרכים נוספות ליצור קשר</h2>
                 <p className="text-muted-foreground mb-8">
-                  אתם מוזמנים להתקשר, לשלוח הודעה ב-WhatsApp או אימייל. אני זמין כמעט תמיד ואשמח לענות על כל שאלה.
+                  אתם מוזמנים להתקשר או לשלוח הודעה ב-WhatsApp. אני זמין כמעט תמיד ואשמח לענות על כל שאלה.
                 </p>
               </div>
 
@@ -281,7 +301,7 @@ export default function Contact() {
                     <Phone className="h-6 w-6 text-primary" />
                   </div>
                   <div>
-                    <div className="font-bold">טלפון נוסף</div>
+                    <div className="font-bold">טלפון משרד</div>
                     <div className="text-muted-foreground">07-22-3333-22</div>
                   </div>
                 </a>
@@ -298,19 +318,6 @@ export default function Contact() {
                   <div>
                     <div className="font-bold">WhatsApp</div>
                     <div className="text-muted-foreground">שלחו הודעה עכשיו</div>
-                  </div>
-                </a>
-
-                <a
-                  href="mailto:arichaassaf@gmail.com"
-                  className="flex items-center gap-4 p-4 bg-card rounded-xl border border-border/50 hover:border-primary/50 transition-all card-hover"
-                >
-                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                    <Mail className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <div className="font-bold">אימייל</div>
-                    <div className="text-muted-foreground">arichaassaf@gmail.com</div>
                   </div>
                 </a>
 
