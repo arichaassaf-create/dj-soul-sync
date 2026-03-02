@@ -5,6 +5,19 @@ import { Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { blogPosts } from "@/data/blogPosts";
 
+// Hero images map
+import corporateEventHero from "@/assets/corporate-event-hero.png";
+import djPhoto1 from "@/assets/dj-photo-1.webp";
+import djPhoto2 from "@/assets/dj-photo-2.jpg";
+import djPhoto3 from "@/assets/dj-photo-3.jpg";
+import djPhoto4 from "@/assets/dj-photo-4.jpg";
+
+const heroImages: Record<string, string> = {
+  "corporate-event-hero": corporateEventHero,
+};
+
+const sectionImages = [djPhoto1, djPhoto2, djPhoto3, djPhoto4];
+
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
   const post = blogPosts.find((p) => p.slug === slug);
@@ -12,6 +25,8 @@ export default function BlogPost() {
   if (!post) {
     return <Navigate to="/blog" replace />;
   }
+
+  const heroImage = post.heroImage ? heroImages[post.heroImage] : null;
 
   return (
     <Layout>
@@ -35,6 +50,18 @@ export default function BlogPost() {
             </ol>
           </nav>
 
+          {/* Hero Image */}
+          {heroImage && (
+            <div className="relative rounded-2xl overflow-hidden mb-12 max-w-4xl">
+              <img
+                src={heroImage}
+                alt={post.title}
+                className="w-full h-64 md:h-96 object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
+            </div>
+          )}
+
           <header className="max-w-3xl mb-12">
             <div className="flex items-center gap-2 text-muted-foreground mb-4">
               <Calendar className="h-4 w-4" />
@@ -50,6 +77,28 @@ export default function BlogPost() {
               {post.content.intro}
             </p>
 
+            {/* Sections with images */}
+            {post.content.sections?.map((section, index) => (
+              <div key={index} className="mb-12">
+                {sectionImages[index] && (
+                  <div className="rounded-xl overflow-hidden mb-6">
+                    <img
+                      src={sectionImages[index]}
+                      alt={section.title}
+                      className="w-full h-48 md:h-64 object-cover"
+                    />
+                  </div>
+                )}
+                <h2 className="text-2xl font-bold text-primary mt-4 mb-4">
+                  {section.title}
+                </h2>
+                <p className="text-foreground/90 leading-relaxed">
+                  {section.content}
+                </p>
+              </div>
+            ))}
+
+            {/* Tips */}
             {post.content.tips.map((tip, index) => (
               <div key={index}>
                 <h2 className="text-2xl font-bold text-primary mt-12 mb-4">
@@ -60,6 +109,18 @@ export default function BlogPost() {
                 </p>
               </div>
             ))}
+
+            {/* Outro */}
+            {post.content.outro && (
+              <div className="mt-12 p-8 bg-card rounded-2xl border border-primary/20">
+                <h2 className="text-2xl font-bold mb-4">
+                  <span className="text-gradient-gold">המחויבות שלי: חוויה אישית ובלתי מתפשרת</span>
+                </h2>
+                <p className="text-foreground/90 leading-relaxed">
+                  {post.content.outro}
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="max-w-3xl mt-16 pt-8 border-t border-border">

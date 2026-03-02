@@ -3,6 +3,11 @@ import { SEO } from "@/components/SEO";
 import { Layout } from "@/components/Layout";
 import { Calendar, ArrowLeft } from "lucide-react";
 import { blogPosts } from "@/data/blogPosts";
+import corporateEventHero from "@/assets/corporate-event-hero.png";
+
+const heroImages: Record<string, string> = {
+  "corporate-event-hero": corporateEventHero,
+};
 
 export default function Blog() {
   return (
@@ -31,7 +36,11 @@ export default function Blog() {
             {blogPosts.map((post) => (
               <Link key={post.slug} to={`/blog/${post.slug}`} className="group">
                 <article className="bg-card rounded-2xl overflow-hidden border border-border/50 card-hover h-full">
-                  <div className="h-48 bg-gradient-card" />
+                  {post.heroImage && heroImages[post.heroImage] ? (
+                    <img src={heroImages[post.heroImage]} alt={post.title} className="h-48 w-full object-cover" />
+                  ) : (
+                    <div className="h-48 bg-gradient-card" />
+                  )}
                   <div className="p-6">
                     <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
                       <Calendar className="h-4 w-4" />
