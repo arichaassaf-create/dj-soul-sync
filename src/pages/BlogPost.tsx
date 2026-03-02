@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 import { blogPosts } from "@/data/blogPosts";
 
 // Hero images map
-import corporateEventHero from "@/assets/corporate-event-hero.png";
-import djPhoto1 from "@/assets/dj-photo-5.jpg";
+import corporateEventHero from "@/assets/dj-photo-5.jpg";
+import djPhoto1 from "@/assets/dj-photo-1.webp";
 import djPhoto2 from "@/assets/dj-photo-2.jpg";
 import djPhoto3 from "@/assets/dj-photo-3.jpg";
 import djPhoto4 from "@/assets/dj-photo-4.jpg";
