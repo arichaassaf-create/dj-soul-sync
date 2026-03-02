@@ -3,7 +3,7 @@ import { SEO } from "@/components/SEO";
 import { Layout } from "@/components/Layout";
 import { Calendar, ArrowLeft } from "lucide-react";
 import { blogPosts } from "@/data/blogPosts";
-import corporateEventHero from "@/assets/corporate-event-hero.png";
+import corporateEventHero from "@/assets/dj-photo-5.jpg";
 
 const heroImages: Record<string, string> = {
   "corporate-event-hero": corporateEventHero,
