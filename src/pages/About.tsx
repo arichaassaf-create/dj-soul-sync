@@ -6,7 +6,7 @@ import { Layout } from "@/components/Layout";
 import { MapPin, Music, Users, Calendar } from "lucide-react";
 
 // Import all DJ photos for carousel
-import djPhoto1 from "@/assets/dj-photo-1.webp";
+import djPhoto1 from "@/assets/assaf-original.webp";
 import djPhoto2 from "@/assets/dj-photo-2.jpg";
 import djPhoto3 from "@/assets/dj-photo-3.jpg";
 import djPhoto4 from "@/assets/dj-photo-4.jpg";
@@ -49,13 +49,13 @@ export default function About() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Image Carousel */}
             <div className="relative">
-              <div className="relative rounded-2xl overflow-hidden aspect-square max-w-md mx-auto lg:max-w-none">
+              <div className="relative rounded-2xl overflow-hidden aspect-[3/4] max-w-md mx-auto lg:max-w-none">
                 {djPhotos.map((photo, index) => (
                   <img
                     key={index}
                     src={photo}
                     alt={`די ג'יי אסף אריכא - תמונה ${index + 1}`}
-                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                    className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-1000 ease-in-out ${
                       index === currentImageIndex ? "opacity-100" : "opacity-0"
                     }`}
                   />
