@@ -86,6 +86,36 @@ export type Database = {
         }
         Relationships: []
       }
+      workshop_submissions: {
+        Row: {
+          created_at: string
+          experience_level: string | null
+          id: string
+          music_genres: string | null
+          name: string
+          participant_type: string
+          phone: string
+        }
+        Insert: {
+          created_at?: string
+          experience_level?: string | null
+          id?: string
+          music_genres?: string | null
+          name: string
+          participant_type?: string
+          phone: string
+        }
+        Update: {
+          created_at?: string
+          experience_level?: string | null
+          id?: string
+          music_genres?: string | null
+          name?: string
+          participant_type?: string
+          phone?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

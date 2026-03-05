@@ -7,6 +7,7 @@ const navLinks = [
   { href: "/", label: "בית" },
   { href: "/about", label: "אודות" },
   { href: "/services", label: "שירותים" },
+  { href: "/workshop", label: "סדנת DJ" },
   { href: "/blog", label: "בלוג" },
   { href: "/wedding-form", label: "שאלון חתונה" },
   { href: "/contact", label: "צור קשר" },
