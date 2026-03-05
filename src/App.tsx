@@ -15,6 +15,8 @@ import WeddingForm from "./pages/WeddingForm";
 import Privacy from "./pages/Privacy";
 import Accessibility from "./pages/Accessibility";
 import NotFound from "./pages/NotFound";
+import Workshop from "./pages/Workshop";
+import WorkshopLanding from "./pages/WorkshopLanding";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +36,8 @@ const App = () => (
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/wedding-form" element={<WeddingForm />} />
+            <Route path="/workshop" element={<Workshop />} />
+            <Route path="/learn-to-dj" element={<WorkshopLanding />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/accessibility" element={<Accessibility />} />
             <Route path="*" element={<NotFound />} />
