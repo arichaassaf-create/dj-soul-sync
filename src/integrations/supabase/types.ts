@@ -86,6 +86,27 @@ export type Database = {
         }
         Relationships: []
       }
+      whatsapp_clicks: {
+        Row: {
+          created_at: string
+          id: string
+          source: string
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          source?: string
+          url?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          source?: string
+          url?: string
+        }
+        Relationships: []
+      }
       workshop_submissions: {
         Row: {
           created_at: string
