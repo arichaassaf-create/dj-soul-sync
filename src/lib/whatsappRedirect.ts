@@ -8,10 +8,10 @@ declare global {
  * Fires a Facebook Lead event, saves click data to DB, then opens WhatsApp directly.
  * No interstitial page needed — everything happens inline.
  */
-export function redirectToWhatsApp(whatsappMessage: string, source: string) {
-  // 1. Fire FB Lead event
+export function redirectToWhatsApp(whatsappMessage: string, source: string, pixelEvent: "Lead" | "CompleteRegistration" = "Lead") {
+  // 1. Fire FB pixel event
   if (window.fbq) {
-    window.fbq("track", "Lead", {
+    window.fbq("track", pixelEvent, {
       content_name: source,
     });
   }

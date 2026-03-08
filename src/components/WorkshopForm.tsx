@@ -74,7 +74,7 @@ export function WorkshopForm({ variant = "default" }: WorkshopFormProps) {
     }
 
     const whatsappMessage = buildWorkshopWhatsAppMessage(result.data);
-    redirectToWhatsApp(whatsappMessage, "workshop");
+    redirectToWhatsApp(whatsappMessage, "workshop", "CompleteRegistration");
 
     recordSubmission();
     setIsSubmitting(false);
