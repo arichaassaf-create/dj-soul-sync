@@ -5,18 +5,33 @@ declare global {
 }
 
 /**
- * Fires a Facebook Lead event on the current page (where pixel is already loaded),
- * then opens the interstitial redirect page that saves click data and redirects to WhatsApp.
+ * Fires a Facebook Lead event, saves click data to DB, then opens WhatsApp directly.
+ * No interstitial page needed — everything happens inline.
  */
 export function redirectToWhatsApp(whatsappMessage: string, source: string) {
-  // Fire FB Lead event on the CURRENT page where pixel is already loaded
+  // 1. Fire FB Lead event
   if (window.fbq) {
     window.fbq("track", "Lead", {
       content_name: source,
     });
   }
 
-  const whatsappUrl = `https://wa.me/972505567078?text=${whatsappMessage}`;
-  const redirectUrl = `/whatsapp-redirect?source=${encodeURIComponent(source)}&url=${encodeURIComponent(whatsappUrl)}`;
-  window.open(redirectUrl, "_blank");
+  // 2. Save click data (fire and forget)
+  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+  const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+  if (supabaseUrl && supabaseKey) {
+    const whatsappUrl = `https://wa.me/972505567078?text=${whatsappMessage}`;
+    fetch(`${supabaseUrl}/rest/v1/whatsapp_clicks`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: supabaseKey,
+        Authorization: `Bearer ${supabaseKey}`,
+      },
+      body: JSON.stringify({ source, url: whatsappUrl }),
+    }).catch(() => {});
+  }
+
+  // 3. Open WhatsApp directly
+  window.open(`https://wa.me/972505567078?text=${whatsappMessage}`, "_blank");
 }
