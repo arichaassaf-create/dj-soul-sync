@@ -127,7 +127,7 @@ export default function WeddingForm() {
       notes: result.data.notes,
     });
 
-    redirectToWhatsApp(whatsappMessage, "wedding");
+    redirectToWhatsApp(whatsappMessage, "wedding", "Lead");
 
     // Record successful submission for rate limiting
     recordSubmission();
