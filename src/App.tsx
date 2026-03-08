@@ -39,6 +39,7 @@ const App = () => (
             <Route path="/wedding-form" element={<WeddingForm />} />
             <Route path="/workshop" element={<Workshop />} />
             <Route path="/learn-to-dj" element={<WorkshopLanding />} />
+            <Route path="/whatsapp-redirect" element={<WhatsAppRedirect />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/accessibility" element={<Accessibility />} />
             <Route path="*" element={<NotFound />} />
