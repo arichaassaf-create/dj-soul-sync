@@ -6,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { checkRateLimit, recordSubmission } from "@/lib/formValidation";
 import { workshopSchema, buildWorkshopWhatsAppMessage } from "@/lib/workshopValidation";
+import { redirectToWhatsApp } from "@/lib/whatsappRedirect";
 import { Send, CheckCircle } from "lucide-react";
 
 interface WorkshopFormProps {
@@ -73,7 +74,7 @@ export function WorkshopForm({ variant = "default" }: WorkshopFormProps) {
     }
 
     const whatsappMessage = buildWorkshopWhatsAppMessage(result.data);
-    window.open(`https://wa.me/972505567078?text=${whatsappMessage}`, "_blank");
+    redirectToWhatsApp(whatsappMessage, "workshop");
 
     recordSubmission();
     setIsSubmitting(false);

@@ -10,6 +10,7 @@ import { Send, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { weddingSchema, checkRateLimit, recordSubmission } from "@/lib/formValidation";
+import { redirectToWhatsApp } from "@/lib/whatsappRedirect";
 
 function buildWhatsAppMessage(data: {
   brideName: string;
@@ -126,7 +127,7 @@ export default function WeddingForm() {
       notes: result.data.notes,
     });
 
-    window.open(`https://wa.me/972505567078?text=${whatsappMessage}`, "_blank");
+    redirectToWhatsApp(whatsappMessage, "wedding");
 
     // Record successful submission for rate limiting
     recordSubmission();

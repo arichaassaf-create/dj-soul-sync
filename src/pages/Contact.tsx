@@ -10,6 +10,7 @@ import { Phone, MapPin, MessageCircle, Send, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { contactSchema, checkRateLimit, recordSubmission } from "@/lib/formValidation";
+import { redirectToWhatsApp } from "@/lib/whatsappRedirect";
 
 const EVENT_TYPE_LABELS: Record<string, string> = {
   wedding: "חתונה",
@@ -107,7 +108,7 @@ export default function Contact() {
       }
     }
 
-    // Build WhatsApp message and open
+    // Build WhatsApp message and redirect via interstitial page
     const whatsappMessage = buildWhatsAppMessage({
       name: result.data.name,
       phone: result.data.phone,
@@ -116,7 +117,7 @@ export default function Contact() {
       message: result.data.message,
     });
 
-    window.open(`https://wa.me/972505567078?text=${whatsappMessage}`, "_blank");
+    redirectToWhatsApp(whatsappMessage, "contact");
 
     // Record successful submission for rate limiting
     recordSubmission();
