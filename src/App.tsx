@@ -17,6 +17,7 @@ import Accessibility from "./pages/Accessibility";
 import NotFound from "./pages/NotFound";
 import Workshop from "./pages/Workshop";
 import WorkshopLanding from "./pages/WorkshopLanding";
+import WhatsAppRedirect from "./pages/WhatsAppRedirect";
 
 const queryClient = new QueryClient();
 

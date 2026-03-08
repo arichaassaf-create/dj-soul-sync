@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
 
 declare global {
   interface Window {
@@ -22,11 +21,20 @@ export default function WhatsAppRedirect() {
       });
     }
 
-    // 2. Save click data to DB
-    supabase
-      .from("whatsapp_clicks")
-      .insert({ source, url: url || "" })
-      .then(() => {});
+    // 2. Save click data to DB (fire and forget)
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+    const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+    if (supabaseUrl && supabaseKey) {
+      fetch(`${supabaseUrl}/rest/v1/whatsapp_clicks`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+        },
+        body: JSON.stringify({ source, url: url || "" }),
+      }).catch(() => {});
+    }
 
     // 3. Redirect to WhatsApp after short delay
     const timer = setTimeout(() => {
