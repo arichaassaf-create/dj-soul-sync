@@ -1,12 +1,6 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
-declare global {
-  interface Window {
-    fbq?: (...args: unknown[]) => void;
-  }
-}
-
 export default function WhatsAppRedirect() {
   const [searchParams] = useSearchParams();
 
@@ -14,14 +8,7 @@ export default function WhatsAppRedirect() {
     const url = searchParams.get("url");
     const source = searchParams.get("source") || "unknown";
 
-    // 1. Fire Facebook Lead event
-    if (window.fbq) {
-      window.fbq("track", "Lead", {
-        content_name: source,
-      });
-    }
-
-    // 2. Save click data to DB (fire and forget)
+    // Save click data to DB (fire and forget)
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
     const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
     if (supabaseUrl && supabaseKey) {
@@ -36,7 +23,7 @@ export default function WhatsAppRedirect() {
       }).catch(() => {});
     }
 
-    // 3. Redirect to WhatsApp after short delay
+    // Redirect to WhatsApp after short delay
     const timer = setTimeout(() => {
       if (url) {
         window.location.href = url;
