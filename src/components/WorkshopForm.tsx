@@ -6,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { checkRateLimit, recordSubmission } from "@/lib/formValidation";
 import { workshopSchema, buildWorkshopWhatsAppMessage } from "@/lib/workshopValidation";
+import { redirectToWhatsApp } from "@/lib/whatsappRedirect";
 import { Send, CheckCircle } from "lucide-react";
 
 interface WorkshopFormProps {
