@@ -127,7 +127,7 @@ export default function WeddingForm() {
       notes: result.data.notes,
     });
 
-    window.open(`https://wa.me/972505567078?text=${whatsappMessage}`, "_blank");
+    redirectToWhatsApp(whatsappMessage, "wedding");
 
     // Record successful submission for rate limiting
     recordSubmission();
