@@ -1,20 +1,32 @@
-import { supabase } from "@/integrations/supabase/client";
-
+/**
+ * שולח טופס ל-Netlify Forms — שיטה פשוטה שלא מצריכה API keys.
+ * Netlify מקבל את הנתונים ושולח מייל ל-arichaassaf@gmail.com אוטומטית.
+ */
 export async function sendFormEmail(
-  formType: "contact" | "wedding" | "workshop",
+  formName: "contact" | "wedding" | "workshop",
   data: Record<string, string | undefined>
 ): Promise<void> {
   try {
-    const { error } = await supabase.functions.invoke("send-form-email", {
-      body: { formType, data },
+    // בנה את הנתונים בפורמט שNetlify מצפה לו
+    const formData = new URLSearchParams();
+    formData.append("form-name", formName);
+
+    // הוסף את כל השדות שאינם ריקים
+    Object.entries(data).forEach(([key, value]) => {
+      if (value && value.trim() !== "") {
+        formData.append(key, value);
+      }
     });
-    if (error) {
-      console.error("Failed to send email notification:", error);
-    }
+
+    await fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: formData.toString(),
+    });
   } catch (err) {
-    // Silent fail — email is secondary to WhatsApp redirect
+    // Silent fail — המייל הוא משני לWhatsApp
     if (import.meta.env.DEV) {
-      console.error("Email notification error:", err);
+      console.error("Netlify form submission error:", err);
     }
   }
 }
