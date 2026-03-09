@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { contactSchema, checkRateLimit, recordSubmission } from "@/lib/formValidation";
 import { redirectToWhatsApp } from "@/lib/whatsappRedirect";
+import { sendFormEmail } from "@/lib/sendFormEmail";
 
 const EVENT_TYPE_LABELS: Record<string, string> = {
   wedding: "חתונה",
@@ -115,6 +116,15 @@ export default function Contact() {
       eventType: result.data.eventType,
       eventDate: result.data.eventDate,
       message: result.data.message,
+    });
+
+    // Send email notification (fire and forget)
+    sendFormEmail("contact", {
+      "שם": result.data.name,
+      "טלפון": result.data.phone,
+      "סוג אירוע": result.data.eventType ? EVENT_TYPE_LABELS[result.data.eventType] || result.data.eventType : undefined,
+      "תאריך": result.data.eventDate || undefined,
+      "הודעה": result.data.message || undefined,
     });
 
     redirectToWhatsApp(whatsappMessage, "contact");

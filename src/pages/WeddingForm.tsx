@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { weddingSchema, checkRateLimit, recordSubmission } from "@/lib/formValidation";
 import { redirectToWhatsApp } from "@/lib/whatsappRedirect";
+import { sendFormEmail } from "@/lib/sendFormEmail";
 
 function buildWhatsAppMessage(data: {
   brideName: string;
@@ -114,6 +115,18 @@ export default function WeddingForm() {
         console.error("Error submitting wedding form:", error);
       }
     }
+
+    // Send email notification (fire and forget)
+    sendFormEmail("wedding", {
+      "שם הכלה": result.data.brideName,
+      "שם החתן": result.data.groomName,
+      "טלפון": result.data.phone,
+      "תאריך": result.data.eventDate || undefined,
+      "מקום": result.data.venue || undefined,
+      "סגנונות מוזיקה": result.data.genres || undefined,
+      "שירים מועדפים": result.data.songs || undefined,
+      "הערות": result.data.notes || undefined,
+    });
 
     // Build WhatsApp message and open
     const whatsappMessage = buildWhatsAppMessage({
