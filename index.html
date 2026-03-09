@@ -103,6 +103,39 @@
     </script>
     <!-- End Meta Pixel Code -->
   </head>
+  <!-- Netlify Forms hidden detection forms -->
+  <body>
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input name="bot-field" />
+      <input name="שם" />
+      <input name="טלפון" />
+      <input name="סוג-אירוע" />
+      <input name="תאריך" />
+      <input name="הודעה" />
+    </form>
+    <form name="wedding" netlify netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="wedding" />
+      <input name="bot-field" />
+      <input name="שם-הכלה" />
+      <input name="שם-החתן" />
+      <input name="טלפון" />
+      <input name="תאריך-החתונה" />
+      <input name="מקום-האירוע" />
+      <input name="סגנונות-מוזיקה" />
+      <input name="שירים-מועדפים" />
+      <input name="הערות" />
+    </form>
+    <form name="workshop" netlify netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="workshop" />
+      <input name="bot-field" />
+      <input name="שם" />
+      <input name="טלפון" />
+      <input name="סוג-משתתף" />
+      <input name="רמת-ניסיון" />
+      <input name="סגנונות-מוזיקה" />
+    </form>
+  </body>
 
   <body>
     <noscript><img height="1" width="1" style="display:none"
