@@ -116,6 +116,18 @@ export default function WeddingForm() {
       }
     }
 
+    // Send email notification (fire and forget)
+    sendFormEmail("wedding", {
+      "שם הכלה": result.data.brideName,
+      "שם החתן": result.data.groomName,
+      "טלפון": result.data.phone,
+      "תאריך": result.data.eventDate || undefined,
+      "מקום": result.data.venue || undefined,
+      "סגנונות מוזיקה": result.data.genres || undefined,
+      "שירים מועדפים": result.data.songs || undefined,
+      "הערות": result.data.notes || undefined,
+    });
+
     // Build WhatsApp message and open
     const whatsappMessage = buildWhatsAppMessage({
       brideName: result.data.brideName,

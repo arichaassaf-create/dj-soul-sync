@@ -74,6 +74,15 @@ export function WorkshopForm({ variant = "default" }: WorkshopFormProps) {
       console.error("Error submitting workshop form:", error);
     }
 
+    // Send email notification (fire and forget)
+    sendFormEmail("workshop", {
+      "שם": result.data.name,
+      "טלפון": result.data.phone,
+      "סוג משתתף": result.data.participantType,
+      "רמת ניסיון": result.data.experienceLevel || undefined,
+      "סגנונות מוזיקה": result.data.musicGenres || undefined,
+    });
+
     const whatsappMessage = buildWorkshopWhatsAppMessage(result.data);
     redirectToWhatsApp(whatsappMessage, "workshop", "CompleteRegistration");
 
