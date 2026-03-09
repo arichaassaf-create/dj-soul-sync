@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { checkRateLimit, recordSubmission } from "@/lib/formValidation";
 import { workshopSchema, buildWorkshopWhatsAppMessage } from "@/lib/workshopValidation";
 import { redirectToWhatsApp } from "@/lib/whatsappRedirect";
+import { sendFormEmail } from "@/lib/sendFormEmail";
 import { Send, CheckCircle } from "lucide-react";
 
 interface WorkshopFormProps {

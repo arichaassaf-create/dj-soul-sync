@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { weddingSchema, checkRateLimit, recordSubmission } from "@/lib/formValidation";
 import { redirectToWhatsApp } from "@/lib/whatsappRedirect";
+import { sendFormEmail } from "@/lib/sendFormEmail";
 
 function buildWhatsAppMessage(data: {
   brideName: string;
