@@ -122,7 +122,7 @@ export default function Contact() {
     sendFormEmail("contact", {
       "שם": result.data.name,
       "טלפון": result.data.phone,
-      "סוג אירוע": result.data.eventType ? EVENT_TYPE_LABELS[result.data.eventType] || result.data.eventType : undefined,
+      "סוג-אירוע": result.data.eventType ? EVENT_TYPE_LABELS[result.data.eventType] || result.data.eventType : undefined,
       "תאריך": result.data.eventDate || undefined,
       "הודעה": result.data.message || undefined,
     });
