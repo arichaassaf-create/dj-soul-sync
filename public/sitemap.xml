@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- ===== דף הבית - עברית (ראשי) ===== -->
+  <url>
+    <loc>https://www.dj-assaf-aricha.com/</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.00</priority>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.dj-assaf-aricha.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://en.dj-assaf-aricha.com/"/>
+  </url>
+
+  <!-- ===== דף הבית - אנגלית ===== -->
+  <url>
+    <loc>https://en.dj-assaf-aricha.com/</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.dj-assaf-aricha.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://en.dj-assaf-aricha.com/"/>
+  </url>
+
+  <!-- ===== שירותים ===== -->
+  <url>
+    <loc>https://www.dj-assaf-aricha.com/weddings</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <url>
+    <loc>https://www.dj-assaf-aricha.com/bar-bat-mitzva</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.dj-assaf-aricha.com/corporate-events</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.dj-assaf-aricha.com/private-events</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- ===== עמודים נוספים ===== -->
+  <url>
+    <loc>https://www.dj-assaf-aricha.com/about</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://www.dj-assaf-aricha.com/gallery</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://www.dj-assaf-aricha.com/reviews</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://www.dj-assaf-aricha.com/contact</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!--
+  =====================================================
+  הערה: אנא בדקו את שמות ה-slugs האמיתיים של הדפים
+  ועדכנו את הכתובות בהתאם לאתר הבנוי ב-Wix.
+  =====================================================
+  -->
+
+</urlset>

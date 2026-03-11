@@ -1,14 +1,11 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
+
+# חסימת עמודים פנימיים שלא צריכים אינדוקס
+Disallow: /inst4gr4m
+Disallow: /_api/
+Disallow: /_partials/
+Disallow: /wix-warmup-data
+
+# Sitemap
+Sitemap: https://www.dj-assaf-aricha.com/sitemap.xml
