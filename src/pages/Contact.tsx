@@ -12,6 +12,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { contactSchema, checkRateLimit, recordSubmission } from "@/lib/formValidation";
 import { redirectToWhatsApp } from "@/lib/whatsappRedirect";
 import { sendFormEmail } from "@/lib/sendFormEmail";
+import { trackContactFormSubmit } from "@/lib/analytics";
 
 const EVENT_TYPE_LABELS: Record<string, string> = {
   wedding: "חתונה",
@@ -117,6 +118,9 @@ export default function Contact() {
       eventDate: result.data.eventDate,
       message: result.data.message,
     });
+
+    // Track GA4 event
+    trackContactFormSubmit(result.data.eventType);
 
     // Send email notification (fire and forget)
     sendFormEmail("contact", {

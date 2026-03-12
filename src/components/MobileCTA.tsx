@@ -1,12 +1,13 @@
 import { Phone, MessageCircle, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { trackPhoneClick, trackWhatsAppClick, trackCTAClick } from "@/lib/analytics";
 
 export function MobileCTA() {
   return (
     <div className="fixed bottom-0 left-0 right-0 lg:hidden z-40 glass border-t border-border/50 p-3">
       <div className="flex items-center justify-between gap-2 max-w-md mx-auto">
         <Button variant="phone" size="sm" className="flex-1" asChild>
-          <a href="tel:0505567078" aria-label="התקשרו עכשיו">
+          <a href="tel:0505567078" aria-label="התקשרו עכשיו" onClick={() => trackPhoneClick("mobile_cta")}>
             <Phone className="h-4 w-4" />
             <span>התקשרו</span>
           </a>
@@ -18,6 +19,7 @@ export function MobileCTA() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="שלחו הודעה ב-WhatsApp"
+            onClick={() => trackWhatsAppClick("mobile_cta")}
           >
             <MessageCircle className="h-4 w-4" />
             <span>WhatsApp</span>
@@ -25,7 +27,7 @@ export function MobileCTA() {
         </Button>
         
         <Button variant="hero" size="sm" className="flex-1" asChild>
-          <a href="/contact" aria-label="השאירו פרטים">
+          <a href="/contact" aria-label="השאירו פרטים" onClick={() => trackCTAClick("contact_form", "mobile_cta")}>
             <Mail className="h-4 w-4" />
             <span>פרטים</span>
           </a>

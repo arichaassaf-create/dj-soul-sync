@@ -12,6 +12,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { weddingSchema, checkRateLimit, recordSubmission } from "@/lib/formValidation";
 import { redirectToWhatsApp } from "@/lib/whatsappRedirect";
 import { sendFormEmail } from "@/lib/sendFormEmail";
+import { trackWeddingFormSubmit } from "@/lib/analytics";
 
 function buildWhatsAppMessage(data: {
   brideName: string;
@@ -115,6 +116,9 @@ export default function WeddingForm() {
         console.error("Error submitting wedding form:", error);
       }
     }
+
+    // Track GA4 event
+    trackWeddingFormSubmit();
 
     // Send email notification (fire and forget)
     sendFormEmail("wedding", {

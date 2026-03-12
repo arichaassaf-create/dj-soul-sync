@@ -1,3 +1,5 @@
+import { trackWhatsAppClick } from "@/lib/analytics";
+
 declare global {
   interface Window {
     fbq?: (...args: unknown[]) => void;
@@ -25,6 +27,9 @@ export function redirectToWhatsApp(
       content_name: source,
     });
   }
+
+  // 1b. Fire GA4 event
+  trackWhatsAppClick(source);
 
   // 2. Save click data (fire and forget)
   const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;

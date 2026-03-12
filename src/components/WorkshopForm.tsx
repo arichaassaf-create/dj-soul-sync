@@ -8,6 +8,7 @@ import { checkRateLimit, recordSubmission } from "@/lib/formValidation";
 import { workshopSchema, buildWorkshopWhatsAppMessage } from "@/lib/workshopValidation";
 import { redirectToWhatsApp } from "@/lib/whatsappRedirect";
 import { sendFormEmail } from "@/lib/sendFormEmail";
+import { trackWorkshopFormSubmit } from "@/lib/analytics";
 import { Send, CheckCircle } from "lucide-react";
 
 interface WorkshopFormProps {
@@ -73,6 +74,9 @@ export function WorkshopForm({ variant = "default" }: WorkshopFormProps) {
     if (error && import.meta.env.DEV) {
       console.error("Error submitting workshop form:", error);
     }
+
+    // Track GA4 event
+    trackWorkshopFormSubmit();
 
     // Send email notification (fire and forget)
     sendFormEmail("workshop", {
