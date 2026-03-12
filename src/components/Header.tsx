@@ -124,7 +124,7 @@ export function Header() {
               </Button>
               <Button variant="whatsapp" asChild>
                 <a
-                  href="https://wa.me/972505567078"
+                  href="https://wa.me/972505567078" onClick={() => trackWhatsAppClick("header_mobile")}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
