@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { trackPhoneClick, trackWhatsAppClick, trackCTAClick } from "@/lib/analytics";
 
 const navLinks = [
   { href: "/", label: "בית" },
