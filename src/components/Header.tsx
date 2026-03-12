@@ -76,7 +76,7 @@ export function Header() {
             </a>
           </Button>
           <Button variant="hero" size="sm" asChild>
-            <Link to="/contact">הצעת מחיר</Link>
+            <Link to="/contact" onClick={() => trackCTAClick("quote_request", "header_desktop")}>הצעת מחיר</Link>
           </Button>
         </div>
 
