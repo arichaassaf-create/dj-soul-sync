@@ -117,6 +117,9 @@ export default function WeddingForm() {
       }
     }
 
+    // Track GA4 event
+    trackWeddingFormSubmit();
+
     // Send email notification (fire and forget)
     sendFormEmail("wedding", {
       "שם-הכלה": result.data.brideName,

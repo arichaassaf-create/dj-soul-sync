@@ -119,6 +119,9 @@ export default function Contact() {
       message: result.data.message,
     });
 
+    // Track GA4 event
+    trackContactFormSubmit(result.data.eventType);
+
     // Send email notification (fire and forget)
     sendFormEmail("contact", {
       "שם": result.data.name,

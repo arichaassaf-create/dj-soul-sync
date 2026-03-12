@@ -75,6 +75,9 @@ export function WorkshopForm({ variant = "default" }: WorkshopFormProps) {
       console.error("Error submitting workshop form:", error);
     }
 
+    // Track GA4 event
+    trackWorkshopFormSubmit();
+
     // Send email notification (fire and forget)
     sendFormEmail("workshop", {
       "שם": result.data.name,

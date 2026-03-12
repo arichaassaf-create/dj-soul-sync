@@ -27,7 +27,7 @@ export function MobileCTA() {
         </Button>
         
         <Button variant="hero" size="sm" className="flex-1" asChild>
-          <a href="/contact" aria-label="השאירו פרטים">
+          <a href="/contact" aria-label="השאירו פרטים" onClick={() => trackCTAClick("contact_form", "mobile_cta")}>
             <Mail className="h-4 w-4" />
             <span>פרטים</span>
           </a>
