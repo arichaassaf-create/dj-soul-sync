@@ -1,5 +1,6 @@
 import { Phone, MessageCircle, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { trackPhoneClick, trackWhatsAppClick, trackCTAClick } from "@/lib/analytics";
 
 export function MobileCTA() {
   return (
