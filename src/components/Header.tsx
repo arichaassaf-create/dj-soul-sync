@@ -70,7 +70,7 @@ export function Header() {
         {/* Desktop CTA */}
         <div className="hidden lg:flex items-center gap-3">
           <Button variant="glass" size="sm" asChild>
-            <a href="tel:0505567078" aria-label="התקשרו אלינו">
+            <a href="tel:0505567078" aria-label="התקשרו אלינו" onClick={() => trackPhoneClick("header_desktop")}>
               <Phone className="h-4 w-4" />
               <span>050-5567078</span>
             </a>
