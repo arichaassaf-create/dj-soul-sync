@@ -19,6 +19,7 @@ export function MobileCTA() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="שלחו הודעה ב-WhatsApp"
+            onClick={() => trackWhatsAppClick("mobile_cta")}
           >
             <MessageCircle className="h-4 w-4" />
             <span>WhatsApp</span>
