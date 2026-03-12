@@ -1,3 +1,5 @@
+import { trackWhatsAppClick } from "@/lib/analytics";
+
 declare global {
   interface Window {
     fbq?: (...args: unknown[]) => void;
