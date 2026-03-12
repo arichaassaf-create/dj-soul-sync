@@ -12,6 +12,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { weddingSchema, checkRateLimit, recordSubmission } from "@/lib/formValidation";
 import { redirectToWhatsApp } from "@/lib/whatsappRedirect";
 import { sendFormEmail } from "@/lib/sendFormEmail";
+import { trackWeddingFormSubmit } from "@/lib/analytics";
 
 function buildWhatsAppMessage(data: {
   brideName: string;
