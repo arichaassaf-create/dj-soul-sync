@@ -117,7 +117,7 @@ export function Header() {
             ))}
             <li className="flex gap-3 mt-6 animate-fade-in-up" style={{ animationDelay: "0.6s" }}>
               <Button variant="phone" asChild>
-                <a href="tel:0505567078">
+                <a href="tel:0505567078" onClick={() => trackPhoneClick("header_mobile")}>
                   <Phone className="h-4 w-4" />
                   התקשרו
                 </a>
