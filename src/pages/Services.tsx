@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/SEO";
 import { Layout } from "@/components/Layout";
-import { Heart, PartyPopper, Briefcase, Headphones, CheckCircle } from "lucide-react";
+import { Heart, PartyPopper, Briefcase, Headphones, Music, CheckCircle } from "lucide-react";
 import weddingImage from "@/assets/wedding-dance.jpg";
 import privatePartyImage from "@/assets/private-party.jpg";
 import corporateImage from "@/assets/corporate-event.jpg";
