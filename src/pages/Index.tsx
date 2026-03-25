@@ -201,18 +201,12 @@ export default function Index() {
                 className="group block"
               >
                 <article className="relative h-80 rounded-2xl overflow-hidden card-hover">
-                  {service.image ? (
-                    <img
-                      src={service.image}
-                      alt={`${service.title} - די ג'יי אסף אריכא`}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                      <Music className="h-20 w-20 text-primary/30" />
-                    </div>
-                  )}
+                  <img
+                    src={service.image}
+                    alt={`${service.title} - די ג'יי אסף אריכא`}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    loading="lazy"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
                   <div className="absolute bottom-0 right-0 left-0 p-6">
                     <h3 className="text-2xl font-heading font-bold mb-2 group-hover:text-primary transition-colors">
