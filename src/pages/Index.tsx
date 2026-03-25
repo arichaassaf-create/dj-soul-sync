@@ -7,6 +7,7 @@ import heroImage from "@/assets/hero-dj-updated.jpg";
 import weddingImage from "@/assets/wedding-dance.jpg";
 import privatePartyImage from "@/assets/private-party.jpg";
 import corporateImage from "@/assets/corporate-event.jpg";
+import workshopImage from "@/assets/workshop-dj.png";
 
 const features = [
   {
