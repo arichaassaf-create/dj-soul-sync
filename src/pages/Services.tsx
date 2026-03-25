@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/SEO";
 import { Layout } from "@/components/Layout";
-import { Heart, PartyPopper, Briefcase, Headphones, CheckCircle } from "lucide-react";
+import { Heart, PartyPopper, Briefcase, Headphones, Music, CheckCircle } from "lucide-react";
 import weddingImage from "@/assets/wedding-dance.jpg";
 import privatePartyImage from "@/assets/private-party.jpg";
 import corporateImage from "@/assets/corporate-event.jpg";
@@ -66,6 +66,26 @@ const services = [
       "המלצות לזמני שיאים",
       "טיפים לבחירת שירים מיוחדים",
     ],
+    ctaLink: "/contact",
+    ctaText: "קבלו הצעת מחיר",
+  },
+  {
+    id: "workshop",
+    icon: Music,
+    title: "סדנת DJ",
+    subtitle: "למדו לתקלט בסדנה פרטית ואישית",
+    image: null,
+    description: "חלמתם תמיד לעמוד מאחורי הקונסולה? אני מציע סדנאות DJ פרטיות ליחידים ולזוגות, במפגש של 3.5 שעות שבו תלמדו את הבסיס של תקלוט, מיקס ובניית סט מוזיקלי.",
+    features: [
+      "סדנה פרטית בהתאמה אישית",
+      "מתאים למתחילים לגמרי",
+      "ליחידים (1,199 ₪) או לזוגות (1,750 ₪)",
+      "ציוד מקצועי מסופק",
+      "לומדים על סגנונות המוזיקה שאתם אוהבים",
+      "חוויה מהנה ומיוחדת - גם כמתנה",
+    ],
+    ctaLink: "/workshop",
+    ctaText: "לפרטים נוספים",
   },
 ];
 
@@ -154,7 +174,7 @@ export default function Services() {
                 </ul>
 
                 <Button variant="outline" size="lg" asChild>
-                  <Link to="/contact">קבלו הצעת מחיר</Link>
+                  <Link to={(service as any).ctaLink || "/contact"}>{(service as any).ctaText || "קבלו הצעת מחיר"}</Link>
                 </Button>
               </div>
             </article>
