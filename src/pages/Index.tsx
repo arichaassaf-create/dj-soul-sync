@@ -47,11 +47,10 @@ const services = [
     link: "/services#corporate",
   },
   {
-    image: null,
+    image: workshopImage,
     title: "סדנת DJ",
     description: "למדו לתקלט בסדנה פרטית - ליחידים ולזוגות, בהתאמה אישית מלאה",
     link: "/workshop",
-    icon: true,
   },
 ];
 
