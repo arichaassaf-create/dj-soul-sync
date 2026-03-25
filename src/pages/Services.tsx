@@ -174,7 +174,7 @@ export default function Services() {
                 </ul>
 
                 <Button variant="outline" size="lg" asChild>
-                  <Link to="/contact">קבלו הצעת מחיר</Link>
+                  <Link to={(service as any).ctaLink || "/contact"}>{(service as any).ctaText || "קבלו הצעת מחיר"}</Link>
                 </Button>
               </div>
             </article>
