@@ -6,6 +6,7 @@ import { Heart, PartyPopper, Briefcase, Headphones, Music, CheckCircle } from "l
 import weddingImage from "@/assets/wedding-dance.jpg";
 import privatePartyImage from "@/assets/private-party.jpg";
 import corporateImage from "@/assets/corporate-event.jpg";
+import workshopImage from "@/assets/workshop-dj.png";
 
 const services = [
   {
@@ -74,7 +75,7 @@ const services = [
     icon: Music,
     title: "סדנת DJ",
     subtitle: "למדו לתקלט בסדנה פרטית ואישית",
-    image: null,
+    image: workshopImage,
     description: "חלמתם תמיד לעמוד מאחורי הקונסולה? אני מציע סדנאות DJ פרטיות ליחידים ולזוגות, במפגש של 3.5 שעות שבו תלמדו את הבסיס של תקלוט, מיקס ובניית סט מוזיקלי.",
     features: [
       "סדנה פרטית בהתאמה אישית",
