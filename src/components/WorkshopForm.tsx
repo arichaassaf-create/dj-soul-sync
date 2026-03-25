@@ -195,7 +195,7 @@ export function WorkshopForm({ variant = "default" }: WorkshopFormProps) {
         ) : (
           <>
             <Send className="h-5 w-5" />
-            {variant === "aggressive" ? "אני רוצה ללמוד לתקלט!" : "לתיאום סדנה"}
+            {variant === "aggressive" ? "אני רוצה ללמוד לתקלט!" : "שליחת פרטים"}
           </>
         )}
       </Button>
