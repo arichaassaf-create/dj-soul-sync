@@ -1,12 +1,17 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { Layout } from "@/components/Layout";
 import { WorkshopForm } from "@/components/WorkshopForm";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Music, Users, Clock, Zap, Headphones, ListChecks,
-  CheckCircle, HelpCircle, ChevronDown
+  CheckCircle, HelpCircle, ChevronDown, Gift, Loader2
 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 import workshopHero from "@/assets/workshop-hero.jpg";
 import {
   Accordion,
@@ -51,6 +56,28 @@ const faqItems = [
 ];
 
 export default function Workshop() {
+  const [giftLoading, setGiftLoading] = useState<string | null>(null);
+  const [recipientName, setRecipientName] = useState("");
+  const [senderName, setSenderName] = useState("");
+  const [email, setEmail] = useState("");
+
+  const handleGiftPurchase = async (type: "individual" | "couple") => {
+    setGiftLoading(type);
+    try {
+      const { data, error } = await supabase.functions.invoke("create-gift-payment", {
+        body: { type, recipientName, senderName, email },
+      });
+      if (error) throw error;
+      if (data?.url) {
+        window.open(data.url, "_blank");
+      }
+    } catch (err) {
+      toast.error("שגיאה ביצירת התשלום. נסה שוב.");
+    } finally {
+      setGiftLoading(null);
+    }
+  };
+
   return (
     <Layout>
       <SEO
@@ -208,6 +235,9 @@ export default function Workshop() {
               אם יש לך ציוד או לפטופ – מעולה. אם לא, גם בסדר. נוכל לעבוד עם מה שיש ולהכווין אותך מה הכי נכון עבורך.
               אפשר להגיע גם בלי ידע מוקדם בכלל.
             </p>
+            <Button variant="glass" className="mt-4" asChild>
+              <a href="#gift-vouchers">🎁 רכישת שובר מתנה</a>
+            </Button>
           </div>
         </div>
       </section>
@@ -226,6 +256,89 @@ export default function Workshop() {
               <WorkshopForm />
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Gift Vouchers */}
+      <section id="gift-vouchers" className="section-padding bg-card/50">
+        <div className="container-custom">
+          <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4 text-center">
+            <span className="text-gradient-gold">🎁 שוברי מתנה</span>
+          </h2>
+          <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto">
+            מתנה מושלמת לחובבי מוזיקה! רכשו שובר מתנה לסדנת DJ פרטית וההנאה מובטחת.
+          </p>
+
+          <div className="max-w-2xl mx-auto mb-8">
+            <div className="bg-card rounded-2xl border border-border/50 p-6 space-y-4">
+              <h3 className="font-heading font-bold text-center mb-2">פרטי השובר (אופציונלי)</h3>
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="recipient">שם מקבל/ת המתנה</Label>
+                  <Input id="recipient" value={recipientName} onChange={e => setRecipientName(e.target.value)} placeholder="למי השובר מיועד?" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="sender">שם שולח/ת המתנה</Label>
+                  <Input id="sender" value={senderName} onChange={e => setSenderName(e.target.value)} placeholder="מאת..." />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="gift-email">אימייל לקבלת השובר</Label>
+                <Input id="gift-email" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="your@email.com" />
+              </div>
+            </div>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+            <div className="bg-card rounded-2xl border border-border/50 p-8 text-center card-hover">
+              <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Gift className="h-7 w-7 text-primary" />
+              </div>
+              <h3 className="text-xl font-heading font-bold mb-2">שובר ליחיד</h3>
+              <p className="text-3xl font-heading font-bold text-gradient-gold mb-2">₪1,199</p>
+              <p className="text-muted-foreground flex items-center justify-center gap-1 mb-4">
+                <Clock className="h-4 w-4" /> סדנה פרטית 3.5 שעות
+              </p>
+              <Button
+                variant="hero"
+                size="lg"
+                className="w-full"
+                disabled={giftLoading !== null}
+                onClick={() => handleGiftPurchase("individual")}
+              >
+                {giftLoading === "individual" ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
+                רכישת שובר
+              </Button>
+            </div>
+
+            <div className="bg-card rounded-2xl border-2 border-primary/50 p-8 text-center card-hover relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full">
+                משתלם יותר
+              </div>
+              <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Gift className="h-7 w-7 text-primary" />
+              </div>
+              <h3 className="text-xl font-heading font-bold mb-2">שובר לזוג</h3>
+              <p className="text-3xl font-heading font-bold text-gradient-gold mb-2">₪1,750</p>
+              <p className="text-muted-foreground flex items-center justify-center gap-1 mb-4">
+                <Clock className="h-4 w-4" /> סדנה פרטית 3.5 שעות
+              </p>
+              <Button
+                variant="hero"
+                size="lg"
+                className="w-full"
+                disabled={giftLoading !== null}
+                onClick={() => handleGiftPurchase("couple")}
+              >
+                {giftLoading === "couple" ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
+                רכישת שובר
+              </Button>
+            </div>
+          </div>
+
+          <p className="text-center text-muted-foreground mt-6 text-sm">
+            התשלום מאובטח דרך Stripe. תמיכה ב-Google Pay ו-Apple Pay.
+          </p>
         </div>
       </section>
 

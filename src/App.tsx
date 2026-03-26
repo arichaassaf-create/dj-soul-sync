@@ -18,6 +18,7 @@ import NotFound from "./pages/NotFound";
 import Workshop from "./pages/Workshop";
 import WorkshopLanding from "./pages/WorkshopLanding";
 import WhatsAppRedirect from "./pages/WhatsAppRedirect";
+import GiftSuccess from "./pages/GiftSuccess";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,7 @@ const App = () => (
             <Route path="/workshop" element={<Workshop />} />
             <Route path="/learn-to-dj" element={<WorkshopLanding />} />
             <Route path="/whatsapp-redirect" element={<WhatsAppRedirect />} />
+            <Route path="/gift-success" element={<GiftSuccess />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/accessibility" element={<Accessibility />} />
             <Route path="*" element={<NotFound />} />
