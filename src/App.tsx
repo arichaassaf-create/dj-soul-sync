@@ -18,6 +18,7 @@ import NotFound from "./pages/NotFound";
 import Workshop from "./pages/Workshop";
 import WorkshopLanding from "./pages/WorkshopLanding";
 import WhatsAppRedirect from "./pages/WhatsAppRedirect";
+import GiftSuccess from "./pages/GiftSuccess";
 
 const queryClient = new QueryClient();
 
