@@ -235,6 +235,9 @@ export default function Workshop() {
               אם יש לך ציוד או לפטופ – מעולה. אם לא, גם בסדר. נוכל לעבוד עם מה שיש ולהכווין אותך מה הכי נכון עבורך.
               אפשר להגיע גם בלי ידע מוקדם בכלל.
             </p>
+            <Button variant="glass" className="mt-4" asChild>
+              <a href="#gift-vouchers">🎁 רכישת שובר מתנה</a>
+            </Button>
           </div>
         </div>
       </section>
