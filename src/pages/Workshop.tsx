@@ -1,12 +1,17 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { Layout } from "@/components/Layout";
 import { WorkshopForm } from "@/components/WorkshopForm";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Music, Users, Clock, Zap, Headphones, ListChecks,
-  CheckCircle, HelpCircle, ChevronDown
+  CheckCircle, HelpCircle, ChevronDown, Gift, Loader2
 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 import workshopHero from "@/assets/workshop-hero.jpg";
 import {
   Accordion,
@@ -51,6 +56,28 @@ const faqItems = [
 ];
 
 export default function Workshop() {
+  const [giftLoading, setGiftLoading] = useState<string | null>(null);
+  const [recipientName, setRecipientName] = useState("");
+  const [senderName, setSenderName] = useState("");
+  const [email, setEmail] = useState("");
+
+  const handleGiftPurchase = async (type: "individual" | "couple") => {
+    setGiftLoading(type);
+    try {
+      const { data, error } = await supabase.functions.invoke("create-gift-payment", {
+        body: { type, recipientName, senderName, email },
+      });
+      if (error) throw error;
+      if (data?.url) {
+        window.open(data.url, "_blank");
+      }
+    } catch (err) {
+      toast.error("שגיאה ביצירת התשלום. נסה שוב.");
+    } finally {
+      setGiftLoading(null);
+    }
+  };
+
   return (
     <Layout>
       <SEO
