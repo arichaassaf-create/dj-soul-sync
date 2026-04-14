@@ -64,13 +64,13 @@ export function EventGallery() {
         </div>
 
         {/* Main showcase */}
-        <div className="relative aspect-[16/9] max-w-4xl mx-auto rounded-2xl overflow-hidden border border-border/50 shadow-2xl mb-6">
+        <div className="relative aspect-[4/3] md:aspect-[16/9] max-w-4xl mx-auto rounded-2xl overflow-hidden border border-border/50 shadow-2xl mb-6 bg-background">
           {/* prev layer */}
           {prevIndex !== null && (
             <img
               src={images[prevIndex].src}
               alt=""
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-contain"
             />
           )}
           {/* active layer with clip-path reveal */}
@@ -78,7 +78,7 @@ export function EventGallery() {
             src={images[activeIndex].src}
             alt={images[activeIndex].alt}
             className={cn(
-              "absolute inset-0 w-full h-full object-cover transition-all duration-[900ms] ease-[cubic-bezier(0.77,0,0.18,1)]",
+              "absolute inset-0 w-full h-full object-contain transition-all duration-[900ms] ease-[cubic-bezier(0.77,0,0.18,1)]",
               isTransitioning
                 ? "animate-gallery-reveal"
                 : "clip-path-full",
