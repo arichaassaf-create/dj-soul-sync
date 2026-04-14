@@ -3,38 +3,47 @@ import { SEO } from "@/components/SEO";
 import { Layout } from "@/components/Layout";
 import { Calendar, ArrowLeft } from "lucide-react";
 import { blogPosts } from "@/data/blogPosts";
-import corporateEventHero from "@/assets/dj-photo-5.jpg";
-import tipsChoosingDj from "@/assets/blog/tips-choosing-dj.jpg";
-import weddingPlaylist from "@/assets/blog/wedding-playlist.jpg";
-import chuppahMusic from "@/assets/blog/chuppah-music.jpg";
-import musicMistakes from "@/assets/blog/music-mistakes.jpg";
-import diverseCrowd from "@/assets/blog/diverse-crowd.jpg";
-import lastSongs from "@/assets/blog/last-songs.jpg";
-import workingWithDj from "@/assets/blog/working-with-dj.jpg";
-import receptionMusic from "@/assets/blog/reception-music.jpg";
-
-const heroImages: Record<string, string> = {
-  "corporate-event-hero": corporateEventHero,
-  "tips-choosing-dj": tipsChoosingDj,
-  "wedding-playlist": weddingPlaylist,
-  "chuppah-music": chuppahMusic,
-  "music-mistakes": musicMistakes,
-  "diverse-crowd": diverseCrowd,
-  "last-songs": lastSongs,
-  "working-with-dj": workingWithDj,
-  "reception-music": receptionMusic,
-};
+import { Helmet } from "react-helmet-async";
 
 export default function Blog() {
+  const blogListSchema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "בלוג דיג'יי אסף אריכא - טיפים לחתונות ואירועים",
+    "url": "https://dj-assaf-aricha.com/blog",
+    "description": "טיפים, מדריכים ורעיונות לתכנון המוזיקה בחתונה ובאירועים מאת DJ אסף אריכא",
+    "author": {
+      "@type": "Person",
+      "name": "אסף אריכא"
+    },
+    "blogPost": blogPosts.map(post => ({
+      "@type": "BlogPosting",
+      "headline": post.title,
+      "description": post.excerpt,
+      "datePublished": post.date,
+      "url": `https://dj-assaf-aricha.com/blog/${post.slug}`,
+      "author": {
+        "@type": "Person",
+        "name": "אסף אריכא"
+      }
+    }))
+  };
+
   return (
     <Layout>
       <SEO
-        title="בלוג | טיפים לאירועים ומוזיקה - די ג'יי אסף אריכא"
-        description="טיפים, מדריכים ומאמרים על בחירת DJ, תכנון מוזיקה לחתונה ואירועים."
-        canonicalUrl="https://dj-assaf-aricha.co.il/blog"
+        title="בלוג | טיפים לחתונות ואירועים - DJ אסף אריכא"
+        description="מדריכים וטיפים לתכנון המוזיקה בחתונה: איך לבחור דיג'יי, לבנות פלייליסט, ולתכנן מוזיקה לחופה. מאת DJ אסף אריכא - תקליטן לחתונות במרכז ובשרון."
+        canonicalUrl="https://dj-assaf-aricha.com/blog"
+        keywords="בלוג דיג'יי חתונה, טיפים לבחירת תקליטן, מדריך מוזיקה לחתונה, פלייליסט לחתונה, מוזיקה לחופה"
       />
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(blogListSchema)}
+        </script>
+      </Helmet>
 
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24">
+      <section className="pt-32 pb-16 md:pt-40">
         <div className="container-custom">
           <nav aria-label="Breadcrumb" className="mb-8">
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -44,34 +53,35 @@ export default function Blog() {
             </ol>
           </nav>
 
-          <h1 className="text-4xl md:text-5xl font-heading font-bold mb-12">
-            <span className="text-gradient-gold">הבלוג</span>
-          </h1>
+          <header className="max-w-3xl mb-16">
+            <h1 className="text-4xl md:text-5xl font-heading font-bold mb-6">
+              <span className="text-gradient-gold">בלוג</span>
+            </h1>
+            <p className="text-xl text-muted-foreground leading-relaxed">
+              טיפים, מדריכים ורעיונות לתכנון המוזיקה המושלמת לחתונה ולאירועים שלכם. מניסיון אמיתי של דיג'יי לחתונות באזור המרכז והשרון.
+            </p>
+          </header>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogPosts.map((post) => (
-              <Link key={post.slug} to={`/blog/${post.slug}`} className="group">
-                <article className="bg-card rounded-2xl overflow-hidden border border-border/50 card-hover h-full">
-                  {post.heroImage && heroImages[post.heroImage] ? (
-                    <img src={heroImages[post.heroImage]} alt={post.title} className="h-48 w-full object-cover" />
-                  ) : (
-                    <div className="h-48 bg-gradient-card" />
-                  )}
-                  <div className="p-6">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
-                      <Calendar className="h-4 w-4" />
-                      <time>{new Date(post.date).toLocaleDateString("he-IL")}</time>
-                    </div>
-                    <h2 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
-                      {post.title}
-                    </h2>
-                    <p className="text-muted-foreground mb-4">{post.excerpt}</p>
-                    <span className="inline-flex items-center gap-2 text-primary font-medium">
-                      קראו עוד <ArrowLeft className="h-4 w-4" />
-                    </span>
+              <article key={post.slug} className="bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 group">
+                <Link to={`/blog/${post.slug}`} className="block p-6">
+                  <div className="flex items-center gap-2 text-muted-foreground text-sm mb-4">
+                    <Calendar className="h-4 w-4" />
+                    <time>{new Date(post.date).toLocaleDateString("he-IL", { year: 'numeric', month: 'long', day: 'numeric' })}</time>
                   </div>
-                </article>
-              </Link>
+                  <h2 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
+                    {post.title}
+                  </h2>
+                  <p className="text-muted-foreground leading-relaxed mb-4">
+                    {post.excerpt}
+                  </p>
+                  <span className="inline-flex items-center gap-2 text-primary font-medium text-sm">
+                    קרא עוד
+                    <ArrowLeft className="h-4 w-4" />
+                  </span>
+                </Link>
+              </article>
             ))}
           </div>
         </div>
