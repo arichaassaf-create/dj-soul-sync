@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/SEO";
 import { Layout } from "@/components/Layout";
+import { Helmet } from "react-helmet-async";
 import { MapPin, Music, Users, Calendar } from "lucide-react";
 
 // Import all DJ photos for carousel
@@ -31,9 +32,33 @@ export default function About() {
       <SEO
         title="אודות אסף אריכא | DJ לחתונות ומסיבות במרכז והשרון"
         description="אסף אריכא - תקליטן מקצועי לחתונות ומסיבות באזור המרכז והשרון: מודיעין, רחובות, רמת השרון, הרצליה, הוד השרון ומושבי השפלה. ניסיון של שנים והתאמה אישית."
-        canonicalUrl="https://dj-assaf-aricha.co.il/about"
+        canonicalUrl="https://dj-assaf-aricha.com/about"
         keywords="DJ אסף אריכא, תקליטן רמת השרון, דיג'יי הרצליה, DJ הוד השרון, תקליטן מודיעין, דיג'יי רחובות, תקליטן מושבים שפלה, DJ מרכז"
       />
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "name": "אסף אריכא",
+          "alternateName": "Assaf Aricha",
+          "jobTitle": "DJ לחתונות ומסיבות",
+          "description": "תקליטן מקצועי לחתונות ומסיבות באזור המרכז והשרון עם ניסיון של שנים",
+          "url": "https://dj-assaf-aricha.com/about",
+          "telephone": "+972-50-5567078",
+          "email": "arichaassaf@gmail.com",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "כרמי יוסף",
+            "addressCountry": "IL"
+          },
+          "sameAs": [
+            "https://www.instagram.com/dj_assaf_aricha/",
+            "https://www.tiktok.com/@dj.assaf.aricha",
+            "https://soundcloud.com/4ss4f4rich4"
+          ],
+          "knowsAbout": ["DJ", "תקלוט", "מוזיקה לחתונות", "ניהול אירועים", "Traktor", "Pioneer DJ"]
+        })}</script>
+      </Helmet>
 
       {/* Hero Section */}
       <section className="pt-32 pb-16 md:pt-40 md:pb-24">
