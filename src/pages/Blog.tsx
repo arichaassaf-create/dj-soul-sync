@@ -4,9 +4,25 @@ import { Layout } from "@/components/Layout";
 import { Calendar, ArrowLeft } from "lucide-react";
 import { blogPosts } from "@/data/blogPosts";
 import corporateEventHero from "@/assets/dj-photo-5.jpg";
+import tipsChoosingDj from "@/assets/blog/tips-choosing-dj.jpg";
+import weddingPlaylist from "@/assets/blog/wedding-playlist.jpg";
+import chuppahMusic from "@/assets/blog/chuppah-music.jpg";
+import musicMistakes from "@/assets/blog/music-mistakes.jpg";
+import diverseCrowd from "@/assets/blog/diverse-crowd.jpg";
+import lastSongs from "@/assets/blog/last-songs.jpg";
+import workingWithDj from "@/assets/blog/working-with-dj.jpg";
+import receptionMusic from "@/assets/blog/reception-music.jpg";
 
 const heroImages: Record<string, string> = {
   "corporate-event-hero": corporateEventHero,
+  "tips-choosing-dj": tipsChoosingDj,
+  "wedding-playlist": weddingPlaylist,
+  "chuppah-music": chuppahMusic,
+  "music-mistakes": musicMistakes,
+  "diverse-crowd": diverseCrowd,
+  "last-songs": lastSongs,
+  "working-with-dj": workingWithDj,
+  "reception-music": receptionMusic,
 };
 
 export default function Blog() {
