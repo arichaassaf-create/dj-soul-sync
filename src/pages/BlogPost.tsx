@@ -1,6 +1,7 @@
 import { Link, useParams, Navigate } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { Layout } from "@/components/Layout";
+import { Helmet } from "react-helmet-async";
 import { Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { blogPosts } from "@/data/blogPosts";
@@ -43,15 +44,43 @@ export default function BlogPost() {
 
   const heroImage = post.heroImage ? heroImages[post.heroImage] : null;
 
+  const blogPostSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.excerpt,
+    "datePublished": post.date,
+    "dateModified": post.date,
+    "author": {
+      "@type": "Person",
+      "name": "אסף אריכא",
+      "url": "https://dj-assaf-aricha.com/about"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "DJ אסף אריכא",
+      "url": "https://dj-assaf-aricha.com"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://dj-assaf-aricha.com/blog/${post.slug}`
+    },
+    "url": `https://dj-assaf-aricha.com/blog/${post.slug}`,
+    "inLanguage": "he"
+  };
+
   return (
     <Layout>
       <SEO
         title={`${post.title} | בלוג`}
         description={post.excerpt}
-        canonicalUrl={`https://dj-assaf-aricha.co.il/blog/${post.slug}`}
+        canonicalUrl={`https://dj-assaf-aricha.com/blog/${post.slug}`}
         article
         publishedTime={post.date}
       />
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(blogPostSchema)}</script>
+      </Helmet>
 
       <article className="pt-32 pb-16 md:pt-40">
         <div className="container-custom">
