@@ -1,74 +1,92 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <url>
-    <loc>https://www.dj-assaf-aricha.com/</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.00</priority>
-  </url>
-
-  <url>
-    <loc>https://www.dj-assaf-aricha.com/about</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-
-  <url>
-    <loc>https://www.dj-assaf-aricha.com/services</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
-  <url>
-    <loc>https://www.dj-assaf-aricha.com/blog</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-
-  <url>
-    <loc>https://www.dj-assaf-aricha.com/contact</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
-  <url>
-    <loc>https://www.dj-assaf-aricha.com/wedding-form</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-
-  <url>
-    <loc>https://www.dj-assaf-aricha.com/workshop</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-
-  <url>
-    <loc>https://www.dj-assaf-aricha.com/learn-to-dj</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-
-  <url>
-    <loc>https://www.dj-assaf-aricha.com/privacy</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.40</priority>
-  </url>
-
-  <url>
-    <loc>https://www.dj-assaf-aricha.com/accessibility</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.40</priority>
-  </url>
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<url>
+<loc>https://dj-assaf-aricha.com/</loc>
+<lastmod>2026-04-14</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.00</priority>
+</url>
+<url>
+<loc>https://dj-assaf-aricha.com/about</loc>
+<lastmod>2026-04-14</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.85</priority>
+</url>
+<url>
+<loc>https://dj-assaf-aricha.com/services</loc>
+<lastmod>2026-04-14</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.90</priority>
+</url>
+<url>
+<loc>https://dj-assaf-aricha.com/blog</loc>
+<lastmod>2026-04-14</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.85</priority>
+</url>
+<url>
+<loc>https://dj-assaf-aricha.com/blog/5-tips-choosing-wedding-dj</loc>
+<lastmod>2024-12-15</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://dj-assaf-aricha.com/blog/perfect-wedding-playlist</loc>
+<lastmod>2024-12-10</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://dj-assaf-aricha.com/blog/chuppah-music-guide</loc>
+<lastmod>2024-12-05</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://dj-assaf-aricha.com/blog/dj-center-sharon</loc>
+<lastmod>2024-11-20</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://dj-assaf-aricha.com/blog/music-mistakes-wedding</loc>
+<lastmod>2024-11-15</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://dj-assaf-aricha.com/contact</loc>
+<lastmod>2026-04-14</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.85</priority>
+</url>
+<url>
+<loc>https://dj-assaf-aricha.com/wedding-form</loc>
+<lastmod>2026-04-14</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.80</priority>
+</url>
+<url>
+<loc>https://dj-assaf-aricha.com/workshop</loc>
+<lastmod>2026-04-14</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.75</priority>
+</url>
+<url>
+<loc>https://dj-assaf-aricha.com/learn-to-dj</loc>
+<lastmod>2026-04-14</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.75</priority>
+</url>
+<url>
+<loc>https://dj-assaf-aricha.com/privacy</loc>
+<lastmod>2026-04-14</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.40</priority>
+</url>
+<url>
+<loc>https://dj-assaf-aricha.com/accessibility</loc>
+<lastmod>2026-04-14</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.40</priority>
+</url>
 </urlset>
