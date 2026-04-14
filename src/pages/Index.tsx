@@ -228,6 +228,9 @@ export default function Index() {
         </div>
       </section>
 
+      {/* Event Gallery */}
+      <EventGallery />
+
       {/* Testimonials Section */}
       <section className="section-padding bg-dark-surface" aria-labelledby="testimonials">
         <div className="container-custom">
