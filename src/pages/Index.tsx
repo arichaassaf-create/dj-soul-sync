@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/SEO";
 import { Layout } from "@/components/Layout";
+import { EventGallery } from "@/components/EventGallery";
 import { Phone, MessageCircle, Star, Music, Heart, Users, CheckCircle } from "lucide-react";
 import heroImage from "@/assets/hero-dj-updated.jpg";
 import weddingImage from "@/assets/wedding-dance.jpg";
