@@ -299,3 +299,21 @@ body.invert-colors video,
 body.invert-colors picture {
   filter: invert(1) hue-rotate(180deg);
 }
+
+/* Gallery reveal animation */
+@keyframes gallery-reveal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.animate-gallery-reveal {
+  animation: gallery-reveal 900ms cubic-bezier(0.77, 0, 0.18, 1) forwards;
+}
+
+.clip-path-full {
+  clip-path: inset(0 0 0 0);
+}
