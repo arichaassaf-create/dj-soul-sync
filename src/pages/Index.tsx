@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/accordion";
 import { Phone, MessageCircle, Star, Music, Heart, ChevronLeft } from "lucide-react";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
-import heroImage from "@/assets/hero-dj-updated.jpg";
+import heroImage from "@/assets/assaf-original.webp";
 import weddingImage from "@/assets/wedding-dance.jpg";
 import privatePartyImage from "@/assets/private-party.jpg";
 import corporateImage from "@/assets/corporate-event.jpg";
@@ -447,10 +447,10 @@ export default function Index() {
       {/* ══════════════════════════════════════════════════════════
           TESTIMONIALS — Two-row infinite marquee
           ══════════════════════════════════════════════════════════ */}
-      <section className="section-padding overflow-hidden" aria-labelledby="testimonials-heading">
+      <section className="section-padding" aria-labelledby="testimonials-heading">
 
-        <div className="container-custom mb-12">
-          <div data-reveal>
+        <div className="container-custom">
+          <div className="mb-12" data-reveal>
             <h2
               id="testimonials-heading"
               className="text-3xl md:text-5xl font-heading font-bold mb-4 tracking-tight"
@@ -458,40 +458,14 @@ export default function Index() {
               מה <span className="text-primary">הלקוחות</span> אומרים
             </h2>
           </div>
-        </div>
 
-        {/* Row 1 — scroll left */}
-        <div className="marquee-container mb-4">
-          <div className="marquee-track">
-            {[...testimonials, ...testimonials].map((t, i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {testimonials.map((t, i) => (
               <article
                 key={i}
-                className="shrink-0 w-[300px] bg-card rounded-2xl p-6 border border-border/40 mx-3"
-              >
-                <div className="flex gap-0.5 mb-4">
-                  {Array.from({ length: t.rating }).map((_, j) => (
-                    <Star key={j} className="h-4 w-4 fill-primary text-primary" />
-                  ))}
-                </div>
-                <blockquote className="text-foreground/90 mb-5 leading-relaxed text-sm">
-                  &ldquo;{t.text}&rdquo;
-                </blockquote>
-                <footer>
-                  <cite className="font-bold text-sm not-italic block">{t.name}</cite>
-                  <p className="text-xs text-muted-foreground mt-0.5">{t.event}</p>
-                </footer>
-              </article>
-            ))}
-          </div>
-        </div>
-
-        {/* Row 2 — scroll right (reversed), offset start */}
-        <div className="marquee-container">
-          <div className="marquee-track reversed">
-            {[...testimonials.slice(2), ...testimonials.slice(0, 2), ...testimonials.slice(2), ...testimonials.slice(0, 2)].map((t, i) => (
-              <article
-                key={i}
-                className="shrink-0 w-[300px] bg-card rounded-2xl p-6 border border-border/40 mx-3"
+                className="bg-card rounded-2xl p-6 border border-border/40 card-hover"
+                data-reveal
+                data-delay={String(i % 3)}
               >
                 <div className="flex gap-0.5 mb-4">
                   {Array.from({ length: t.rating }).map((_, j) => (
