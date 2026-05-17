@@ -16,8 +16,8 @@ interface SEOProps {
 export function SEO({
   title = "די ג'יי לחתונות ומסיבות באזור המרכז והשרון | אסף אריכא",
   description = "די ג'יי אסף אריכא - תקליטן מקצועי לחתונות ומסיבות באזור המרכז והשרון: מודיעין, רחובות, נס ציונה, רמת השרון, הרצליה, הוד השרון ומושבי השפלה. ניסיון של שנים ויחס אישי.",
-  canonicalUrl = "https://dj-assaf-aricha.com",
-  ogImage = "https://dj-assaf-aricha.com/og-image.jpg",
+  canonicalUrl = "https://dj-assaf-aricha.co.il",
+  ogImage = "/og-image.jpg",
   keywords = "דיג'יי לחתונה במרכז, תקליטן רמת השרון, DJ הרצליה, דיג'יי הוד השרון, תקליטן מודיעין, DJ רחובות, דיג'יי נס ציונה, תקליטן מושבים שפלה, DJ כרמי יוסף, דיג'יי לאירועים מרכז",
   article = false,
   publishedTime,
@@ -28,10 +28,6 @@ export function SEO({
   const fullTitle = title.includes("אסף אריכא")
     ? title
     : `${title} | די ג'יי אסף אריכא`;
-
-  const fullOgImage = ogImage.startsWith("http")
-    ? ogImage
-    : `https://dj-assaf-aricha.com${ogImage}`;
 
   return (
     <Helmet>
@@ -48,13 +44,13 @@ export function SEO({
       <link rel="canonical" href={canonicalUrl} />
 
       {/* Open Graph / Facebook */}
+      <meta property="og:site_name" content="די ג'יי אסף אריכא" />
       <meta property="og:type" content={article ? "article" : "website"} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={fullOgImage} />
+      <meta property="og:image" content={ogImage} />
       <meta property="og:locale" content="he_IL" />
-      <meta property="og:site_name" content="DJ אסף אריכא" />
 
       {/* Article specific */}
       {article && publishedTime && (
@@ -72,7 +68,7 @@ export function SEO({
       <meta name="twitter:url" content={canonicalUrl} />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={fullOgImage} />
+      <meta name="twitter:image" content={ogImage} />
     </Helmet>
   );
 }

@@ -1,7 +1,14 @@
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/SEO";
 import { Layout } from "@/components/Layout";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Phone, MessageCircle, Star, Music, Heart, ChevronLeft } from "lucide-react";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import heroImage from "@/assets/hero-dj-updated.jpg";
@@ -83,6 +90,39 @@ const services = [
   },
 ];
 
+const faqs = [
+  {
+    q: "כמה עולה DJ לחתונה?",
+    a: "המחיר תלוי בגורמים כמו משך האירוע, מיקום ואופי הציוד הנדרש. לקבלת הצעת מחיר מדויקת ומותאמת לאירוע שלכם, צרו קשר לפגישת היכרות ללא עלות.",
+  },
+  {
+    q: "מה כולל שירות DJ לחתונה?",
+    a: "שירות מלא כולל פגישת תכנון מקדימה, התאמת מוזיקה אישית לפי טעמכם, ניהול לוח זמנים מוזיקלי, ציוד הגברה מקצועי, שירי כניסה וריקודים מיוחדים ונוכחות מהחופה ועד הריקוד האחרון.",
+  },
+  {
+    q: "כמה זמן לפני החתונה כדאי להזמין DJ?",
+    a: "מומלץ להזמין DJ לפחות 6–12 חודשים מראש, בעיקר בעונת החתונות (אפריל–אוקטובר). תאריכים מבוקשים מתמלאים מהר.",
+  },
+  {
+    q: "לאיזה אזורים מגיע אסף אריכא?",
+    a: "אסף מתמחה באזור המרכז והשרון: מודיעין, רחובות, נס ציונה, כרמי יוסף, רמת השרון, הרצליה, הוד השרון ומושבי השפלה. לאזורים נוספים יש לבדוק זמינות בפנייה ישירה.",
+  },
+  {
+    q: "האם DJ מספק גם ציוד הגברה ותאורה?",
+    a: "כן, שירות מלא כולל ציוד הגברה מקצועי. ניתן להוסיף תאורה דקורטיבית לאירוע בתיאום מראש.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
 const marqueeItems = [
   "חתונות", "מסיבות פרטיות", "אירועי חברה",
   "כרמי יוסף", "אזור המרכז", "השרון",
@@ -95,6 +135,9 @@ export default function Index() {
   return (
     <Layout>
       <SEO />
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+      </Helmet>
 
       {/* ══════════════════════════════════════════════════════════
           HERO — Split screen: image LEFT / text RIGHT
@@ -464,6 +507,42 @@ export default function Index() {
                 </footer>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════
+          FAQ — Accordion with FAQPage schema
+          ══════════════════════════════════════════════════════════ */}
+      <section className="section-padding bg-dark-surface" aria-labelledby="faq-heading">
+        <div className="container-custom">
+          <div className="max-w-2xl mx-auto">
+            <div className="mb-10 text-center" data-reveal>
+              <h2
+                id="faq-heading"
+                className="text-3xl md:text-4xl font-heading font-bold mb-3 tracking-tight"
+              >
+                שאלות <span className="text-primary">נפוצות</span>
+              </h2>
+              <p className="text-muted-foreground">כל מה שרציתם לדעת לפני שבוחרים DJ</p>
+            </div>
+
+            <Accordion type="single" collapsible className="space-y-3" data-reveal>
+              {faqs.map((faq, i) => (
+                <AccordionItem
+                  key={i}
+                  value={`faq-${i}`}
+                  className="bg-card border border-border/40 rounded-xl px-6 data-[state=open]:border-primary/30"
+                >
+                  <AccordionTrigger className="text-right font-medium hover:text-primary hover:no-underline py-5 text-base">
+                    {faq.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground leading-relaxed pb-5">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
         </div>
       </section>
