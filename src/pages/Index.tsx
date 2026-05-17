@@ -2,29 +2,63 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/SEO";
 import { Layout } from "@/components/Layout";
-import { EventGallery } from "@/components/EventGallery";
-import { Phone, MessageCircle, Star, Music, Heart, Users, CheckCircle } from "lucide-react";
+import { Phone, MessageCircle, Star, Music, Heart, ChevronLeft } from "lucide-react";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import heroImage from "@/assets/hero-dj-updated.jpg";
 import weddingImage from "@/assets/wedding-dance.jpg";
 import privatePartyImage from "@/assets/private-party.jpg";
 import corporateImage from "@/assets/corporate-event.jpg";
-import workshopImage from "@/assets/workshop-dj.png";
 
-const features = [
+function EQBars({ count = 6 }: { count?: number }) {
+  return (
+    <div className="eq-bars" aria-hidden="true">
+      {Array.from({ length: count }).map((_, i) => (
+        <div
+          key={i}
+          className="eq-bar"
+          style={{ "--eq-delay": `${i * 0.14}s` } as React.CSSProperties}
+        />
+      ))}
+    </div>
+  );
+}
+
+const testimonials = [
   {
-    icon: Star,
-    title: "ניסיון עשיר",
-    description: "ניסיון עשיר באלפי חתונות, מסיבות פרטיות ואירועי חברה.",
+    name: "רוני ודני כהן",
+    event: "חתונה, אביגדור",
+    text: "הרחבה לא הפסיקה לרקוד רגע. אסף ידע בדיוק מתי להעלות הילוך.",
+    rating: 5,
   },
   {
-    icon: Music,
-    title: "התאמה מושלמת",
-    description: "התאמת מוזיקה לקהל, סגנון האירוע והאווירה הרצויה.",
+    name: "שירה ויובל לוי",
+    event: "חתונה, כרמי יוסף",
+    text: "קרא את הקהל בצורה מושלמת. הכל זרם בדיוק כמו שחלמנו.",
+    rating: 5,
   },
   {
-    icon: Heart,
-    title: "יחס אישי",
-    description: "יחס אישי וליווי מקצועי משלב התכנון ועד הריקוד האחרון.",
+    name: "מיכל ואיתי ברק",
+    event: "אירוע חברה",
+    text: "האירוע הכי מוצלח שלנו. המוזיקה מדויקת לכל רגע.",
+    rating: 5,
+  },
+  {
+    name: "נועה ותומר אברהם",
+    event: "חתונה, רחובות",
+    text: "יצר אווירה מטורפת שגרמה לכולם לרקוד עד הסוף.",
+    rating: 5,
+  },
+  {
+    name: "דנה וגיא כץ",
+    event: "חתונה, מודיעין",
+    text: "מהרגע הראשון הרגשנו שאנחנו בידיים טובות.",
+    rating: 5,
+  },
+  {
+    name: "רותם ועידו שמש",
+    event: "מסיבה פרטית",
+    text: "הפלייליסט מושלם. הוסיף נגיעות משלו שעשו את ההבדל.",
+    rating: 5,
   },
 ];
 
@@ -32,231 +66,401 @@ const services = [
   {
     image: weddingImage,
     title: "חתונות",
-    description: "מקבלת הפנים ועד לריקוד האחרון - חוויה מוזיקלית בלתי נשכחת",
+    description: "מקבלת הפנים ועד לריקוד האחרון, חוויה מוזיקלית בלתי נשכחת",
     link: "/services#weddings",
   },
   {
     image: privatePartyImage,
     title: "מסיבות פרטיות",
-    description: "יום הולדת, אירוע משפחתי או כל חגיגה פרטית",
+    description: "יום הולדת, חגיגה משפחתית, כל רגע מיוחד",
     link: "/services#private",
   },
   {
     image: corporateImage,
     title: "אירועי חברה",
-    description: "אירועים עסקיים, השקות וכנסים עם אווירה מקצועית",
+    description: "השקות, כנסים, אירועי סוף שנה עם אווירה מקצועית",
     link: "/services#corporate",
-  },
-  {
-    image: workshopImage,
-    title: "סדנת DJ",
-    description: "למדו לתקלט בסדנה פרטית - ליחידים ולזוגות, בהתאמה אישית מלאה",
-    link: "/workshop",
   },
 ];
 
-const testimonials = [
-  {
-    name: "רוני ודני כהן",
-    event: "חתונה",
-    text: "אסף הפך את החתונה שלנו לחוויה בלתי נשכחת! הרחבה לא הפסיקה לרקוד רגע.",
-    rating: 5,
-  },
-  {
-    name: "שירה ויובל לוי",
-    event: "חתונה",
-    text: "תקליטן מקצועי ברמה הגבוהה ביותר. ידע לקרוא את הקהל בצורה מושלמת והכל זרם כמו שחלמנו.",
-    rating: 5,
-  },
-  {
-    name: "מיכל ואיתי ברק",
-    event: "חתונה",
-    text: "האירוע השנתי שלנו היה הכי מוצלח בזכות אסף. המוזיקה הייתה מדויקת לכל רגע!",
-    rating: 5,
-  },
-  {
-    name: "נועה ותומר אברהם",
-    event: "חתונה",
-    text: "כל האורחים שיבחו את המוזיקה! אסף יצר אווירה מטורפת שגרמה לכולם לרקוד עד הסוף.",
-    rating: 5,
-  },
-  {
-    name: "דנה וגיא כץ",
-    event: "חתונה",
-    text: "מהרגע הראשון הרגשנו שאנחנו בידיים טובות. המוזיקה הייתה בול מה שרצינו.",
-    rating: 5,
-  },
-  {
-    name: "רותם ועידו שמש",
-    event: "חתונה",
-    text: "הפלייליסט היה מושלם! אסף הקשיב לכל הבקשות שלנו והוסיף נגיעות משלו שעשו את ההבדל.",
-    rating: 5,
-  },
+const marqueeItems = [
+  "חתונות", "מסיבות פרטיות", "אירועי חברה",
+  "כרמי יוסף", "אזור המרכז", "השרון",
+  "מודיעין", "רחובות", "הרצליה",
 ];
 
 export default function Index() {
+  useScrollReveal();
+
   return (
     <Layout>
       <SEO />
-      
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${heroImage})` }}
-        >
-          <div className="absolute inset-0 bg-gradient-hero" />
-          <div className="absolute inset-0 bg-background/40" />
+
+      {/* ══════════════════════════════════════════════════════════
+          HERO — Split screen: image LEFT / text RIGHT
+          ══════════════════════════════════════════════════════════ */}
+      <section
+        className="relative min-h-[100dvh] overflow-hidden"
+        aria-label="כותרת ראשית"
+      >
+        {/* Image panel — physical LEFT, 46% on desktop, full bleed on mobile */}
+        <div className="absolute left-0 top-0 bottom-0 w-full lg:w-[46%]">
+          <img
+            src={heroImage}
+            alt="DJ אסף אריכא"
+            className="absolute inset-0 w-full h-full object-cover object-top"
+          />
+          {/* Mobile: dark veil so text is readable */}
+          <div className="absolute inset-0 bg-background/74 lg:hidden" />
+          {/* Desktop: gradient fading image into background on its right edge */}
+          <div
+            className="absolute inset-0 hidden lg:block"
+            style={{
+              background:
+                "linear-gradient(to right, transparent 45%, hsl(220 20% 6% / 0.75) 78%, hsl(220 20% 6%) 100%)",
+            }}
+          />
         </div>
 
-        {/* Content */}
-        <div className="relative z-10 container-custom text-center py-32 px-4">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold mb-6 animate-fade-in-up">
-              <span className="text-gradient-gold">די ג'יי אסף אריכא</span>
-            </h1>
-            
-            <h2 className="text-xl md:text-2xl lg:text-3xl text-foreground/90 mb-8 font-medium animate-fade-in-up stagger-1">
-              די ג'יי לחתונה, מסיבה פרטית או אירוע חברה – 
-              <br className="hidden md:block" />
-              תקליטן מקצועי שירים לכם את האירוע
-            </h2>
+        {/* Text content — physical RIGHT via ml-auto */}
+        <div className="relative z-10 min-h-[100dvh] flex items-center">
+          <div className="container-custom w-full">
+            <div className="lg:ml-auto lg:w-[57%] lg:pl-8 xl:pl-14 py-32 lg:py-20">
 
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in-up stagger-2">
-              מחפשים די ג'יי לחתונה שיקפיץ את הרחבה ויהפוך את האירוע לבלתי נשכח? 
-              צריכים תקליטן למסיבה פרטית או אירוע חברה שיידע לקרוא את הקהל ולבנות את האווירה המושלמת?
-            </p>
+              {/* Label + EQ bars */}
+              <div
+                className="flex items-center gap-3 mb-8"
+                data-reveal
+              >
+                <EQBars count={6} />
+                <span className="text-primary text-xs font-medium tracking-[0.22em] uppercase">
+                  תקליטן מקצועי לחתונות ואירועים
+                </span>
+              </div>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up stagger-3">
-              <Button variant="hero" size="xl" asChild>
-                <Link to="/contact">
-                  קבלו הצעת מחיר
-                </Link>
-              </Button>
-              <Button variant="glass" size="lg" asChild>
-                <a href="tel:0505567078">
-                  <Phone className="h-5 w-5" />
-                  050-5567078
-                </a>
-              </Button>
+              {/* H1 */}
+              <h1
+                className="text-5xl md:text-7xl lg:text-[5.5rem] font-heading font-bold tracking-tight leading-none mb-6"
+                data-reveal
+                data-delay="1"
+              >
+                DJ אסף
+                <br />
+                <span className="text-primary">אריכא</span>
+              </h1>
+
+              {/* Subtitle */}
+              <p
+                className="text-lg md:text-xl text-muted-foreground max-w-[440px] mb-10 leading-relaxed"
+                data-reveal
+                data-delay="2"
+              >
+                תקליטן לחתונות, מסיבות ואירועי חברה. יחס אישי, קריאת קהל, ואווירה שלא תשכחו.
+              </p>
+
+              {/* CTA buttons */}
+              <div
+                className="flex flex-col sm:flex-row items-start gap-4"
+                data-reveal
+                data-delay="3"
+              >
+                <Button variant="hero" size="xl" className="btn-active" asChild>
+                  <Link to="/contact">קבלו הצעת מחיר</Link>
+                </Button>
+                <Button variant="glass" size="lg" className="btn-active" asChild>
+                  <a href="tel:0505567078">
+                    <Phone className="h-4 w-4" />
+                    050-5567078
+                  </a>
+                </Button>
+              </div>
+
+              {/* Stats strip */}
+              <div
+                className="flex items-center gap-8 mt-14 pt-8 border-t border-border/25"
+                data-reveal
+                data-delay="4"
+              >
+                <div>
+                  <div className="text-3xl font-bold font-heading text-primary">1,000+</div>
+                  <div className="text-xs text-muted-foreground tracking-wide mt-0.5">אירועים</div>
+                </div>
+                <div className="w-px h-8 bg-border/50 shrink-0" />
+                <div>
+                  <div className="text-3xl font-bold font-heading">10+</div>
+                  <div className="text-xs text-muted-foreground tracking-wide mt-0.5">שנות ניסיון</div>
+                </div>
+                <div className="w-px h-8 bg-border/50 shrink-0" />
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <Star className="h-5 w-5 fill-primary text-primary" />
+                    <span className="text-3xl font-bold font-heading">5.0</span>
+                  </div>
+                  <div className="text-xs text-muted-foreground tracking-wide mt-0.5">דירוג ממוצע</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-float">
-          <div className="w-6 h-10 border-2 border-primary/50 rounded-full flex justify-center">
-            <div className="w-1.5 h-3 bg-primary rounded-full mt-2 animate-pulse" />
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-float">
+          <div className="w-5 h-9 border-2 border-primary/40 rounded-full flex justify-center pt-1.5">
+            <div className="w-1 h-2.5 bg-primary/70 rounded-full animate-pulse" />
           </div>
         </div>
       </section>
 
-      {/* Why Choose Me Section */}
-      <section className="section-padding bg-dark-surface" aria-labelledby="why-choose">
+      {/* ══════════════════════════════════════════════════════════
+          KINETIC TEXT BAND
+          ══════════════════════════════════════════════════════════ */}
+      <div
+        className="py-[18px] border-y border-border/20 overflow-hidden bg-dark-surface"
+        aria-hidden="true"
+      >
+        <div className="marquee-track">
+          {[...marqueeItems, ...marqueeItems].map((item, i) => (
+            <span
+              key={i}
+              className="text-[11px] font-medium tracking-[0.2em] uppercase text-muted-foreground shrink-0 mx-5"
+            >
+              {item}
+              <span className="text-primary mx-5">◆</span>
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* ══════════════════════════════════════════════════════════
+          FEATURES — Asymmetric bento (not 3 equal cards)
+          ══════════════════════════════════════════════════════════ */}
+      <section className="section-padding" aria-labelledby="features-heading">
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 id="why-choose" className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-4">
-              למה לבחור <span className="text-gradient-gold">בי?</span>
+
+          <div className="mb-14" data-reveal>
+            <h2
+              id="features-heading"
+              className="text-3xl md:text-5xl font-heading font-bold mb-4 tracking-tight"
+            >
+              למה לבחור <span className="text-primary">בי?</span>
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              אני די ג'יי מקצועי עם ניסיון של שנים בעולם האירועים. אני מתמחה בלתפור לכל אירוע את הפסקול המדויק שלו.
+            <p className="text-muted-foreground text-lg max-w-xl leading-relaxed">
+              כל אירוע הוא עולם ומלואו. אני מגיע עם ניסיון, ציוד, ואוזן מכוונת.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <article
-                key={feature.title}
-                className="bg-gradient-card rounded-2xl p-8 card-hover border border-border/50"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
-                  <feature.icon className="h-7 w-7 text-primary" />
+          {/* Asymmetric 2-col grid: large left + 2 stacked right */}
+          <div className="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-6">
+
+            {/* Large card — spans full height */}
+            <div
+              className="bg-gradient-card rounded-2xl p-8 md:p-10 border border-border/40 card-hover flex flex-col justify-between min-h-[300px] md:row-span-2"
+              data-reveal
+            >
+              <div>
+                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-7">
+                  <Star className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="text-xl font-heading font-bold mb-3">{feature.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
-              </article>
-            ))}
+                <h3 className="text-2xl font-heading font-bold mb-4">ניסיון עשיר</h3>
+                <p className="text-muted-foreground leading-relaxed text-base max-w-sm">
+                  מעל 1,000 אירועים, כולל חתונות, מסיבות פרטיות ואירועי חברה בכל רחבי המרכז והשרון.
+                  כל אירוע הוא הזדמנות לכתוב פסקול מושלם שאי אפשר לשכוח.
+                </p>
+              </div>
+              <div className="mt-10 pt-7 border-t border-border/25">
+                <div className="flex items-end gap-2">
+                  <span className="text-6xl font-bold font-heading text-primary leading-none">1,000</span>
+                  <span className="text-muted-foreground mb-1 text-lg">+ אירועים</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Small card — התאמה מושלמת */}
+            <div
+              className="bg-gradient-card rounded-2xl p-7 border border-border/40 card-hover"
+              data-reveal
+              data-delay="1"
+            >
+              <div className="w-11 h-11 bg-primary/10 rounded-xl flex items-center justify-center mb-5">
+                <Music className="h-5 w-5 text-primary" />
+              </div>
+              <h3 className="text-xl font-heading font-bold mb-3">התאמה מושלמת</h3>
+              <p className="text-muted-foreground leading-relaxed text-sm">
+                מוזיקה שמתאימה לקהל, לסגנון, ולרגע. ישראלית, מזרחית, היטים בינלאומיים.
+              </p>
+            </div>
+
+            {/* Small card — יחס אישי */}
+            <div
+              className="bg-gradient-card rounded-2xl p-7 border border-border/40 card-hover"
+              data-reveal
+              data-delay="2"
+            >
+              <div className="w-11 h-11 bg-primary/10 rounded-xl flex items-center justify-center mb-5">
+                <Heart className="h-5 w-5 text-primary" />
+              </div>
+              <h3 className="text-xl font-heading font-bold mb-3">יחס אישי</h3>
+              <p className="text-muted-foreground leading-relaxed text-sm">
+                ליווי מקצועי מהתכנון ועד לריקוד האחרון. נדבר על האירוע ונתאים יחד את הפסקול.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Services Preview Section */}
-      <section className="section-padding" aria-labelledby="services-section">
+      {/* ══════════════════════════════════════════════════════════
+          SERVICES — Accordion image slider
+          ══════════════════════════════════════════════════════════ */}
+      <section className="section-padding bg-dark-surface" aria-labelledby="services-heading">
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 id="services-section" className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-4">
-              <span className="text-gradient-gold">השירותים</span> שלי
+
+          <div className="mb-12" data-reveal>
+            <h2
+              id="services-heading"
+              className="text-3xl md:text-5xl font-heading font-bold mb-4 tracking-tight"
+            >
+              <span className="text-primary">השירותים</span> שלי
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              מהרגעים המרגשים של החופה ועד למסיבה המטורפת שתשאיר את כולם על הרגליים
+            <p className="text-muted-foreground text-lg">
+              מחתונה ועד מסיבה, מהחופה ועד ריקוד האחרון
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((service, index) => (
+          {/* Desktop accordion slider */}
+          <div
+            className="hidden md:flex gap-2 h-[460px]"
+            data-reveal
+            aria-label="שירותים"
+          >
+            {services.map((service) => (
               <Link
                 key={service.title}
                 to={service.link}
-                className="group block"
+                className="accordion-panel group"
+                aria-label={service.title}
               >
-                <article className="relative h-80 rounded-2xl overflow-hidden card-hover">
+                <img
+                  src={service.image}
+                  alt={`${service.title} עם DJ אסף אריכא`}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
+
+                {/* Content revealed on expand */}
+                <div className="accordion-panel-content">
+                  <h3 className="text-2xl font-heading font-bold mb-2">{service.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                    {service.description}
+                  </p>
+                  <span className="inline-flex items-center gap-1.5 text-primary text-sm font-medium">
+                    למידע נוסף
+                    <ChevronLeft className="h-4 w-4" />
+                  </span>
+                </div>
+
+                {/* Collapsed label (hidden on expand) */}
+                <div className="absolute inset-x-0 bottom-4 flex justify-center transition-opacity duration-200 group-hover:opacity-0">
+                  <span
+                    className="text-xs font-medium text-foreground/60 tracking-wider"
+                    style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+                  >
+                    {service.title}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Mobile fallback grid */}
+          <div className="grid grid-cols-1 gap-4 md:hidden">
+            {services.map((service) => (
+              <Link key={service.title} to={service.link} className="group block">
+                <article className="relative h-56 rounded-2xl overflow-hidden">
                   <img
                     src={service.image}
-                    alt={`${service.title} - די ג'יי אסף אריכא`}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    alt={service.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-                  <div className="absolute bottom-0 right-0 left-0 p-6">
-                    <h3 className="text-2xl font-heading font-bold mb-2 group-hover:text-primary transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="text-muted-foreground">{service.description}</p>
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent" />
+                  <div className="absolute bottom-0 inset-x-0 p-5">
+                    <h3 className="text-xl font-heading font-bold mb-1">{service.title}</h3>
+                    <p className="text-muted-foreground text-sm">{service.description}</p>
                   </div>
                 </article>
               </Link>
             ))}
           </div>
 
-          <div className="text-center mt-12">
-            <Button variant="outline" size="lg" asChild>
+          <div className="mt-10 text-center" data-reveal>
+            <Button variant="outline" size="lg" className="btn-active" asChild>
               <Link to="/services">לכל השירותים</Link>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Event Gallery */}
-      <EventGallery />
+      {/* ══════════════════════════════════════════════════════════
+          TESTIMONIALS — Two-row infinite marquee
+          ══════════════════════════════════════════════════════════ */}
+      <section className="section-padding overflow-hidden" aria-labelledby="testimonials-heading">
 
-      {/* Testimonials Section */}
-      <section className="section-padding bg-dark-surface" aria-labelledby="testimonials">
-        <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 id="testimonials" className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-4">
-              מה <span className="text-gradient-gold">הלקוחות</span> אומרים
+        <div className="container-custom mb-12">
+          <div data-reveal>
+            <h2
+              id="testimonials-heading"
+              className="text-3xl md:text-5xl font-heading font-bold mb-4 tracking-tight"
+            >
+              מה <span className="text-primary">הלקוחות</span> אומרים
             </h2>
           </div>
+        </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
+        {/* Row 1 — scroll left */}
+        <div className="marquee-container mb-4">
+          <div className="marquee-track">
+            {[...testimonials, ...testimonials].map((t, i) => (
               <article
-                key={index}
-                className="bg-card rounded-2xl p-8 card-hover border border-border/50"
+                key={i}
+                className="shrink-0 w-[300px] bg-card rounded-2xl p-6 border border-border/40 mx-3"
               >
-                <div className="flex gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-primary text-primary" />
+                <div className="flex gap-0.5 mb-4">
+                  {Array.from({ length: t.rating }).map((_, j) => (
+                    <Star key={j} className="h-4 w-4 fill-primary text-primary" />
                   ))}
                 </div>
-                <blockquote className="text-foreground mb-6 leading-relaxed">
-                  "{testimonial.text}"
+                <blockquote className="text-foreground/90 mb-5 leading-relaxed text-sm">
+                  &ldquo;{t.text}&rdquo;
                 </blockquote>
                 <footer>
-                  <cite className="font-bold not-italic">{testimonial.name}</cite>
-                  <p className="text-sm text-muted-foreground">{testimonial.event}</p>
+                  <cite className="font-bold text-sm not-italic block">{t.name}</cite>
+                  <p className="text-xs text-muted-foreground mt-0.5">{t.event}</p>
+                </footer>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        {/* Row 2 — scroll right (reversed), offset start */}
+        <div className="marquee-container">
+          <div className="marquee-track reversed">
+            {[...testimonials.slice(2), ...testimonials.slice(0, 2), ...testimonials.slice(2), ...testimonials.slice(0, 2)].map((t, i) => (
+              <article
+                key={i}
+                className="shrink-0 w-[300px] bg-card rounded-2xl p-6 border border-border/40 mx-3"
+              >
+                <div className="flex gap-0.5 mb-4">
+                  {Array.from({ length: t.rating }).map((_, j) => (
+                    <Star key={j} className="h-4 w-4 fill-primary text-primary" />
+                  ))}
+                </div>
+                <blockquote className="text-foreground/90 mb-5 leading-relaxed text-sm">
+                  &ldquo;{t.text}&rdquo;
+                </blockquote>
+                <footer>
+                  <cite className="font-bold text-sm not-italic block">{t.name}</cite>
+                  <p className="text-xs text-muted-foreground mt-0.5">{t.event}</p>
                 </footer>
               </article>
             ))}
@@ -264,22 +468,43 @@ export default function Index() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="section-padding relative overflow-hidden" aria-labelledby="cta-section">
-        <div className="absolute inset-0 bg-gradient-gold opacity-10" />
+      {/* ══════════════════════════════════════════════════════════
+          CTA — Pulsing rings
+          ══════════════════════════════════════════════════════════ */}
+      <section
+        className="section-padding relative overflow-hidden bg-dark-surface"
+        aria-labelledby="cta-heading"
+      >
+        {/* Pulsing rings — decorative */}
+        <div
+          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          aria-hidden="true"
+        >
+          <div className="relative w-24 h-24">
+            <div className="absolute inset-0 rounded-full border border-primary/25 ring-pulse" />
+            <div className="absolute inset-0 rounded-full border border-primary/18 ring-pulse ring-pulse-delay-1" />
+            <div className="absolute inset-0 rounded-full border border-primary/12 ring-pulse ring-pulse-delay-2" />
+          </div>
+        </div>
+
         <div className="container-custom relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 id="cta-section" className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-6">
-              מוכנים להפוך את האירוע שלכם <span className="text-gradient-gold">לבלתי נשכח?</span>
+          <div className="max-w-2xl mx-auto text-center" data-reveal>
+            <h2
+              id="cta-heading"
+              className="text-3xl md:text-5xl font-heading font-bold mb-6 tracking-tight leading-tight"
+            >
+              מוכנים להפוך את האירוע שלכם
+              <br />
+              <span className="text-primary">לבלתי נשכח?</span>
             </h2>
-            <p className="text-lg text-muted-foreground mb-10">
-              צרו קשר עוד היום לפגישת היכרות ונדבר על האירוע וכמובן מוזיקה
+            <p className="text-lg text-muted-foreground mb-10 max-w-md mx-auto leading-relaxed">
+              צרו קשר לפגישת היכרות ונדבר על האירוע ועל המוזיקה
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button variant="hero" size="xl" asChild>
+              <Button variant="hero" size="xl" className="btn-active" asChild>
                 <Link to="/contact">השאירו פרטים</Link>
               </Button>
-              <Button variant="whatsapp" size="lg" asChild>
+              <Button variant="whatsapp" size="lg" className="btn-active" asChild>
                 <a
                   href="https://wa.me/972505567078?text=היי%20אסף%2C%20אשמח%20לפרטים%20על%20DJ%20לאירוע"
                   target="_blank"

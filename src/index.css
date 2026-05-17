@@ -1,9 +1,9 @@
+/* Import Hebrew font — must be before @tailwind directives */
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Assistant:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Import Hebrew font */
-@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Assistant:wght@300;400;500;600;700;800&display=swap');
 
 /* DJ Assaf Aricha - Dark Elegant Design System */
 
@@ -150,7 +150,8 @@
 
   /* Card hover effect */
   .card-hover {
-    @apply transition-all duration-300;
+    transition: transform 0.32s cubic-bezier(0.23, 1, 0.32, 1),
+                box-shadow 0.32s cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   .card-hover:hover {
@@ -263,11 +264,175 @@
 }
 
 /* Stagger animations */
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.2s; }
-.stagger-3 { animation-delay: 0.3s; }
-.stagger-4 { animation-delay: 0.4s; }
-.stagger-5 { animation-delay: 0.5s; }
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+
+/* ─────────────────────────────────────────────────────────
+   SCROLL REVEAL SYSTEM
+   ───────────────────────────────────────────────────────── */
+[data-reveal] {
+  opacity: 0;
+  transform: scale(0.96) translateY(14px);
+  transition:
+    opacity 0.55s cubic-bezier(0.23, 1, 0.32, 1),
+    transform 0.55s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+[data-reveal][data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+[data-reveal][data-delay="1"][data-visible="true"] { transition-delay: 50ms; }
+[data-reveal][data-delay="2"][data-visible="true"] { transition-delay: 100ms; }
+[data-reveal][data-delay="3"][data-visible="true"] { transition-delay: 150ms; }
+[data-reveal][data-delay="4"][data-visible="true"] { transition-delay: 200ms; }
+[data-reveal][data-delay="5"][data-visible="true"] { transition-delay: 250ms; }
+
+/* ─────────────────────────────────────────────────────────
+   EQ BARS (DJ equalizer decoration)
+   ───────────────────────────────────────────────────────── */
+.eq-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.eq-bar {
+  width: 3px;
+  height: 100%;
+  background: hsl(var(--primary));
+  border-radius: 2px;
+  transform-origin: bottom;
+  animation: eq-beat 0.9s cubic-bezier(0.23, 1, 0.32, 1) infinite;
+  animation-delay: var(--eq-delay, 0s);
+}
+
+@keyframes eq-beat {
+  0%, 100% {
+    transform: scaleY(0.15);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   MARQUEE
+   ───────────────────────────────────────────────────────── */
+.marquee-container {
+  overflow: hidden;
+}
+
+.marquee-container:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-ltr 32s linear infinite;
+}
+
+.marquee-track.reversed {
+  animation: marquee-rtl 38s linear infinite;
+}
+
+@keyframes marquee-ltr {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes marquee-rtl {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+/* ─────────────────────────────────────────────────────────
+   BUTTON TACTILE FEEDBACK
+   ───────────────────────────────────────────────────────── */
+.btn-active {
+  transition: transform 130ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.btn-active:active {
+  transform: scale(0.97);
+}
+
+/* ─────────────────────────────────────────────────────────
+   ACCORDION IMAGE SLIDER (Services)
+   ───────────────────────────────────────────────────────── */
+.accordion-panel {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: flex 0.65s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.accordion-panel:hover,
+.accordion-panel:focus-within {
+  flex: 5;
+}
+
+.accordion-panel-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.3s cubic-bezier(0.23, 1, 0.32, 1) 0.1s,
+    transform 0.3s cubic-bezier(0.23, 1, 0.32, 1) 0.1s;
+}
+
+.accordion-panel:hover .accordion-panel-content,
+.accordion-panel:focus-within .accordion-panel-content {
+  opacity: 1;
+  transform: none;
+}
+
+/* ─────────────────────────────────────────────────────────
+   PULSING RINGS (CTA section)
+   ───────────────────────────────────────────────────────── */
+@keyframes ring-pulse {
+  0%   { transform: scale(0.8);  opacity: 0.55; }
+  100% { transform: scale(2.8);  opacity: 0; }
+}
+
+.ring-pulse {
+  animation: ring-pulse 2.6s cubic-bezier(0.23, 1, 0.32, 1) infinite;
+}
+
+.ring-pulse-delay-1 { animation-delay: 0.85s; }
+.ring-pulse-delay-2 { animation-delay: 1.7s; }
+
+/* ─────────────────────────────────────────────────────────
+   REDUCED MOTION SAFETY
+   ───────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .eq-bar,
+  .marquee-track,
+  .ring-pulse {
+    animation: none !important;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
 
 /* Accessibility Styles */
 body.high-contrast {
@@ -298,22 +463,4 @@ body.invert-colors img,
 body.invert-colors video,
 body.invert-colors picture {
   filter: invert(1) hue-rotate(180deg);
-}
-
-/* Gallery reveal animation */
-@keyframes gallery-reveal {
-  0% {
-    clip-path: inset(0 100% 0 0);
-  }
-  100% {
-    clip-path: inset(0 0 0 0);
-  }
-}
-
-.animate-gallery-reveal {
-  animation: gallery-reveal 900ms cubic-bezier(0.77, 0, 0.18, 1) forwards;
-}
-
-.clip-path-full {
-  clip-path: inset(0 0 0 0);
 }
