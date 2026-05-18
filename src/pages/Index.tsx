@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/accordion";
 import { Phone, MessageCircle, Star, Music, Heart, ChevronLeft } from "lucide-react";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
-import heroImage from "@/assets/assaf-original.webp";
+import heroImage from "@/assets/hero-dj-updated.jpg";
 import weddingImage from "@/assets/wedding-dance.jpg";
 import privatePartyImage from "@/assets/private-party.jpg";
 import corporateImage from "@/assets/corporate-event.jpg";
