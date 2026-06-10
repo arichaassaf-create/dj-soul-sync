@@ -46,6 +46,9 @@ export const weddingSchema = z.object({
     .string()
     .max(200, "מקום האירוע יכול להכיל עד 200 תווים")
     .optional(),
+  entrySong: z.string().max(200).optional(),
+  glassSong: z.string().max(200).optional(),
+  slowSong: z.string().max(200).optional(),
   genres: z
     .string()
     .max(500, "סגנונות מוזיקה יכולים להכיל עד 500 תווים")
