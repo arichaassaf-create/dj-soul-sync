@@ -12,6 +12,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { weddingSchema, checkRateLimit, recordSubmission } from "@/lib/formValidation";
 import { redirectToWhatsApp } from "@/lib/whatsappRedirect";
 import { sendFormEmail } from "@/lib/sendFormEmail";
+import { SongPickerField } from "@/components/SongPickerField";
+import {
+  chuppahEntranceSongs,
+  glassBreakingSongs,
+  slowDanceSongs,
+} from "@/data/weddingSongs";
 
 function buildWhatsAppMessage(data: {
   brideName: string;
@@ -20,8 +26,11 @@ function buildWhatsAppMessage(data: {
   eventDate?: string;
   venue?: string;
   entrySong?: string;
+  entrySongLink?: string;
   glassSong?: string;
+  glassSongLink?: string;
   slowSong?: string;
+  slowSongLink?: string;
   genres?: string;
   songs?: string;
   notes?: string;
@@ -32,9 +41,22 @@ function buildWhatsAppMessage(data: {
   msg += `*טלפון:* ${data.phone}\n`;
   if (data.eventDate) msg += `*תאריך:* ${data.eventDate}\n`;
   if (data.venue) msg += `*מקום:* ${data.venue}\n`;
-  if (data.entrySong) msg += `\n🎵 *שיר כניסה לחופה:*\n${data.entrySong}\n`;
-  if (data.glassSong) msg += `\n🥂 *שיר לשבירת הכוס:*\n${data.glassSong}\n`;
-  if (data.slowSong) msg += `\n💃🕺 *שיר סלואו:*\n${data.slowSong}\n`;
+
+  if (data.entrySong) {
+    msg += `\n🎵 *שיר כניסה לחופה:*\n${data.entrySong}`;
+    if (data.entrySongLink) msg += `\n${data.entrySongLink}`;
+    msg += "\n";
+  }
+  if (data.glassSong) {
+    msg += `\n🥂 *שיר לשבירת הכוס:*\n${data.glassSong}`;
+    if (data.glassSongLink) msg += `\n${data.glassSongLink}`;
+    msg += "\n";
+  }
+  if (data.slowSong) {
+    msg += `\n💃🕺 *שיר סלואו:*\n${data.slowSong}`;
+    if (data.slowSongLink) msg += `\n${data.slowSongLink}`;
+    msg += "\n";
+  }
   if (data.genres) msg += `\n🎶 *סגנונות מוזיקה:*\n${data.genres}\n`;
   if (data.songs) msg += `\n✅ *שירים שחייבים להיות:*\n${data.songs}\n`;
   if (data.notes) msg += `\n📝 *הערות נוספות:*\n${data.notes}`;
@@ -62,6 +84,12 @@ export default function WeddingForm() {
     }
 
     const formData = new FormData(e.currentTarget);
+
+    // Collect link fields separately (not in schema)
+    const entrySongLink = (formData.get("entrySongLink") as string) || "";
+    const glassSongLink = (formData.get("glassSongLink") as string) || "";
+    const slowSongLink = (formData.get("slowSongLink") as string) || "";
+
     const rawData = {
       brideName: formData.get("bride") as string,
       groomName: formData.get("groom") as string,
@@ -97,9 +125,21 @@ export default function WeddingForm() {
 
     // Combine specific songs for DB storage (no schema change needed)
     const songParts: string[] = [];
-    if (result.data.entrySong) songParts.push(`שיר כניסה לחופה: ${result.data.entrySong}`);
-    if (result.data.glassSong) songParts.push(`שיר לשבירת הכוס: ${result.data.glassSong}`);
-    if (result.data.slowSong) songParts.push(`שיר סלואו: ${result.data.slowSong}`);
+    if (result.data.entrySong) {
+      songParts.push(
+        `שיר כניסה לחופה: ${result.data.entrySong}${entrySongLink ? ` (${entrySongLink})` : ""}`
+      );
+    }
+    if (result.data.glassSong) {
+      songParts.push(
+        `שיר לשבירת הכוס: ${result.data.glassSong}${glassSongLink ? ` (${glassSongLink})` : ""}`
+      );
+    }
+    if (result.data.slowSong) {
+      songParts.push(
+        `שיר סלואו: ${result.data.slowSong}${slowSongLink ? ` (${slowSongLink})` : ""}`
+      );
+    }
     if (result.data.songs) songParts.push(result.data.songs);
 
     const { error } = await supabase.from("wedding_submissions").insert({
@@ -108,7 +148,9 @@ export default function WeddingForm() {
       phone: result.data.phone,
       event_date: result.data.eventDate || null,
       venue: result.data.venue || null,
-      music_genres: result.data.genres ? result.data.genres.split(",").map((g) => g.trim()) : null,
+      music_genres: result.data.genres
+        ? result.data.genres.split(",").map((g) => g.trim())
+        : null,
       favorite_songs: songParts.length > 0 ? songParts.join("\n") : null,
       notes: result.data.notes || null,
     });
@@ -124,8 +166,11 @@ export default function WeddingForm() {
       "תאריך-החתונה": result.data.eventDate || undefined,
       "מקום-האירוע": result.data.venue || undefined,
       "שיר-כניסה-לחופה": result.data.entrySong || undefined,
+      "קישור-כניסה": entrySongLink || undefined,
       "שיר-לשבירת-הכוס": result.data.glassSong || undefined,
+      "קישור-שבירת-כוס": glassSongLink || undefined,
       "שיר-סלואו": result.data.slowSong || undefined,
+      "קישור-סלואו": slowSongLink || undefined,
       "סגנונות-מוזיקה": result.data.genres || undefined,
       "שירים-מועדפים": result.data.songs || undefined,
       "הערות": result.data.notes || undefined,
@@ -138,8 +183,11 @@ export default function WeddingForm() {
       eventDate: result.data.eventDate,
       venue: result.data.venue,
       entrySong: result.data.entrySong,
+      entrySongLink,
       glassSong: result.data.glassSong,
+      glassSongLink,
       slowSong: result.data.slowSong,
+      slowSongLink,
       genres: result.data.genres,
       songs: result.data.songs,
       notes: result.data.notes,
@@ -150,7 +198,10 @@ export default function WeddingForm() {
     recordSubmission();
     setIsSubmitting(false);
     setIsSubmitted(true);
-    toast({ title: "השאלון נשלח בהצלחה!", description: "הפרטים נשלחו ל-WhatsApp." });
+    toast({
+      title: "השאלון נשלח בהצלחה!",
+      description: "הפרטים נשלחו ל-WhatsApp.",
+    });
   };
 
   return (
@@ -165,7 +216,11 @@ export default function WeddingForm() {
         <div className="container-custom max-w-3xl">
           <nav aria-label="Breadcrumb" className="mb-8">
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-              <li><Link to="/" className="hover:text-primary">בית</Link></li>
+              <li>
+                <Link to="/" className="hover:text-primary">
+                  בית
+                </Link>
+              </li>
               <li>/</li>
               <li className="text-primary">שאלון חתונה</li>
             </ol>
@@ -178,14 +233,25 @@ export default function WeddingForm() {
               לקראת פגישת המוזיקה שלנו, אשמח אם תחשבו מראש על כמה דברים. מלאו כמה שיותר, לא חייב הכל:
             </p>
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-              <li>🎵 <strong className="text-foreground">שיר כניסה לחופה</strong> – מה השיר שתרצו להיכנס אליו?</li>
-              <li>🥂 <strong className="text-foreground">שיר לשבירת הכוס</strong> – שיר מיוחד לסיום החופה?</li>
-              <li>💃🕺 <strong className="text-foreground">שיר סלואו</strong> – יש לכם שיר שאתם רוצים לרקוד יחד?</li>
-              <li>🎶 <strong className="text-foreground">סגנונות מוזיקה</strong> שאתם אוהבים במיוחד</li>
-              <li>✅ <strong className="text-foreground">שירים שחייבים להיות</strong> בתוכנית</li>
+              <li>
+                🎵 <strong className="text-foreground">שיר כניסה לחופה</strong> – מה השיר שתרצו להיכנס אליו?
+              </li>
+              <li>
+                🥂 <strong className="text-foreground">שיר לשבירת הכוס</strong> – שיר מיוחד לסיום החופה?
+              </li>
+              <li>
+                💃🕺 <strong className="text-foreground">שיר סלואו</strong> – יש לכם שיר שאתם רוצים לרקוד יחד?
+              </li>
+              <li>
+                🎶 <strong className="text-foreground">סגנונות מוזיקה</strong> שאתם אוהבים במיוחד
+              </li>
+              <li>
+                ✅ <strong className="text-foreground">שירים שחייבים להיות</strong> בתוכנית
+              </li>
             </ul>
             <p className="mt-5 text-sm text-muted-foreground/80 italic border-t border-border/30 pt-4">
-              אם עדיין אין לכם בחירות סופיות, אין שום בעיה. בפגישה נעבור יחד על רעיונות ונבנה יחד את פלייליסט החלומות שלכם ❤️
+              אם עדיין אין לכם בחירות סופיות, אין שום בעיה. בפגישה נעבור יחד על רעיונות ונבנה יחד את
+              פלייליסט החלומות שלכם ❤️
             </p>
             <p className="mt-2 text-sm font-medium text-primary">— די ג'יי אסף אריכא 🎧🎵</p>
           </div>
@@ -205,6 +271,7 @@ export default function WeddingForm() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Names */}
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="bride">שם הכלה *</Label>
@@ -215,7 +282,9 @@ export default function WeddingForm() {
                       maxLength={100}
                       className={`bg-background ${errors.brideName ? "border-destructive" : ""}`}
                     />
-                    {errors.brideName && <p className="text-sm text-destructive">{errors.brideName}</p>}
+                    {errors.brideName && (
+                      <p className="text-sm text-destructive">{errors.brideName}</p>
+                    )}
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="groom">שם החתן *</Label>
@@ -226,10 +295,13 @@ export default function WeddingForm() {
                       maxLength={100}
                       className={`bg-background ${errors.groomName ? "border-destructive" : ""}`}
                     />
-                    {errors.groomName && <p className="text-sm text-destructive">{errors.groomName}</p>}
+                    {errors.groomName && (
+                      <p className="text-sm text-destructive">{errors.groomName}</p>
+                    )}
                   </div>
                 </div>
 
+                {/* Phone + Date */}
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="phone">טלפון *</Label>
@@ -241,7 +313,9 @@ export default function WeddingForm() {
                       maxLength={20}
                       className={`bg-background ${errors.phone ? "border-destructive" : ""}`}
                     />
-                    {errors.phone && <p className="text-sm text-destructive">{errors.phone}</p>}
+                    {errors.phone && (
+                      <p className="text-sm text-destructive">{errors.phone}</p>
+                    )}
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="date">תאריך החתונה</Label>
@@ -257,6 +331,7 @@ export default function WeddingForm() {
                   </div>
                 </div>
 
+                {/* Venue */}
                 <div className="space-y-2">
                   <Label htmlFor="venue">מקום האירוע</Label>
                   <Input
@@ -265,44 +340,41 @@ export default function WeddingForm() {
                     maxLength={200}
                     className={`bg-background ${errors.venue ? "border-destructive" : ""}`}
                   />
-                  {errors.venue && <p className="text-sm text-destructive">{errors.venue}</p>}
+                  {errors.venue && (
+                    <p className="text-sm text-destructive">{errors.venue}</p>
+                  )}
                 </div>
 
-                {/* Specific ceremony songs */}
-                <div className="border-t border-border/40 pt-6 space-y-4">
+                {/* Special songs section */}
+                <div className="border-t border-border/40 pt-6 space-y-5">
                   <p className="text-sm font-medium text-muted-foreground">🎵 שירים לרגעים המיוחדים</p>
-                  <div className="space-y-2">
-                    <Label htmlFor="entrySong">שיר כניסה לחופה</Label>
-                    <Input
-                      id="entrySong"
-                      name="entrySong"
-                      maxLength={200}
-                      placeholder="השיר שתרצו להיכנס אליו לחופה..."
-                      className="bg-background"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="glassSong">שיר לשבירת הכוס</Label>
-                    <Input
-                      id="glassSong"
-                      name="glassSong"
-                      maxLength={200}
-                      placeholder="שיר מיוחד לסיום החופה..."
-                      className="bg-background"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="slowSong">שיר סלואו</Label>
-                    <Input
-                      id="slowSong"
-                      name="slowSong"
-                      maxLength={200}
-                      placeholder="שיר שאתם רוצים לרקוד יחד..."
-                      className="bg-background"
-                    />
-                  </div>
+                  <p className="text-xs text-muted-foreground -mt-3">
+                    בחרו שיר מהרשימה או הקלידו שיר משלכם. לאחר הבחירה תוכלו לשמוע ב-YouTube ולהדביק קישור.
+                  </p>
+
+                  <SongPickerField
+                    name="entrySong"
+                    label="שיר כניסה לחופה 🎵"
+                    placeholder="בחרו שיר לכניסה לחופה..."
+                    songs={chuppahEntranceSongs}
+                  />
+
+                  <SongPickerField
+                    name="glassSong"
+                    label="שיר לשבירת הכוס 🥂"
+                    placeholder="בחרו שיר לסיום החופה..."
+                    songs={glassBreakingSongs}
+                  />
+
+                  <SongPickerField
+                    name="slowSong"
+                    label="שיר סלואו 💃🕺"
+                    placeholder="בחרו שיר לריקוד זוגי..."
+                    songs={slowDanceSongs}
+                  />
                 </div>
 
+                {/* Genres */}
                 <div className="space-y-2">
                   <Label htmlFor="genres">סגנונות מוזיקה אהובים</Label>
                   <Textarea
@@ -312,10 +384,15 @@ export default function WeddingForm() {
                     className={`bg-background resize-none ${errors.genres ? "border-destructive" : ""}`}
                     placeholder="מזרחית, ישראלי, לועזי, שנות 80/90, האוס, טראנס, רגאטון..."
                   />
-                  <p className="text-xs text-muted-foreground">אם עדיין לא בטוחים, אין בעיה, נחליט ביחד בפגישה</p>
-                  {errors.genres && <p className="text-sm text-destructive">{errors.genres}</p>}
+                  <p className="text-xs text-muted-foreground">
+                    אם עדיין לא בטוחים, אין בעיה, נחליט ביחד בפגישה
+                  </p>
+                  {errors.genres && (
+                    <p className="text-sm text-destructive">{errors.genres}</p>
+                  )}
                 </div>
 
+                {/* Must-play songs */}
                 <div className="space-y-2">
                   <Label htmlFor="songs">שירים שחייבים להיות</Label>
                   <Textarea
@@ -326,9 +403,12 @@ export default function WeddingForm() {
                     className={`bg-background resize-none ${errors.songs ? "border-destructive" : ""}`}
                     placeholder="שירים שאתם חייבים לשמוע בחתונה..."
                   />
-                  {errors.songs && <p className="text-sm text-destructive">{errors.songs}</p>}
+                  {errors.songs && (
+                    <p className="text-sm text-destructive">{errors.songs}</p>
+                  )}
                 </div>
 
+                {/* Notes */}
                 <div className="space-y-2">
                   <Label htmlFor="notes">הערות נוספות</Label>
                   <Textarea
@@ -338,11 +418,25 @@ export default function WeddingForm() {
                     placeholder="שירים שממש לא תרצו לשמוע, בקשות מיוחדות עבור המשפחה, כל מידע נוסף..."
                     className={`bg-background resize-none ${errors.notes ? "border-destructive" : ""}`}
                   />
-                  {errors.notes && <p className="text-sm text-destructive">{errors.notes}</p>}
+                  {errors.notes && (
+                    <p className="text-sm text-destructive">{errors.notes}</p>
+                  )}
                 </div>
 
-                <Button type="submit" variant="hero" size="lg" className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? "שולח..." : <><Send className="h-5 w-5 ml-2" /> שליחה</>}
+                <Button
+                  type="submit"
+                  variant="hero"
+                  size="lg"
+                  className="w-full"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    "שולח..."
+                  ) : (
+                    <>
+                      <Send className="h-5 w-5 ml-2" /> שליחה
+                    </>
+                  )}
                 </Button>
               </form>
             )}
