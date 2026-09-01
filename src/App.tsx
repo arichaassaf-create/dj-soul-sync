@@ -16,6 +16,7 @@ import Privacy from "./pages/Privacy";
 import Accessibility from "./pages/Accessibility";
 import NotFound from "./pages/NotFound";
 import Workshop from "./pages/Workshop";
+import WorkshopGuide from "./pages/WorkshopGuide";
 import WorkshopLanding from "./pages/WorkshopLanding";
 import WhatsAppRedirect from "./pages/WhatsAppRedirect";
 import GiftSuccess from "./pages/GiftSuccess";
@@ -39,6 +40,7 @@ const App = () => (
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/wedding-form" element={<WeddingForm />} />
             <Route path="/workshop" element={<Workshop />} />
+            <Route path="/workshop-guide" element={<WorkshopGuide />} />
             <Route path="/learn-to-dj" element={<WorkshopLanding />} />
             <Route path="/whatsapp-redirect" element={<WhatsAppRedirect />} />
             <Route path="/gift-success" element={<GiftSuccess />} />
