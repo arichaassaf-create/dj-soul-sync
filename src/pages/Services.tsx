@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/SEO";
 import { Layout } from "@/components/Layout";
-import { Helmet } from "react-helmet-async";
 import { Heart, PartyPopper, Briefcase, Headphones, Music, CheckCircle } from "lucide-react";
 import weddingImage from "@/assets/wedding-dance.jpg";
 import privatePartyImage from "@/assets/private-party.jpg";
@@ -92,8 +91,7 @@ const services = [
 ];
 
 const servicesSchema = {
-  "@context": "https://schema.org",
-  "@type": "ItemList",
+    "@type": "ItemList",
   "name": "שירותי DJ אסף אריכא",
   "itemListElement": [
     {
@@ -101,7 +99,7 @@ const servicesSchema = {
       "position": 1,
       "name": "DJ לחתונות במרכז ובשרון",
       "description": "שירותי דיג'יי מקצועיים לחתונות באזור המרכז והשרון. מקבלת פנים ועד ריקוד אחרון.",
-      "provider": { "@type": "Person", "name": "אסף אריכא" },
+      "provider": { "@id": "https://dj-assaf-aricha.com/#business" },
       "areaServed": ["מרכז", "שרון", "מודיעין", "רחובות", "הרצליה", "רמת השרון"]
     },
     {
@@ -109,21 +107,21 @@ const servicesSchema = {
       "position": 2,
       "name": "DJ למסיבות פרטיות",
       "description": "דיג'יי למסיבות פרטיות, ימי הולדת ואירועים משפחתיים.",
-      "provider": { "@type": "Person", "name": "אסף אריכא" }
+      "provider": { "@id": "https://dj-assaf-aricha.com/#business" }
     },
     {
       "@type": "Service",
       "position": 3,
       "name": "DJ לאירועי חברה",
       "description": "תקליטן מקצועי לאירועי חברה, השקות וכנסים.",
-      "provider": { "@type": "Person", "name": "אסף אריכא" }
+      "provider": { "@id": "https://dj-assaf-aricha.com/#business" }
     },
     {
       "@type": "Service",
       "position": 4,
       "name": "סדנת DJ",
       "description": "סדנאות DJ פרטיות ליחידים וזוגות - למדו לתקלט.",
-      "provider": { "@type": "Person", "name": "אסף אריכא" }
+      "provider": { "@id": "https://dj-assaf-aricha.com/#business" }
     }
   ]
 };
@@ -134,12 +132,11 @@ export default function Services() {
       <SEO
         title="שירותי DJ לחתונות ומסיבות | מרכז, רמת השרון, הרצליה, הוד השרון"
         description="שירותי DJ מקצועיים לחתונות ומסיבות באזור המרכז והשרון: מודיעין, רחובות, רמת השרון, הרצליה, הוד השרון ומושבי השפלה. תקליטן מנוסה עם התאמה אישית."
-        canonicalUrl="https://dj-assaf-aricha.com/services"
+        canonicalUrl="/services"
+        breadcrumbs={[{ name: "שירותים", path: "/services" }]}
         keywords="שירותי DJ מרכז, תקליטן רמת השרון, DJ הרצליה, דיג'יי הוד השרון, תקליטן מודיעין, DJ רחובות, דיג'יי מושבים שפלה, שירותי דיג'יי השרון"
+        schema={[servicesSchema]}
       />
-      <Helmet>
-        <script type="application/ld+json">{JSON.stringify(servicesSchema)}</script>
-      </Helmet>
 
       {/* Hero Section */}
       <section className="pt-32 pb-16 md:pt-40 md:pb-24 bg-dark-surface">

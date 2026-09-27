@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/SEO";
+import { ENTITY, REVIEW_SOURCES } from "@/lib/site";
 import { Layout } from "@/components/Layout";
-import { Helmet } from "react-helmet-async";
 import { MapPin, Music, Users, Calendar } from "lucide-react";
 
 // Import all DJ photos for carousel
@@ -30,35 +30,12 @@ export default function About() {
   return (
     <Layout>
       <SEO
-        title="אודות אסף אריכא | DJ לחתונות ומסיבות במרכז והשרון"
+        title="אודות DJ אסף אריכא | DJ לחתונות במרכז ובשרון"
         description="אסף אריכא - תקליטן מקצועי לחתונות ומסיבות באזור המרכז והשרון: מודיעין, רחובות, רמת השרון, הרצליה, הוד השרון ומושבי השפלה. ניסיון של שנים והתאמה אישית."
-        canonicalUrl="https://dj-assaf-aricha.com/about"
+        canonicalUrl="/about"
+        breadcrumbs={[{ name: "אודות", path: "/about" }]}
         keywords="DJ אסף אריכא, תקליטן רמת השרון, דיג'יי הרצליה, DJ הוד השרון, תקליטן מודיעין, דיג'יי רחובות, תקליטן מושבים שפלה, DJ מרכז"
       />
-      <Helmet>
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Person",
-          "name": "אסף אריכא",
-          "alternateName": "Assaf Aricha",
-          "jobTitle": "DJ לחתונות ומסיבות",
-          "description": "תקליטן מקצועי לחתונות ומסיבות באזור המרכז והשרון עם ניסיון של שנים",
-          "url": "https://dj-assaf-aricha.com/about",
-          "telephone": "+972-50-5567078",
-          "email": "arichaassaf@gmail.com",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "כרמי יוסף",
-            "addressCountry": "IL"
-          },
-          "sameAs": [
-            "https://www.instagram.com/dj_assaf_aricha/",
-            "https://www.tiktok.com/@dj.assaf.aricha",
-            "https://soundcloud.com/4ss4f4rich4"
-          ],
-          "knowsAbout": ["DJ", "תקלוט", "מוזיקה לחתונות", "ניהול אירועים", "Traktor", "Pioneer DJ"]
-        })}</script>
-      </Helmet>
 
       {/* Hero Section */}
       <section className="pt-32 pb-16 md:pt-40 md:pb-24">
@@ -113,10 +90,10 @@ export default function About() {
             {/* Content */}
             <div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6">
-                <span className="text-gradient-gold">אסף אריכא</span>
+                <span className="text-gradient-gold">DJ אסף אריכא</span>
               </h1>
               <p className="text-xl text-muted-foreground mb-6 leading-relaxed">
-                מדג'ה בחתונות ובברים שונים בתל אביב והסביבה
+                מתקלט בחתונות ובברים שונים בתל אביב והסביבה
               </p>
               <div className="prose prose-lg text-foreground max-w-none">
                 <p className="mb-6 leading-relaxed">
@@ -124,6 +101,13 @@ export default function About() {
                 </p>
                 <p className="mb-8 leading-relaxed">
                   תכנון נכון ויכולת קריאה של הקהל במהלך הערב הכרחיים ביצירת חתונה מושלמת ומיוחדת. צרו קשר לפגישת הכירות ונדבר על האירוע וכמובן מוזיקה.
+                </p>
+                <p className="mb-8 leading-relaxed text-muted-foreground">
+                  DJ אסף אריכא הוא תקליטן המתמחה בחתונות ואירועים, שפועל מכרמי יוסף ומתקלט בחתונות באזור המרכז והשרון.
+                  עם כל זוג אני בונה את המוזיקה בפגישה אישית, ובערב עצמו מקשיב לקהל ומתאים את הרחבה בזמן אמת.{" "}
+                  <Link to="/wedding-dj" className="text-primary hover:underline">כך נראה התהליך עם זוגות</Link>, ו
+                  <Link to="/reviews" className="text-primary hover:underline">כך זוגות מתארים אותו</Link>{" "}
+                  ({REVIEW_SOURCES.mit4mit.count} ביקורות במתחתנים למען מתחתנים).
                 </p>
               </div>
 
@@ -197,6 +181,34 @@ export default function About() {
               </article>
             </div>
           </div>
+        </div>
+      </section>
+      {/* External profiles: visible counterpart of sameAs in the entity schema */}
+      <section className="pb-20" aria-labelledby="profiles-h">
+        <div className="container-custom max-w-4xl">
+          <h2 id="profiles-h" className="text-2xl md:text-3xl font-heading font-bold mb-6">איפה עוד אפשר למצוא אותי</h2>
+          <ul className="grid sm:grid-cols-2 gap-3">
+            {[
+              { label: "ביקורות במתחתנים למען מתחתנים", url: ENTITY.sameAs[0] },
+              { label: "דף העסק באיזי", url: ENTITY.sameAs[1] },
+              { label: "אינסטגרם", url: ENTITY.sameAs[2] },
+              { label: "יוטיוב", url: ENTITY.sameAs[3] },
+              { label: "טיקטוק", url: ENTITY.sameAs[4] },
+              { label: "סאונדקלאוד: סטים ומיקסים", url: ENTITY.sameAs[5] },
+              { label: "פייסבוק", url: ENTITY.sameAs[6] },
+            ].map((p) => (
+              <li key={p.url}>
+                <a
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer me"
+                  className="block bg-card rounded-xl px-5 py-4 border border-border/40 hover:border-primary/40 hover:text-primary transition-colors"
+                >
+                  {p.label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
     </Layout>

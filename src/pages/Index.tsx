@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/SEO";
@@ -11,7 +10,11 @@ import {
 } from "@/components/ui/accordion";
 import { Phone, MessageCircle, Star, Music, Heart, ChevronLeft } from "lucide-react";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
-import heroImage from "@/assets/hero-dj-new.png";
+import { ReviewCard } from "@/components/ReviewCard";
+import { reviewById } from "@/data/reviews";
+import { homeFaq, faqSchema } from "@/data/faq";
+import { REVIEW_SOURCES } from "@/lib/site";
+import heroImage from "@/assets/dj-assaf-aricha-hero.webp";
 import weddingImage from "@/assets/wedding-dance.jpg";
 import privatePartyImage from "@/assets/private-party.jpg";
 import corporateImage from "@/assets/corporate-event.jpg";
@@ -29,45 +32,6 @@ function EQBars({ count = 6 }: { count?: number }) {
     </div>
   );
 }
-
-const testimonials = [
-  {
-    name: "רוני ודני כהן",
-    event: "חתונה, אביגדור",
-    text: "הרחבה לא הפסיקה לרקוד רגע. אסף ידע בדיוק מתי להעלות הילוך.",
-    rating: 5,
-  },
-  {
-    name: "שירה ויובל לוי",
-    event: "חתונה, כרמי יוסף",
-    text: "קרא את הקהל בצורה מושלמת. הכל זרם בדיוק כמו שחלמנו.",
-    rating: 5,
-  },
-  {
-    name: "מיכל ואיתי ברק",
-    event: "אירוע חברה",
-    text: "האירוע הכי מוצלח שלנו. המוזיקה מדויקת לכל רגע.",
-    rating: 5,
-  },
-  {
-    name: "נועה ותומר אברהם",
-    event: "חתונה, רחובות",
-    text: "יצר אווירה מטורפת שגרמה לכולם לרקוד עד הסוף.",
-    rating: 5,
-  },
-  {
-    name: "דנה וגיא כץ",
-    event: "חתונה, מודיעין",
-    text: "מהרגע הראשון הרגשנו שאנחנו בידיים טובות.",
-    rating: 5,
-  },
-  {
-    name: "רותם ועידו שמש",
-    event: "מסיבה פרטית",
-    text: "הפלייליסט מושלם. הוסיף נגיעות משלו שעשו את ההבדל.",
-    rating: 5,
-  },
-];
 
 const services = [
   {
@@ -90,38 +54,9 @@ const services = [
   },
 ];
 
-const faqs = [
-  {
-    q: "כמה עולה DJ לחתונה?",
-    a: "המחיר תלוי בגורמים כמו משך האירוע, מיקום ואופי הציוד הנדרש. לקבלת הצעת מחיר מדויקת ומותאמת לאירוע שלכם, צרו קשר לפגישת היכרות ללא עלות.",
-  },
-  {
-    q: "מה כולל שירות DJ לחתונה?",
-    a: "שירות מלא כולל פגישת תכנון מקדימה, התאמת מוזיקה אישית לפי טעמכם, ניהול לוח זמנים מוזיקלי, ציוד הגברה מקצועי, שירי כניסה וריקודים מיוחדים ונוכחות מהחופה ועד הריקוד האחרון.",
-  },
-  {
-    q: "כמה זמן לפני החתונה כדאי להזמין DJ?",
-    a: "מומלץ להזמין DJ לפחות 6–12 חודשים מראש, בעיקר בעונת החתונות (אפריל–אוקטובר). תאריכים מבוקשים מתמלאים מהר.",
-  },
-  {
-    q: "לאיזה אזורים מגיע אסף אריכא?",
-    a: "אסף מתמחה באזור המרכז והשרון: מודיעין, רחובות, נס ציונה, כרמי יוסף, רמת השרון, הרצליה, הוד השרון ומושבי השפלה. לאזורים נוספים יש לבדוק זמינות בפנייה ישירה.",
-  },
-  {
-    q: "האם DJ מספק גם ציוד הגברה ותאורה?",
-    a: "כן, שירות מלא כולל ציוד הגברה מקצועי. ניתן להוסיף תאורה דקורטיבית לאירוע בתיאום מראש.",
-  },
-];
+const faqs = homeFaq;
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
-};
+const homeReviews = ["lital", "assaf-friday", "michal", "keren", "hen", "dennis"].map(reviewById);
 
 const marqueeItems = [
   "חתונות", "מסיבות פרטיות", "אירועי חברה",
@@ -134,10 +69,12 @@ export default function Index() {
 
   return (
     <Layout>
-      <SEO />
-      <Helmet>
-        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
-      </Helmet>
+      <SEO
+        title="DJ אסף אריכא | DJ לחתונה במרכז ובשרון"
+        description="DJ אסף אריכא, תקליטן לחתונות במרכז ובשרון. פגישת מוזיקה אישית, קריאת קהל בזמן אמת ורחבה מלאה מהחופה ועד השיר האחרון. 33 ביקורות של זוגות במתחתנים למען מתחתנים."
+        canonicalUrl="/"
+        schema={[faqSchema(faqs)]}
+      />
 
       {/* ══════════════════════════════════════════════════════════
           HERO — Split screen: image LEFT / text RIGHT
@@ -150,7 +87,11 @@ export default function Index() {
         <div className="absolute left-0 top-0 bottom-0 w-full lg:w-[46%]">
           <img
             src={heroImage}
-            alt="DJ אסף אריכא"
+            alt="DJ אסף אריכא מתקלט בעמדת ה-DJ באולם אירועים"
+            width={1459}
+            height={1078}
+            decoding="async"
+            {...{ fetchpriority: "high" }}
             className="absolute inset-0 w-full h-full object-cover object-top"
           />
           {/* Mobile: dark veil so text is readable */}
@@ -177,7 +118,7 @@ export default function Index() {
               >
                 <EQBars count={6} />
                 <span className="text-primary text-xs font-medium tracking-[0.22em] uppercase">
-                  תקליטן מקצועי לחתונות ואירועים
+                  DJ לחתונות ואירועים · מרכז ושרון
                 </span>
               </div>
 
@@ -190,6 +131,9 @@ export default function Index() {
                 DJ אסף
                 <br />
                 <span className="text-primary">אריכא</span>
+                <span className="block text-xl md:text-2xl lg:text-3xl font-medium text-foreground/80 tracking-normal mt-5">
+                  DJ לחתונה במרכז ובשרון
+                </span>
               </h1>
 
               {/* Subtitle */}
@@ -198,7 +142,7 @@ export default function Index() {
                 data-reveal
                 data-delay="2"
               >
-                תקליטן לחתונות, מסיבות ואירועי חברה. יחס אישי, קריאת קהל, ואווירה שלא תשכחו.
+                בונה איתכם את המוזיקה בפגישה אישית, וקורא את הרחבה בזמן אמת כדי שגם החברים וגם המשפחה ירקדו. מהכניסה לחופה ועד השיר האחרון.
               </p>
 
               {/* CTA buttons */}
@@ -208,7 +152,7 @@ export default function Index() {
                 data-delay="3"
               >
                 <Button variant="hero" size="xl" className="btn-active" asChild>
-                  <Link to="/contact">קבלו הצעת מחיר</Link>
+                  <Link to="/contact">בדיקת זמינות לתאריך שלכם</Link>
                 </Button>
                 <Button variant="glass" size="lg" className="btn-active" asChild>
                   <a href="tel:0505567078">
@@ -234,13 +178,15 @@ export default function Index() {
                   <div className="text-xs text-muted-foreground tracking-wide mt-0.5">שנות ניסיון</div>
                 </div>
                 <div className="w-px h-8 bg-border/50 shrink-0" />
-                <div>
+                <Link to="/reviews" className="group">
                   <div className="flex items-center gap-1.5">
                     <Star className="h-5 w-5 fill-primary text-primary" />
-                    <span className="text-3xl font-bold font-heading">5.0</span>
+                    <span className="text-3xl font-bold font-heading">{REVIEW_SOURCES.mit4mit.score.split("/")[0]}</span>
                   </div>
-                  <div className="text-xs text-muted-foreground tracking-wide mt-0.5">דירוג ממוצע</div>
-                </div>
+                  <div className="text-xs text-muted-foreground tracking-wide mt-0.5 group-hover:text-primary">
+                    {REVIEW_SOURCES.mit4mit.count} ביקורות במתחתנים למען מתחתנים
+                  </div>
+                </Link>
               </div>
             </div>
           </div>
@@ -455,32 +401,27 @@ export default function Index() {
               id="testimonials-heading"
               className="text-3xl md:text-5xl font-heading font-bold mb-4 tracking-tight"
             >
-              מה <span className="text-primary">הלקוחות</span> אומרים
+              מה <span className="text-primary">זוגות</span> כותבים
             </h2>
+            <p className="text-muted-foreground max-w-2xl">
+              ציטוטים מתוך {REVIEW_SOURCES.mit4mit.count} ביקורות אמיתיות של זוגות באתר מתחתנים למען מתחתנים, בציון {REVIEW_SOURCES.mit4mit.score}.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {testimonials.map((t, i) => (
-              <article
-                key={i}
-                className="bg-card rounded-2xl p-6 border border-border/40 card-hover"
-                data-reveal
-                data-delay={String(i % 3)}
-              >
-                <div className="flex gap-0.5 mb-4">
-                  {Array.from({ length: t.rating }).map((_, j) => (
-                    <Star key={j} className="h-4 w-4 fill-primary text-primary" />
-                  ))}
-                </div>
-                <blockquote className="text-foreground/90 mb-5 leading-relaxed text-sm">
-                  &ldquo;{t.text}&rdquo;
-                </blockquote>
-                <footer>
-                  <cite className="font-bold text-sm not-italic block">{t.name}</cite>
-                  <p className="text-xs text-muted-foreground mt-0.5">{t.event}</p>
-                </footer>
-              </article>
+            {homeReviews.map((r, i) => (
+              <div key={r.id} data-reveal data-delay={String(i % 3)} className="flex">
+                <ReviewCard review={r} className="card-hover w-full" />
+              </div>
             ))}
+          </div>
+          <div className="mt-10 flex flex-wrap gap-4">
+            <Button variant="outline" size="lg" className="btn-active" asChild>
+              <Link to="/reviews">לכל הביקורות</Link>
+            </Button>
+            <Button variant="ghost" size="lg" asChild>
+              <Link to="/wedding-dj">איך אני עובד עם זוגות</Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -498,7 +439,7 @@ export default function Index() {
               >
                 שאלות <span className="text-primary">נפוצות</span>
               </h2>
-              <p className="text-muted-foreground">כל מה שרציתם לדעת לפני שבוחרים DJ</p>
+              <p className="text-muted-foreground">שאלות שזוגות שואלים לפני שסוגרים DJ. <Link to="/wedding-dj" className="text-primary hover:underline">המדריך המלא ל-DJ לחתונה</Link></p>
             </div>
 
             <Accordion type="single" collapsible className="space-y-3" data-reveal>
@@ -511,7 +452,7 @@ export default function Index() {
                   <AccordionTrigger className="text-right font-medium hover:text-primary hover:no-underline py-5 text-base">
                     {faq.q}
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground leading-relaxed pb-5">
+                  <AccordionContent forceMount className="text-muted-foreground leading-relaxed pb-5 group-data-[state=closed]:hidden">
                     {faq.a}
                   </AccordionContent>
                 </AccordionItem>
@@ -551,11 +492,11 @@ export default function Index() {
               <span className="text-primary">לבלתי נשכח?</span>
             </h2>
             <p className="text-lg text-muted-foreground mb-10 max-w-md mx-auto leading-relaxed">
-              צרו קשר לפגישת היכרות ונדבר על האירוע ועל המוזיקה
+              שלחו לי את פרטי החתונה, ונבדוק יחד זמינות ונדבר על המוזיקה שלכם
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button variant="hero" size="xl" className="btn-active" asChild>
-                <Link to="/contact">השאירו פרטים</Link>
+                <Link to="/contact">שלחו לי את פרטי החתונה</Link>
               </Button>
               <Button variant="whatsapp" size="lg" className="btn-active" asChild>
                 <a

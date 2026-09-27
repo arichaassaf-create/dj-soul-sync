@@ -146,9 +146,10 @@ export default function Contact() {
   return (
     <Layout>
       <SEO
-        title="צור קשר | די ג'יי אסף אריכא"
-        description="צרו קשר עם די ג'יי אסף אריכא לקבלת הצעת מחיר לחתונה, מסיבה פרטית או אירוע חברה. טלפון: 050-5567078"
-        canonicalUrl="https://dj-assaf-aricha.com/contact"
+        title="בדיקת זמינות לחתונה | DJ אסף אריכא"
+        description="שלחו ל-DJ אסף אריכא את תאריך החתונה ופרטי האירוע, ותקבלו תשובה על זמינות והצעת מחיר. טלפון ו-WhatsApp: 050-5567078."
+        canonicalUrl="/contact"
+        breadcrumbs={[{ name: "בדיקת זמינות", path: "/contact" }]}
       />
 
       {/* Hero Section */}
@@ -158,16 +159,17 @@ export default function Contact() {
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
               <li><Link to="/" className="hover:text-primary">בית</Link></li>
               <li>/</li>
-              <li className="text-primary">צור קשר</li>
+              <li className="text-primary">בדיקת זמינות</li>
             </ol>
           </nav>
 
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6">
-              <span className="text-gradient-gold">צרו קשר</span>
+              <span className="text-gradient-gold">בדיקת זמינות</span> לתאריך שלכם
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              מלאו פרטים ואחזור אליכם עם הצעת מחיר. אפשר גם להתקשר או לשלוח הודעה ב-WhatsApp!
+              שלחו לי את התאריך, סוג האירוע וכמה מילים על מה שאתם אוהבים, ואחזור אליכם עם זמינות והצעת מחיר.
+              מעדיפים לדבר? אפשר להתקשר או לשלוח הודעה ב-WhatsApp.
             </p>
           </div>
         </div>
