@@ -248,7 +248,16 @@ export default function Contact() {
                           id="event-date"
                           name="event-date"
                           type="date"
-                          className="bg-background"
+                          dir="ltr"
+                          className="bg-background text-right"
+                          onClick={(e) => {
+                            // Open the calendar on any click, not only on the small icon
+                            try {
+                              e.currentTarget.showPicker?.();
+                            } catch {
+                              /* unsupported browser: the icon still works */
+                            }
+                          }}
                         />
                       </div>
                     </div>
