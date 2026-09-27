@@ -6,6 +6,7 @@ import { trackPhoneClick, trackWhatsAppClick, trackCTAClick } from "@/lib/analyt
 
 const navLinks = [
   { href: "/", label: "בית" },
+  { href: "/wedding-dj", label: "DJ לחתונה" },
   { href: "/about", label: "אודות" },
   { href: "/services", label: "שירותים" },
   { href: "/workshop", label: "סדנת DJ" },

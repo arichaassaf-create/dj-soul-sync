@@ -16,13 +16,15 @@ const TikTokIcon = () => (
 const footerLinks = {
   navigation: [
     { href: "/", label: "בית" },
+    { href: "/wedding-dj", label: "DJ לחתונה" },
+    { href: "/reviews", label: "ביקורות" },
     { href: "/about", label: "אודות" },
     { href: "/services", label: "שירותים" },
     { href: "/blog", label: "בלוג" },
     { href: "/contact", label: "צור קשר" },
   ],
   services: [
-    { href: "/services#weddings", label: "חתונות" },
+    { href: "/wedding-dj", label: "DJ לחתונה במרכז ובשרון" },
     { href: "/services#private", label: "מסיבות פרטיות" },
     { href: "/services#corporate", label: "אירועי חברה" },
     { href: "/wedding-form", label: "שאלון חתונה" },
@@ -48,7 +50,20 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              תקליטן מקצועי לחתונות, מסיבות פרטיות ואירועי חברה. ניסיון של שנים ויחס אישי לכל אירוע.
+              DJ לחתונות ואירועים באזור המרכז והשרון. פגישת מוזיקה אישית, קריאת קהל ורחבה מלאה. כרמי יוסף, 050-5567078.
+            </p>
+            <p className="text-sm text-muted-foreground mb-6">
+              <a href="https://www.mit4mit.co.il/biz/25035" target="_blank" rel="noopener noreferrer" className="hover:text-primary">
+                33 ביקורות במתחתנים למען מתחתנים
+              </a>
+              {" · "}
+              <a href="https://www.youtube.com/c/AssAfArichA" target="_blank" rel="noopener noreferrer" className="hover:text-primary">
+                יוטיוב
+              </a>
+              {" · "}
+              <a href="https://www.facebook.com/4ss4f.4rich4/" target="_blank" rel="noopener noreferrer" className="hover:text-primary">
+                פייסבוק
+              </a>
             </p>
             <div className="flex gap-3 flex-wrap">
               <a

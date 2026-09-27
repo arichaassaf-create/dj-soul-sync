@@ -209,7 +209,7 @@ export default function WeddingForm() {
       <SEO
         title="שאלון חתונה ופלייליסט | די ג'יי אסף אריכא"
         description="מלאו את שאלון החתונה כדי שאוכל להכיר את הטעם המוזיקלי שלכם ולתכנן את הפלייליסט המושלם."
-        canonicalUrl="https://dj-assaf-aricha.co.il/wedding-form"
+        canonicalUrl="https://dj-assaf-aricha.com/wedding-form"
       />
 
       <section className="pt-32 pb-16 md:pt-40 md:pb-24">

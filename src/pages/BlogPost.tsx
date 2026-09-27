@@ -1,7 +1,7 @@
 import { Link, useParams, Navigate } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { Layout } from "@/components/Layout";
-import { Helmet } from "react-helmet-async";
+import { SITE_URL, ids } from "@/lib/site";
 import { Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { blogPosts } from "@/data/blogPosts";
@@ -44,29 +44,18 @@ export default function BlogPost() {
 
   const heroImage = post.heroImage ? heroImages[post.heroImage] : null;
 
+  const postUrl = `${SITE_URL}/blog/${post.slug}`;
   const blogPostSchema = {
-    "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": post.title,
-    "description": post.excerpt,
-    "datePublished": post.date,
-    "dateModified": post.date,
-    "author": {
-      "@type": "Person",
-      "name": "אסף אריכא",
-      "url": "https://dj-assaf-aricha.com/about"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "DJ אסף אריכא",
-      "url": "https://dj-assaf-aricha.com"
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": `https://dj-assaf-aricha.com/blog/${post.slug}`
-    },
-    "url": `https://dj-assaf-aricha.com/blog/${post.slug}`,
-    "inLanguage": "he"
+    "@id": `${postUrl}#article`,
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: { "@id": ids.person },
+    publisher: { "@id": ids.business },
+    mainEntityOfPage: { "@id": `${postUrl}#webpage` },
+    inLanguage: "he-IL",
   };
 
   return (
@@ -74,13 +63,13 @@ export default function BlogPost() {
       <SEO
         title={`${post.title} | בלוג`}
         description={post.excerpt}
-        canonicalUrl={`https://dj-assaf-aricha.com/blog/${post.slug}`}
+        canonicalUrl={`/blog/${post.slug}`}
         article
         publishedTime={post.date}
+        modifiedTime={post.date}
+        breadcrumbs={[{ name: "בלוג", path: "/blog" }, { name: post.title, path: `/blog/${post.slug}` }]}
+        schema={[blogPostSchema]}
       />
-      <Helmet>
-        <script type="application/ld+json">{JSON.stringify(blogPostSchema)}</script>
-      </Helmet>
 
       <article className="pt-32 pb-16 md:pt-40">
         <div className="container-custom">
@@ -109,7 +98,11 @@ export default function BlogPost() {
           <header className="max-w-3xl mb-12">
             <div className="flex items-center gap-2 text-muted-foreground mb-4">
               <Calendar className="h-4 w-4" />
-              <time>{new Date(post.date).toLocaleDateString("he-IL", { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+              <time dateTime={post.date}>{new Date(post.date).toLocaleDateString("he-IL", { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+              <span aria-hidden="true">·</span>
+              <span>
+                מאת <Link to="/about" className="hover:text-primary">DJ אסף אריכא</Link>
+              </span>
             </div>
             <h1 className="text-4xl md:text-5xl font-heading font-bold mb-6">
               <span className="text-gradient-gold">{post.title}</span>
@@ -169,7 +162,7 @@ export default function BlogPost() {
 
           <div className="max-w-3xl mt-16 pt-8 border-t border-border">
             <Button variant="hero" asChild>
-              <Link to="/contact">רוצים לדבר על האירוע שלכם?</Link>
+              <Link to="/contact">בדיקת זמינות לתאריך שלכם</Link>
             </Button>
           </div>
         </div>

@@ -100,7 +100,7 @@ export default function WorkshopGuide() {
       <SEO
         title="מילון מונחים ומדריך לסדנת DJ | אסף אריכא"
         description="מדריך חינמי ומילון מונחים לסדנת ה-DJ: BPM, Beatmatching, EQ, מעברים ואפקטים, טווחי BPM לפי ז'אנר וטיפים מקצועיים ממנחה הסדנה אסף אריכא."
-        canonicalUrl="https://dj-assaf-aricha.co.il/workshop-guide"
+        canonicalUrl="https://dj-assaf-aricha.com/workshop-guide"
         keywords="מילון מונחים DJ, מדריך DJ, BPM, Beatmatching, מונחי תקליטנות, ללמוד DJ"
       />
 

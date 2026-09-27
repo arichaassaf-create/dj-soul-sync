@@ -5,7 +5,7 @@ import { Layout } from "@/components/Layout";
 export default function Privacy() {
   return (
     <Layout>
-      <SEO title="מדיניות פרטיות" canonicalUrl="https://dj-assaf-aricha.co.il/privacy" noindex />
+      <SEO title="מדיניות פרטיות" canonicalUrl="https://dj-assaf-aricha.com/privacy" noindex />
       <section className="pt-32 pb-16 md:pt-40">
         <div className="container-custom max-w-3xl">
           <nav aria-label="Breadcrumb" className="mb-8">

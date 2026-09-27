@@ -11,7 +11,7 @@ export default function GiftSuccess() {
 
   return (
     <Layout>
-      <SEO title="התשלום בוצע בהצלחה! | אסף אריכא" description="שובר המתנה נרכש בהצלחה" />
+      <SEO title="התשלום בוצע בהצלחה! | אסף אריכא" description="שובר המתנה נרכש בהצלחה" canonicalUrl="/gift-success" noindex />
       <section className="min-h-[70vh] flex items-center justify-center section-padding">
         <div className="container-custom">
           <div className="max-w-lg mx-auto text-center bg-card rounded-2xl border border-border/50 p-10">

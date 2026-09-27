@@ -2,56 +2,29 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { HelmetProvider } from "react-helmet-async";
+import { Routes, Route } from "react-router-dom";
 import { ScrollToTop } from "./components/ScrollToTop";
-import Index from "./pages/Index";
-import About from "./pages/About";
-import Services from "./pages/Services";
-import Contact from "./pages/Contact";
-import Blog from "./pages/Blog";
-import BlogPost from "./pages/BlogPost";
-import WeddingForm from "./pages/WeddingForm";
-import Privacy from "./pages/Privacy";
-import Accessibility from "./pages/Accessibility";
 import NotFound from "./pages/NotFound";
-import Workshop from "./pages/Workshop";
-import WorkshopGuide from "./pages/WorkshopGuide";
-import WorkshopLanding from "./pages/WorkshopLanding";
-import WhatsAppRedirect from "./pages/WhatsAppRedirect";
-import GiftSuccess from "./pages/GiftSuccess";
+import { routes, blogRoute } from "./routes";
 
 const queryClient = new QueryClient();
 
+// Router and HelmetProvider are supplied by main.tsx (browser) or entry-server.tsx (prerender).
 const App = () => (
-  <HelmetProvider>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/wedding-form" element={<WeddingForm />} />
-            <Route path="/workshop" element={<Workshop />} />
-            <Route path="/workshop-guide" element={<WorkshopGuide />} />
-            <Route path="/learn-to-dj" element={<WorkshopLanding />} />
-            <Route path="/whatsapp-redirect" element={<WhatsAppRedirect />} />
-            <Route path="/gift-success" element={<GiftSuccess />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/accessibility" element={<Accessibility />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
-  </HelmetProvider>
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <ScrollToTop />
+      <Routes>
+        {routes.map((r) => (
+          <Route key={r.path} path={r.path} element={r.element} />
+        ))}
+        <Route path={blogRoute.path} element={blogRoute.element} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </TooltipProvider>
+  </QueryClientProvider>
 );
 
 export default App;

@@ -3,29 +3,21 @@ import { SEO } from "@/components/SEO";
 import { Layout } from "@/components/Layout";
 import { Calendar, ArrowLeft } from "lucide-react";
 import { blogPosts } from "@/data/blogPosts";
-import { Helmet } from "react-helmet-async";
 
 export default function Blog() {
   const blogListSchema = {
-    "@context": "https://schema.org",
-    "@type": "Blog",
+        "@type": "Blog",
     "name": "בלוג דיג'יי אסף אריכא - טיפים לחתונות ואירועים",
     "url": "https://dj-assaf-aricha.com/blog",
     "description": "טיפים, מדריכים ורעיונות לתכנון המוזיקה בחתונה ובאירועים מאת DJ אסף אריכא",
-    "author": {
-      "@type": "Person",
-      "name": "אסף אריכא"
-    },
+    "author": { "@id": "https://dj-assaf-aricha.com/#person" },
     "blogPost": blogPosts.map(post => ({
       "@type": "BlogPosting",
       "headline": post.title,
       "description": post.excerpt,
       "datePublished": post.date,
       "url": `https://dj-assaf-aricha.com/blog/${post.slug}`,
-      "author": {
-        "@type": "Person",
-        "name": "אסף אריכא"
-      }
+      "author": { "@id": "https://dj-assaf-aricha.com/#person" }
     }))
   };
 
@@ -34,14 +26,11 @@ export default function Blog() {
       <SEO
         title="בלוג | טיפים לחתונות ואירועים - DJ אסף אריכא"
         description="מדריכים וטיפים לתכנון המוזיקה בחתונה: איך לבחור דיג'יי, לבנות פלייליסט, ולתכנן מוזיקה לחופה. מאת DJ אסף אריכא - תקליטן לחתונות במרכז ובשרון."
-        canonicalUrl="https://dj-assaf-aricha.com/blog"
+        canonicalUrl="/blog"
+        breadcrumbs={[{ name: "בלוג", path: "/blog" }]}
         keywords="בלוג דיג'יי חתונה, טיפים לבחירת תקליטן, מדריך מוזיקה לחתונה, פלייליסט לחתונה, מוזיקה לחופה"
+        schema={[blogListSchema]}
       />
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify(blogListSchema)}
-        </script>
-      </Helmet>
 
       <section className="pt-32 pb-16 md:pt-40">
         <div className="container-custom">
