@@ -11,7 +11,7 @@ import { REVIEW_SOURCES } from "@/lib/site";
 // publishes about itself (self-serving), and marking them up risks a manual action.
 
 export default function Reviews() {
-  const { mit4mit, easy } = REVIEW_SOURCES;
+  const { google, mit4mit, easy } = REVIEW_SOURCES;
 
   return (
     <Layout>
@@ -40,7 +40,23 @@ export default function Reviews() {
             מילה במילה, ולכל אחד יש קישור למקור שבו אפשר לקרוא את הביקורת המלאה.
           </p>
 
-          <div className="grid sm:grid-cols-2 gap-5 mb-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-4">
+            <a
+              href={google.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-card rounded-2xl p-6 border border-border/50 hover:border-primary/40 transition-colors flex items-center justify-between gap-4"
+            >
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">{google.label}</p>
+                <p className="flex items-center gap-2 text-3xl font-heading font-bold">
+                  <Star className="h-6 w-6 fill-primary text-primary" aria-hidden="true" />
+                  {google.score}
+                </p>
+                <p className="text-sm text-muted-foreground mt-1">ביקורות בפרופיל העסק בגוגל</p>
+              </div>
+              <ExternalLink className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+            </a>
             <a
               href={mit4mit.url}
               target="_blank"

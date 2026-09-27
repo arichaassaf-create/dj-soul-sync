@@ -12,6 +12,11 @@ export const ENTITY = {
   phoneLocal: "050-5567078",
   email: "arichaassaf@gmail.com",
   locality: "כרמי יוסף",
+  // Verified on Google Business Profile and Mit4Mit (27/09/2026). Easy still lists האלון 27.
+  streetAddress: "גפן 26",
+  postalCode: "9979700",
+  geo: { latitude: 31.8480134, longitude: 34.916092 },
+  googleMaps: "https://maps.google.com/?cid=17206966637446661136",
   region: "מרכז",
   logo: `${SITE_URL}/favicon.jpg`,
   image: `${SITE_URL}/og-image.jpg`,
@@ -19,6 +24,7 @@ export const ENTITY = {
     "DJ אסף אריכא הוא תקליטן לחתונות ואירועים בישראל, עם דגש על התאמה אישית לזוג וקריאת קהל בזמן אמת. פועל מכרמי יוסף ומתקלט בחתונות באזור המרכז והשרון.",
   // Only profiles that were verified to exist and belong to Assaf.
   sameAs: [
+    "https://maps.google.com/?cid=17206966637446661136",
     "https://www.mit4mit.co.il/biz/25035",
     "https://easy.co.il/page/6254057",
     "https://www.instagram.com/dj_assaf_aricha/",
@@ -59,6 +65,12 @@ export const WHATSAPP_URL = "https://wa.me/972505567078";
 
 // Public review platforms. Numbers must match the source at the time of writing.
 export const REVIEW_SOURCES = {
+  google: {
+    label: "Google",
+    url: "https://maps.google.com/?cid=17206966637446661136",
+    score: "5.0",
+    checkedAt: "2026-09-27",
+  },
   mit4mit: {
     label: "מתחתנים למען מתחתנים",
     url: "https://www.mit4mit.co.il/biz/25035",
@@ -107,9 +119,13 @@ export function entityGraph() {
       priceRange: "$$",
       address: {
         "@type": "PostalAddress",
+        streetAddress: ENTITY.streetAddress,
         addressLocality: ENTITY.locality,
+        postalCode: ENTITY.postalCode,
         addressCountry: "IL",
       },
+      geo: { "@type": "GeoCoordinates", ...ENTITY.geo },
+      hasMap: ENTITY.googleMaps,
       areaServed: ENTITY.areaServed.map((name) => ({ "@type": "Place", name })),
       founder: { "@id": PERSON_ID },
       sameAs: ENTITY.sameAs,

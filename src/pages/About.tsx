@@ -189,13 +189,14 @@ export default function About() {
           <h2 id="profiles-h" className="text-2xl md:text-3xl font-heading font-bold mb-6">איפה עוד אפשר למצוא אותי</h2>
           <ul className="grid sm:grid-cols-2 gap-3">
             {[
-              { label: "ביקורות במתחתנים למען מתחתנים", url: ENTITY.sameAs[0] },
-              { label: "דף העסק באיזי", url: ENTITY.sameAs[1] },
-              { label: "אינסטגרם", url: ENTITY.sameAs[2] },
-              { label: "יוטיוב", url: ENTITY.sameAs[3] },
-              { label: "טיקטוק", url: ENTITY.sameAs[4] },
-              { label: "סאונדקלאוד: סטים ומיקסים", url: ENTITY.sameAs[5] },
-              { label: "פייסבוק", url: ENTITY.sameAs[6] },
+              { label: "ביקורות בגוגל", url: ENTITY.googleMaps },
+              { label: "ביקורות במתחתנים למען מתחתנים", url: "https://www.mit4mit.co.il/biz/25035" },
+              { label: "דף העסק באיזי", url: "https://easy.co.il/page/6254057" },
+              { label: "אינסטגרם", url: "https://www.instagram.com/dj_assaf_aricha/" },
+              { label: "יוטיוב", url: "https://www.youtube.com/c/AssAfArichA" },
+              { label: "טיקטוק", url: "https://www.tiktok.com/@dj.assaf.aricha" },
+              { label: "סאונדקלאוד: סטים ומיקסים", url: "https://soundcloud.com/4ss4f4rich4" },
+              { label: "פייסבוק", url: "https://www.facebook.com/4ss4f.4rich4/" },
             ].map((p) => (
               <li key={p.url}>
                 <a
