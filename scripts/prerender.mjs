@@ -24,7 +24,9 @@ function page(url) {
 
 let count = 0;
 for (const url of allPaths()) {
-  const file = url === "/" ? path.join(dist, "index.html") : path.join(dist, url.slice(1), "index.html");
+  // Flat files (about.html, not about/index.html): with a directory, Netlify 301-redirects
+  // /about to /about/, which contradicts the canonical URLs and the sitemap.
+  const file = url === "/" ? path.join(dist, "index.html") : path.join(dist, `${url.slice(1)}.html`);
   fs.mkdirSync(path.dirname(file), { recursive: true });
   const out = page(url);
   if (!/<link[^>]*rel="canonical"/.test(out)) throw new Error(`No canonical rendered for ${url}`);
