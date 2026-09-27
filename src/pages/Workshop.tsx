@@ -83,7 +83,7 @@ export default function Workshop() {
       <SEO
         title="סדנת DJ פרטית ליחידים ולזוגות | אסף אריכא"
         description="סדנת די ג'יי פרטית ב-3.5 שעות – למד לתקלט בצורה מקצועית עם אסף אריכא. Beatmatching, EQ, בניית סט ועוד. ליחידים ולזוגות."
-        canonicalUrl="https://dj-assaf-aricha.co.il/workshop"
+        canonicalUrl="https://dj-assaf-aricha.com/workshop"
         keywords="סדנת DJ, קורס תקליטנות, ללמוד לתקלט, סדנת DJ פרטית, סדנת DJ לזוגות, beatmatching, למידת DJ"
       />
 

@@ -5,7 +5,7 @@ import { Layout } from "@/components/Layout";
 export default function Accessibility() {
   return (
     <Layout>
-      <SEO title="הצהרת נגישות" canonicalUrl="https://dj-assaf-aricha.co.il/accessibility" noindex />
+      <SEO title="הצהרת נגישות" canonicalUrl="https://dj-assaf-aricha.com/accessibility" noindex />
       <section className="pt-32 pb-16 md:pt-40">
         <div className="container-custom max-w-3xl">
           <nav aria-label="Breadcrumb" className="mb-8">

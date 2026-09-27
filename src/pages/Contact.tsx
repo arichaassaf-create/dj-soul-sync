@@ -148,7 +148,7 @@ export default function Contact() {
       <SEO
         title="צור קשר | די ג'יי אסף אריכא"
         description="צרו קשר עם די ג'יי אסף אריכא לקבלת הצעת מחיר לחתונה, מסיבה פרטית או אירוע חברה. טלפון: 050-5567078"
-        canonicalUrl="https://dj-assaf-aricha.co.il/contact"
+        canonicalUrl="https://dj-assaf-aricha.com/contact"
       />
 
       {/* Hero Section */}

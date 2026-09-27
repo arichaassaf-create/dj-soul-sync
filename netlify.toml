@@ -2,10 +2,14 @@
   command = "npm run build"
   publish = "dist"
 
+# Every known route is prerendered to its own HTML file, which Netlify serves directly.
+# Unknown URLs get the prerendered 404 page with a real 404 status (no more soft 404s).
+# The JS bundle still loads on 404.html, so a route added in code but missing from
+# src/routes.tsx keeps working for visitors while clearly returning 404 to crawlers.
 [[redirects]]
   from = "/*"
-  to = "/index.html"
-  status = 200
+  to = "/404.html"
+  status = 404
 
 [[headers]]
   for = "/sitemap.xml"
@@ -30,6 +34,11 @@
 
 [[headers]]
   for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 

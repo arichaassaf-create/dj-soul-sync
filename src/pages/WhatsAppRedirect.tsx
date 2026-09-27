@@ -1,5 +1,16 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+import { SEO } from "@/components/SEO";
+
+// Only WhatsApp destinations are allowed, otherwise this page is an open redirect.
+function isWhatsAppUrl(url: string) {
+  try {
+    const host = new URL(url).hostname;
+    return host === "wa.me" || host === "api.whatsapp.com" || host === "web.whatsapp.com";
+  } catch {
+    return false;
+  }
+}
 
 export default function WhatsAppRedirect() {
   const [searchParams] = useSearchParams();
@@ -25,7 +36,7 @@ export default function WhatsAppRedirect() {
 
     // Redirect to WhatsApp after short delay
     const timer = setTimeout(() => {
-      if (url) {
+      if (url && isWhatsAppUrl(url)) {
         window.location.href = url;
       }
     }, 500);
@@ -35,6 +46,7 @@ export default function WhatsAppRedirect() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background">
+      <SEO title="מעביר ל-WhatsApp" canonicalUrl="/whatsapp-redirect" noindex />
       <div className="text-center space-y-4">
         <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto" />
         <p className="text-muted-foreground text-lg">מעביר ל-WhatsApp...</p>

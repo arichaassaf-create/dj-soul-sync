@@ -22,8 +22,13 @@ const defaultSettings: AccessibilitySettings = {
 export function AccessibilityToolbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [settings, setSettings] = useState<AccessibilitySettings>(() => {
-    const saved = localStorage.getItem("accessibility-settings");
-    return saved ? JSON.parse(saved) : defaultSettings;
+    if (typeof window === "undefined") return defaultSettings;
+    try {
+      const saved = window.localStorage.getItem("accessibility-settings");
+      return saved ? JSON.parse(saved) : defaultSettings;
+    } catch {
+      return defaultSettings;
+    }
   });
 
   useEffect(() => {

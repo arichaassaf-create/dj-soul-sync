@@ -49,7 +49,7 @@ export default function WorkshopLanding() {
       <SEO
         title="ללמוד לתקלט ב-3.5 שעות | סדנת DJ פרטית | אסף אריכא"
         description="רוצה להפסיק לשחק ולהתחיל לתקלט באמת? סדנת DJ פרטית ב-3.5 שעות – שיטה ברורה, תרגול מעשי, ומיקסים נקיים כבר מהסדנה הראשונה."
-        canonicalUrl="https://dj-assaf-aricha.co.il/learn-to-dj"
+        canonicalUrl="https://dj-assaf-aricha.com/learn-to-dj"
         keywords="ללמוד לתקלט, סדנת DJ, קורס DJ, beatmatching, סדנה פרטית, DJ למתחילים"
       />
 
