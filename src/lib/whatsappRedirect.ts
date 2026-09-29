@@ -3,6 +3,7 @@ import { trackWhatsAppClick } from "@/lib/analytics";
 declare global {
   interface Window {
     fbq?: (...args: unknown[]) => void;
+    oaiq?: (...args: unknown[]) => void;
   }
 }
 
@@ -28,6 +29,12 @@ export function redirectToWhatsApp(
     });
   }
 
+  // 1a. ChatGPT Ads pixel: same leads Meta counts as "Lead" (contact + wedding forms, not workshop)
+  const hasOaiq = typeof window.oaiq === "function";
+  if (hasOaiq && pixelEvent === "Lead") {
+    window.oaiq("measure", "lead_created", { type: "customer_action" });
+  }
+
   // 1b. Fire GA4 event
   trackWhatsAppClick(source);
 
@@ -48,7 +55,7 @@ export function redirectToWhatsApp(
 
   // 3. Open WhatsApp (slight delay improves Pixel delivery reliability)
   const openWhatsApp = () => window.open(whatsappUrl, "_blank");
-  if (hasPixel) {
+  if (hasPixel || hasOaiq) {
     window.setTimeout(openWhatsApp, PIXEL_DISPATCH_DELAY_MS);
     return;
   }
