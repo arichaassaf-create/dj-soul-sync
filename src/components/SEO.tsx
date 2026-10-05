@@ -22,6 +22,10 @@ interface SEOProps {
   breadcrumbs?: Breadcrumb[];
   /** Extra JSON-LD nodes for this page (FAQPage, Article, Service...). Added to the @graph. */
   schema?: Record<string, unknown>[];
+  /** Page language. English pages render LTR with en_US locale. */
+  lang?: "he" | "en";
+  /** hreflang alternates for the same page in the other language. */
+  alternates?: { hrefLang: string; path: string }[];
 }
 
 function toPath(canonicalUrl?: string) {
@@ -42,10 +46,15 @@ export function SEO({
   noindex = false,
   breadcrumbs,
   schema = [],
+  lang = "he",
+  alternates,
 }: SEOProps) {
+  const isEn = lang === "en";
   const path = toPath(canonicalUrl);
   const url = `${SITE_URL}${path === "/" ? "/" : path}`;
-  const fullTitle = title.includes("אסף אריכא") ? title : `${title} | DJ אסף אריכא`;
+  const fullTitle = isEn
+    ? title.includes("Assaf Aricha") ? title : `${title} | DJ Assaf Aricha`
+    : title.includes("אסף אריכא") ? title : `${title} | DJ אסף אריכא`;
   const image = ogImage.startsWith("http") ? ogImage : `${SITE_URL}${ogImage}`;
 
   const graph: Record<string, unknown>[] = [
@@ -56,7 +65,7 @@ export function SEO({
       url,
       name: fullTitle,
       description,
-      inLanguage: "he-IL",
+      inLanguage: isEn ? "en-US" : "he-IL",
       isPartOf: { "@id": ids.website },
       about: { "@id": ids.business },
       ...(modifiedTime ? { dateModified: modifiedTime } : {}),
@@ -80,13 +89,17 @@ export function SEO({
 
   return (
     <Helmet>
+      <html lang={isEn ? "en" : "he"} dir={isEn ? "ltr" : "rtl"} />
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
-      <meta name="author" content={author} />
+      <meta name="author" content={isEn ? ENTITY.personNameEn : author} />
       <meta name="robots" content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large"} />
       <link rel="canonical" href={url} />
+      {alternates?.map((a) => (
+        <link key={a.hrefLang} rel="alternate" hrefLang={a.hrefLang} href={`${SITE_URL}${a.path === "/" ? "/" : a.path}`} />
+      ))}
 
-      <meta property="og:site_name" content={ENTITY.name} />
+      <meta property="og:site_name" content={isEn ? ENTITY.nameEn : ENTITY.name} />
       <meta property="og:type" content={article ? "article" : "website"} />
       <meta property="og:url" content={url} />
       <meta property="og:title" content={fullTitle} />
@@ -94,7 +107,7 @@ export function SEO({
       <meta property="og:image" content={image} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:locale" content="he_IL" />
+      <meta property="og:locale" content={isEn ? "en_US" : "he_IL"} />
       {article && publishedTime && <meta property="article:published_time" content={publishedTime} />}
       {article && modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
 
