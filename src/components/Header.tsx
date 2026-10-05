@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { trackPhoneClick, trackWhatsAppClick, trackCTAClick } from "@/lib/analytics";
 
 const navLinks = [
   { href: "/", label: "בית" },
@@ -72,13 +71,13 @@ export function Header() {
         {/* Desktop CTA */}
         <div className="hidden lg:flex items-center gap-3">
           <Button variant="glass" size="sm" asChild>
-            <a href="tel:0505567078" aria-label="התקשרו אלינו" onClick={() => trackPhoneClick("header_desktop")}>
+            <a href="tel:0505567078" aria-label="התקשרו אלינו">
               <Phone className="h-4 w-4" />
               <span>050-5567078</span>
             </a>
           </Button>
           <Button variant="hero" size="sm" asChild>
-            <Link to="/contact" onClick={() => trackCTAClick("quote_request", "header_desktop")}>הצעת מחיר</Link>
+            <Link to="/contact">הצעת מחיר</Link>
           </Button>
         </div>
 
@@ -119,14 +118,14 @@ export function Header() {
             ))}
             <li className="flex gap-3 mt-6 animate-fade-in-up" style={{ animationDelay: "0.6s" }}>
               <Button variant="phone" asChild>
-                <a href="tel:0505567078" onClick={() => trackPhoneClick("header_mobile")}>
+                <a href="tel:0505567078">
                   <Phone className="h-4 w-4" />
                   התקשרו
                 </a>
               </Button>
               <Button variant="whatsapp" asChild>
                 <a
-                  href="https://wa.me/972505567078" onClick={() => trackWhatsAppClick("header_mobile")}
+                  href="https://wa.me/972505567078"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

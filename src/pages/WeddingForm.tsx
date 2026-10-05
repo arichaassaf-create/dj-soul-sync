@@ -12,6 +12,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { weddingSchema, checkRateLimit, recordSubmission } from "@/lib/formValidation";
 import { redirectToWhatsApp } from "@/lib/whatsappRedirect";
 import { sendFormEmail } from "@/lib/sendFormEmail";
+import { trackWeddingFormSubmit } from "@/lib/analytics";
 import { SongPickerField } from "@/components/SongPickerField";
 import {
   chuppahEntranceSongs,
@@ -195,6 +196,7 @@ export default function WeddingForm() {
 
     redirectToWhatsApp(whatsappMessage, "wedding", "Lead");
 
+    trackWeddingFormSubmit();
     recordSubmission();
     setIsSubmitting(false);
     setIsSubmitted(true);
