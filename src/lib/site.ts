@@ -126,7 +126,12 @@ export function entityGraph() {
       },
       geo: { "@type": "GeoCoordinates", ...ENTITY.geo },
       hasMap: ENTITY.googleMaps,
-      areaServed: ENTITY.areaServed.map((name) => ({ "@type": "Place", name })),
+      areaServed: [
+        ...ENTITY.areaServed.map((name) => ({ "@type": "Place", name })),
+        { "@type": "Country", name: "Israel" },
+        { "@type": "Country", name: "United States" },
+      ],
+      knowsLanguage: ["he", "en"],
       founder: { "@id": PERSON_ID },
       sameAs: ENTITY.sameAs,
       hasOfferCatalog: {

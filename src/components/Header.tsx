@@ -13,6 +13,7 @@ const navLinks = [
   { href: "/blog", label: "בלוג" },
   { href: "/wedding-form", label: "שאלון חתונה" },
   { href: "/contact", label: "צור קשר" },
+  { href: "/en", label: "EN" },
 ];
 
 export function Header() {

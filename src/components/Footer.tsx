@@ -28,6 +28,8 @@ const footerLinks = {
     { href: "/services#private", label: "מסיבות פרטיות" },
     { href: "/services#corporate", label: "אירועי חברה" },
     { href: "/wedding-form", label: "שאלון חתונה" },
+    { href: "/israelis-abroad", label: "לישראלים שגרים בחו\"ל" },
+    { href: "/en", label: "English: weddings for US couples" },
   ],
   legal: [
     { href: "/privacy", label: "מדיניות פרטיות" },

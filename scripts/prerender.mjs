@@ -18,8 +18,11 @@ const { render, allPaths, sitemapEntries } = await import(
 );
 
 function page(url) {
-  const { html, head } = render(url);
-  return template.replace("<!--app-head-->", head).replace("<!--app-html-->", html);
+  const { html, head, htmlAttributes } = render(url);
+  let out = template.replace("<!--app-head-->", head).replace("<!--app-html-->", html);
+  // English pages set lang="en" dir="ltr" through Helmet; Hebrew pages keep he/rtl.
+  if (htmlAttributes) out = out.replace(/<html[^>]*>/, `<html ${htmlAttributes}>`);
+  return out;
 }
 
 let count = 0;

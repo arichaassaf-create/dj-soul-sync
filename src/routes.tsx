@@ -15,6 +15,10 @@ import WorkshopGuide from "./pages/WorkshopGuide";
 import WorkshopLanding from "./pages/WorkshopLanding";
 import WhatsAppRedirect from "./pages/WhatsAppRedirect";
 import GiftSuccess from "./pages/GiftSuccess";
+import IsraelisAbroad from "./pages/IsraelisAbroad";
+import EnHome from "./pages/en/EnHome";
+import EnIsraelWedding from "./pages/en/EnIsraelWedding";
+import EnUsWedding from "./pages/en/EnUsWedding";
 import { blogPosts } from "./data/blogPosts";
 
 export interface AppRoute {
@@ -31,6 +35,10 @@ export const routes: AppRoute[] = [
   { path: "/", element: <Index />, sitemap: true, priority: 1.0 },
   { path: "/wedding-dj", element: <WeddingDJ />, sitemap: true, priority: 0.9 },
   { path: "/reviews", element: <Reviews />, sitemap: true, priority: 0.8 },
+  { path: "/israelis-abroad", element: <IsraelisAbroad />, sitemap: true, priority: 0.7 },
+  { path: "/en", element: <EnHome />, sitemap: true, priority: 0.9 },
+  { path: "/en/destination-wedding-dj-israel", element: <EnIsraelWedding />, sitemap: true, priority: 0.9 },
+  { path: "/en/israeli-wedding-dj-usa", element: <EnUsWedding />, sitemap: true, priority: 0.8 },
   { path: "/about", element: <About />, sitemap: true, priority: 0.8 },
   { path: "/services", element: <Services />, sitemap: true, priority: 0.8 },
   { path: "/contact", element: <Contact />, sitemap: true, priority: 0.8 },

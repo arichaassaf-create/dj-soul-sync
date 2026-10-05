@@ -17,5 +17,5 @@ export function render(url: string) {
   );
   const h = helmetContext.helmet!;
   const head = [h.title, h.meta, h.link, h.script].map((x) => x.toString()).join("\n");
-  return { html, head };
+  return { html, head, htmlAttributes: h.htmlAttributes.toString() };
 }

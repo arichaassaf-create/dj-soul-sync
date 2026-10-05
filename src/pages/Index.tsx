@@ -74,6 +74,11 @@ export default function Index() {
         title="DJ אסף אריכא | DJ לחתונה במרכז ובשרון"
         description="DJ אסף אריכא, תקליטן לחתונות במרכז ובשרון. פגישת מוזיקה אישית, קריאת קהל בזמן אמת ורחבה מלאה מהחופה ועד השיר האחרון. 33 ביקורות של זוגות במתחתנים למען מתחתנים."
         canonicalUrl="/"
+        alternates={[
+          { hrefLang: "he", path: "/" },
+          { hrefLang: "en", path: "/en" },
+          { hrefLang: "x-default", path: "/" },
+        ]}
         schema={[faqSchema(faqs)]}
       />
 
