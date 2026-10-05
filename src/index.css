@@ -430,14 +430,107 @@
 .ring-pulse-delay-1 { animation-delay: 0.85s; }
 .ring-pulse-delay-2 { animation-delay: 1.7s; }
 
+
+/* ─────────────────────────────────────────────────────────
+   HERO AMBIENCE (living photo: beams, haze, sparkles, slow zoom)
+   ───────────────────────────────────────────────────────── */
+.hero-photo {
+  transform-origin: 50% 30%;
+  animation: hero-zoom 26s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes hero-zoom {
+  from { transform: scale(1); }
+  to   { transform: scale(1.07); }
+}
+
+.hero-ambience {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  mix-blend-mode: screen;
+}
+
+.hero-beam {
+  position: absolute;
+  top: -10%;
+  width: 22%;
+  height: 95%;
+  margin-left: -11%;
+  transform-origin: 50% 0;
+  background: linear-gradient(
+    to bottom,
+    hsl(45 100% 82% / 0.55) 0%,
+    hsl(43 90% 62% / 0.22) 45%,
+    transparent 85%
+  );
+  clip-path: polygon(46% 0, 54% 0, 100% 100%, 0 100%);
+  filter: blur(3px);
+  opacity: 0.7;
+  animation-name: hero-beam-sweep;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  will-change: transform, opacity;
+}
+
+@keyframes hero-beam-sweep {
+  0%   { transform: rotate(calc(var(--beam-rotate) * -1)); opacity: 0.35; }
+  50%  { opacity: 0.9; }
+  100% { transform: rotate(var(--beam-rotate)); opacity: 0.45; }
+}
+
+.hero-haze {
+  position: absolute;
+  inset: -20% -30%;
+  background:
+    radial-gradient(ellipse 40% 30% at 30% 40%, hsl(43 80% 60% / 0.10), transparent 70%),
+    radial-gradient(ellipse 35% 25% at 70% 55%, hsl(35 80% 55% / 0.08), transparent 70%);
+  animation: hero-haze-drift 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes hero-haze-drift {
+  from { transform: translate3d(-4%, 0, 0); }
+  to   { transform: translate3d(4%, -3%, 0); }
+}
+
+.hero-sparkle {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsl(45 100% 92%) 0%, hsl(43 90% 70% / 0.6) 40%, transparent 70%);
+  box-shadow: 0 0 14px 4px hsl(45 100% 80% / 0.7);
+  opacity: 0;
+  animation: hero-twinkle 3.2s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+@keyframes hero-twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.4); }
+  45%      { opacity: 0.95; transform: scale(1.2); }
+  60%      { opacity: 0.3; transform: scale(0.8); }
+}
+
 /* ─────────────────────────────────────────────────────────
    REDUCED MOTION SAFETY
    ───────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .eq-bar,
   .marquee-track,
-  .ring-pulse {
+  .ring-pulse,
+  .hero-photo,
+  .hero-beam,
+  .hero-haze,
+  .hero-sparkle {
     animation: none !important;
+  }
+
+  .hero-ambience {
+    display: none;
   }
 
   [data-reveal] {

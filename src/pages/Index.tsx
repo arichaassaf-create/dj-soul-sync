@@ -11,6 +11,7 @@ import {
 import { Phone, MessageCircle, Star, Music, Heart, ChevronLeft } from "lucide-react";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { ReviewCard } from "@/components/ReviewCard";
+import { HeroAmbience } from "@/components/HeroAmbience";
 import { reviewById } from "@/data/reviews";
 import { homeFaq, faqSchema } from "@/data/faq";
 import { REVIEW_SOURCES } from "@/lib/site";
@@ -84,7 +85,7 @@ export default function Index() {
         aria-label="כותרת ראשית"
       >
         {/* Image panel — physical LEFT, 46% on desktop, full bleed on mobile */}
-        <div className="absolute left-0 top-0 bottom-0 w-full lg:w-[46%]">
+        <div className="absolute left-0 top-0 bottom-0 w-full lg:w-[46%] overflow-hidden">
           <img
             src={heroImage}
             alt="DJ אסף אריכא מתקלט בעמדת ה-DJ באולם אירועים"
@@ -92,8 +93,9 @@ export default function Index() {
             height={1078}
             decoding="async"
             {...{ fetchpriority: "high" }}
-            className="absolute inset-0 w-full h-full object-cover object-top"
+            className="hero-photo absolute inset-0 w-full h-full object-cover object-top"
           />
+          <HeroAmbience />
           {/* Mobile: dark veil so text is readable */}
           <div className="absolute inset-0 bg-background/74 lg:hidden" />
           {/* Desktop: gradient fading image into background on its right edge */}
