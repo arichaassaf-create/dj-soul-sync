@@ -99,8 +99,8 @@ export default {
           "100%": { opacity: "1", transform: "translateX(0)" },
         },
         "pulse-glow": {
-          "0%, 100%": { boxShadow: "0 0 20px hsl(var(--gold) / 0.3)" },
-          "50%": { boxShadow: "0 0 40px hsl(var(--gold) / 0.5)" },
+          "0%, 100%": { boxShadow: "0 0 20px hsl(43 74% 49% / 0.3)" },
+          "50%": { boxShadow: "0 0 40px hsl(43 74% 49% / 0.5)" },
         },
       },
       animation: {
@@ -112,14 +112,14 @@ export default {
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
       },
       backgroundImage: {
-        "gradient-gold": "linear-gradient(135deg, hsl(var(--gold)), hsl(var(--gold-light)))",
-        "gradient-dark": "linear-gradient(180deg, hsl(var(--background)), hsl(var(--dark-deep)))",
-        "gradient-card": "linear-gradient(145deg, hsl(var(--card)), hsl(var(--background)))",
-        "gradient-hero": "linear-gradient(180deg, transparent 0%, hsl(var(--background) / 0.6) 50%, hsl(var(--background)) 100%)",
+        "gradient-gold": "linear-gradient(135deg, hsl(43 74% 49%), hsl(35 80% 45%))",
+        "gradient-dark": "linear-gradient(180deg, hsl(220 20% 6%), hsl(220 25% 4%))",
+        "gradient-card": "linear-gradient(145deg, hsl(220 18% 12%), hsl(220 20% 8%))",
+        "gradient-hero": "linear-gradient(180deg, transparent 0%, hsl(220 20% 6% / 0.6) 50%, hsl(220 20% 6%) 100%)",
       },
       boxShadow: {
-        "gold": "0 4px 30px hsl(var(--gold) / 0.2)",
-        "gold-lg": "0 0 30px hsl(var(--gold) / 0.3), 0 0 60px hsl(var(--gold) / 0.1)",
+        "gold": "0 4px 30px hsl(43 74% 49% / 0.2)",
+        "gold-lg": "0 0 30px hsl(43 74% 49% / 0.3), 0 0 60px hsl(43 74% 49% / 0.1)",
         "card": "0 10px 40px hsl(0 0% 0% / 0.3)",
         "elevated": "0 20px 60px hsl(0 0% 0% / 0.4)",
       },

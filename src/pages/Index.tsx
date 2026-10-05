@@ -101,7 +101,7 @@ export default function Index() {
             className="absolute inset-0 hidden lg:block"
             style={{
               background:
-                "linear-gradient(to right, transparent 45%, hsl(var(--background) / 0.75) 78%, hsl(var(--background)) 100%)",
+                "linear-gradient(to right, transparent 45%, hsl(220 20% 6% / 0.75) 78%, hsl(220 20% 6%) 100%)",
             }}
           />
         </div>
