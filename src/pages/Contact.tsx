@@ -153,7 +153,7 @@ export default function Contact() {
       />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24 bg-dark-surface">
+      <section className="pt-32 pb-16 md:pt-40 md:pb-24 bg-card">
         <div className="container-custom">
           <nav aria-label="Breadcrumb" className="mb-8">
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
