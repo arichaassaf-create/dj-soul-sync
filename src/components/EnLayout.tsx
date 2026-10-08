@@ -29,9 +29,13 @@ export function copyEmailOnClick() {
 
 const nav = [
   { href: "/en", label: "Home" },
+  { href: "/en/services", label: "Services" },
+  { href: "/en/us-couples", label: "US Couples" },
   { href: "/en/destination-wedding-dj-israel", label: "Wedding in Israel" },
   { href: "/en/israeli-wedding-dj-usa", label: "Wedding in the US" },
   { href: "/en/reviews", label: "Reviews" },
+  { href: "/en/blog", label: "Blog" },
+  { href: "/en/wedding-form", label: "Questionnaire" },
 ];
 
 function EnHeader() {
@@ -43,7 +47,7 @@ function EnHeader() {
         <Link to="/en" className="text-xl font-heading font-bold text-gradient-gold">
           DJ Assaf Aricha
         </Link>
-        <ul className="hidden lg:flex items-center gap-7 text-sm">
+        <ul className="hidden xl:flex items-center gap-5 text-sm">
           {nav.map((l) => (
             <li key={l.href}>
               <Link
@@ -60,7 +64,7 @@ function EnHeader() {
             </Link>
           </li>
         </ul>
-        <div className="hidden lg:block">
+        <div className="hidden xl:block">
           <Button variant="hero" size="sm" asChild>
             <a href={EN_WHATSAPP} target="_blank" rel="noopener noreferrer">
               Check availability
@@ -68,7 +72,7 @@ function EnHeader() {
           </Button>
         </div>
         <button
-          className="lg:hidden p-2"
+          className="xl:hidden p-2"
           onClick={() => setOpen(!open)}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
@@ -77,7 +81,7 @@ function EnHeader() {
         </button>
       </nav>
       {open && (
-        <div className="lg:hidden container-custom pt-4 pb-2 flex flex-col gap-3">
+        <div className="xl:hidden container-custom pt-4 pb-2 flex flex-col gap-3">
           {nav.map((l) => (
             <Link key={l.href} to={l.href} onClick={() => setOpen(false)} className="py-2 text-foreground/90">
               {l.label}

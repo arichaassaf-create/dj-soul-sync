@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Routes, Route } from "react-router-dom";
 import { ScrollToTop } from "./components/ScrollToTop";
 import NotFound from "./pages/NotFound";
-import { routes, blogRoute } from "./routes";
+import { routes, blogRoute, enBlogRoute } from "./routes";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +21,7 @@ const App = () => (
           <Route key={r.path} path={r.path} element={r.element} />
         ))}
         <Route path={blogRoute.path} element={blogRoute.element} />
+        <Route path={enBlogRoute.path} element={enBlogRoute.element} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </TooltipProvider>
