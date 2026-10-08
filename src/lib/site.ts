@@ -75,6 +75,9 @@ export const REVIEW_SOURCES = {
     label: "מתחתנים למען מתחתנים",
     url: "https://www.mit4mit.co.il/biz/25035",
     count: 33,
+    // Every one of the 33 reviews is in the top rank (5 of 5) in Mit4Mit's own distribution.
+    // Mit4Mit's headline "95/100" is an algorithmic score (not an average); we show the top-rank share instead.
+    topRated: 33,
     score: "95/100",
     checkedAt: "2026-09-27",
   },
