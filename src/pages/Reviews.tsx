@@ -19,6 +19,10 @@ export default function Reviews() {
         title="ביקורות על DJ אסף אריכא | מה זוגות כותבים"
         description={`${mit4mit.count} ביקורות של זוגות על DJ אסף אריכא באתר מתחתנים למען מתחתנים, בציון ${mit4mit.score}. ציטוטים מקוריים עם קישור למקור.`}
         canonicalUrl="/reviews"
+        alternates={[
+          { hrefLang: "he", path: "/reviews" },
+          { hrefLang: "en", path: "/en/reviews" },
+        ]}
         breadcrumbs={[{ name: "ביקורות", path: "/reviews" }]}
       />
 

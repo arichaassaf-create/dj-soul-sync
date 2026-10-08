@@ -161,6 +161,9 @@ export default function EnHome() {
               <EnReviewCard key={r.id} review={r} />
             ))}
           </div>
+          <Link to="/en/reviews" className="inline-block mt-8 text-primary font-medium hover:underline">
+            Read all 20 reviews in English &rarr;
+          </Link>
         </div>
       </section>
 

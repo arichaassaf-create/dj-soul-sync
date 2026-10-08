@@ -31,6 +31,7 @@ const nav = [
   { href: "/en", label: "Home" },
   { href: "/en/destination-wedding-dj-israel", label: "Wedding in Israel" },
   { href: "/en/israeli-wedding-dj-usa", label: "Wedding in the US" },
+  { href: "/en/reviews", label: "Reviews" },
 ];
 
 function EnHeader() {
@@ -112,11 +113,6 @@ function EnFooter() {
                 </Link>
               </li>
             ))}
-            <li>
-              <Link to="/reviews" lang="he" className="text-muted-foreground hover:text-primary">
-                Reviews (in Hebrew)
-              </Link>
-            </li>
           </ul>
         </nav>
         <div>
