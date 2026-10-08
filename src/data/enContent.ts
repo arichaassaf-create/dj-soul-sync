@@ -22,6 +22,10 @@ const translations: Record<string, string> = {
     "What mattered to us musically was that all of our guests could celebrate, dance and feel part of the biggest event of our lives, from the young crowd to the older guests.",
   keren:
     "You got my aunts dancing, which is not easy, and gave us trance until 4 a.m. Who would have believed it, a winter wedding in the middle of the week.",
+  hen:
+    "He lifted and read the dance floor at a small wedding so that people didn't sit down for a moment. As a person, he has a big heart. He helped and supported our wedding decisions, came to the venue a few days before to make sure he had room for all his equipment.",
+  dennis:
+    "A winter wedding with 180 guests, 80 of them our friends, and it was very important to us that the wedding would go on until late, and it did. Assaf kept our dance floor flying until 2:30 a.m.",
   "assaf-friday":
     "We got married in the hot summer months at an outdoor venue on a Friday afternoon. There was a heat wave that day, 40°C (104°F), and the man who saved the wedding and kept more than 100 of our 220 guests dancing nonstop into the night was Assaf.",
 };
@@ -105,5 +109,33 @@ export const enUsFaq: FaqItem[] = [
   {
     q: "Can you combine American wedding traditions with Israeli music?",
     a: "Yes. The night is built around your program, whether that's a cocktail hour, a grand entrance or a first dance, with Israeli and Mizrahi dance sets where they lift the room the most.",
+  },
+];
+
+/** English translation of the Hebrew homepage FAQ (src/data/faq.ts homeFaq), for /en. */
+export const enTranslatedHomeFaq: FaqItem[] = [
+  {
+    q: "How far ahead should we book a wedding DJ?",
+    a: "It's recommended to book a DJ 6 to 12 months ahead, especially in wedding season (April to October). Popular dates fill up fast, so the first step is to check availability for your date.",
+  },
+  {
+    q: "How does the music meeting work?",
+    a: "In the music meeting I play you songs and you choose what speaks to you, so the playlist is built from your taste rather than a ready-made list. We go through the key moments: walking to the chuppah, breaking the glass, the slow dance and the styles for the dance floor. Before the meeting you can fill in the music questionnaire on the site, and if you don't have final choices yet that's completely fine, that's what the meeting is for.",
+  },
+  {
+    q: "Do you adapt the music to the crowd?",
+    a: "Yes, that's the heart of the job. I respect the couple's wishes and at the same time read the dance floor in real time, so both the young crowd and the older guests feel part of the event. Couples have described a dance floor where the aunts and the friends all danced, from happy songs to trance late at night.",
+  },
+  {
+    q: "Do you do small weddings?",
+    a: "Yes. At a small wedding reading the crowd matters even more, because every guest is felt on the dance floor. Several couples wrote that at their small wedding nobody sat down, and midweek weddings went on until 3 and 4 a.m.",
+  },
+  {
+    q: "Which areas do you cover?",
+    a: "I'm based in Karmei Yosef and DJ weddings in central Israel and the Sharon, including Tel Aviv, Modi'in, Rehovot, Ness Ziona, Mazkeret Batya, Ramat HaSharon, Herzliya, Hod HaSharon and the moshavim of the Shfela, and I also fly to weddings in the United States. For other areas you can check availability directly.",
+  },
+  {
+    q: "How much does a wedding DJ cost?",
+    a: "The price depends on the length of the event, the location and the equipment needed, so there's no single price that fits everyone. For an exact quote for your event, send me your wedding details.",
   },
 ];

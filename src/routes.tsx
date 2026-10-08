@@ -16,11 +16,17 @@ import WorkshopLanding from "./pages/WorkshopLanding";
 import WhatsAppRedirect from "./pages/WhatsAppRedirect";
 import GiftSuccess from "./pages/GiftSuccess";
 import IsraelisAbroad from "./pages/IsraelisAbroad";
-import EnHome from "./pages/en/EnHome";
+import EnIndex from "./pages/en/EnIndex";
+import EnUsCouples from "./pages/en/EnUsCouples";
+import EnServices from "./pages/en/EnServices";
+import EnBlog from "./pages/en/EnBlog";
+import EnBlogPost from "./pages/en/EnBlogPost";
+import EnWeddingForm from "./pages/en/EnWeddingForm";
 import EnIsraelWedding from "./pages/en/EnIsraelWedding";
 import EnUsWedding from "./pages/en/EnUsWedding";
 import EnReviews from "./pages/en/EnReviews";
 import { blogPosts } from "./data/blogPosts";
+import { blogPostsEn } from "./data/blogPostsEn";
 
 export interface AppRoute {
   path: string;
@@ -37,7 +43,11 @@ export const routes: AppRoute[] = [
   { path: "/wedding-dj", element: <WeddingDJ />, sitemap: true, priority: 0.9 },
   { path: "/reviews", element: <Reviews />, sitemap: true, priority: 0.8 },
   { path: "/israelis-abroad", element: <IsraelisAbroad />, sitemap: true, priority: 0.7 },
-  { path: "/en", element: <EnHome />, sitemap: true, priority: 0.9 },
+  { path: "/en", element: <EnIndex />, sitemap: true, priority: 0.9 },
+  { path: "/en/us-couples", element: <EnUsCouples />, sitemap: true, priority: 0.8 },
+  { path: "/en/services", element: <EnServices />, sitemap: true, priority: 0.7 },
+  { path: "/en/wedding-form", element: <EnWeddingForm />, sitemap: true, priority: 0.6 },
+  { path: "/en/blog", element: <EnBlog />, sitemap: true, priority: 0.6 },
   { path: "/en/destination-wedding-dj-israel", element: <EnIsraelWedding />, sitemap: true, priority: 0.9 },
   { path: "/en/israeli-wedding-dj-usa", element: <EnUsWedding />, sitemap: true, priority: 0.8 },
   { path: "/en/reviews", element: <EnReviews />, sitemap: true, priority: 0.7 },
@@ -56,15 +66,21 @@ export const routes: AppRoute[] = [
 ];
 
 export const blogRoute = { path: "/blog/:slug", element: <BlogPost /> };
+export const enBlogRoute = { path: "/en/blog/:slug", element: <EnBlogPost /> };
 
 /** Every concrete URL to prerender, including each blog post. */
 export function allPaths() {
-  return [...routes.map((r) => r.path), ...blogPosts.map((p) => `/blog/${p.slug}`)];
+  return [
+    ...routes.map((r) => r.path),
+    ...blogPosts.map((p) => `/blog/${p.slug}`),
+    ...blogPostsEn.map((p) => `/en/blog/${p.slug}`),
+  ];
 }
 
 export function sitemapEntries() {
   return [
     ...routes.filter((r) => r.sitemap).map((r) => ({ path: r.path, priority: r.priority ?? 0.5, lastmod: undefined as string | undefined })),
     ...blogPosts.map((p) => ({ path: `/blog/${p.slug}`, priority: 0.6, lastmod: p.date })),
+    ...blogPostsEn.map((p) => ({ path: `/en/blog/${p.slug}`, priority: 0.5, lastmod: p.date })),
   ];
 }

@@ -27,6 +27,10 @@ export default function Blog() {
         title="בלוג | טיפים לחתונות ואירועים - DJ אסף אריכא"
         description="מדריכים וטיפים לתכנון המוזיקה בחתונה: איך לבחור דיג'יי, לבנות פלייליסט, ולתכנן מוזיקה לחופה. מאת DJ אסף אריכא - תקליטן לחתונות במרכז ובשרון."
         canonicalUrl="/blog"
+        alternates={[
+          { hrefLang: "he", path: "/blog" },
+          { hrefLang: "en", path: "/en/blog" },
+        ]}
         breadcrumbs={[{ name: "בלוג", path: "/blog" }]}
         keywords="בלוג דיג'יי חתונה, טיפים לבחירת תקליטן, מדריך מוזיקה לחתונה, פלייליסט לחתונה, מוזיקה לחופה"
         schema={[blogListSchema]}

@@ -133,6 +133,10 @@ export default function Services() {
         title="שירותי DJ לחתונות ומסיבות | מרכז, רמת השרון, הרצליה, הוד השרון"
         description="שירותי DJ מקצועיים לחתונות ומסיבות באזור המרכז והשרון: מודיעין, רחובות, רמת השרון, הרצליה, הוד השרון ומושבי השפלה. תקליטן מנוסה עם התאמה אישית."
         canonicalUrl="/services"
+        alternates={[
+          { hrefLang: "he", path: "/services" },
+          { hrefLang: "en", path: "/en/services" },
+        ]}
         breadcrumbs={[{ name: "שירותים", path: "/services" }]}
         keywords="שירותי DJ מרכז, תקליטן רמת השרון, DJ הרצליה, דיג'יי הוד השרון, תקליטן מודיעין, DJ רחובות, דיג'יי מושבים שפלה, שירותי דיג'יי השרון"
         schema={[servicesSchema]}

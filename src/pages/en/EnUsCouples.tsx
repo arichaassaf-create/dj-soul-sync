@@ -32,7 +32,7 @@ const reasons = [
   },
 ];
 
-export default function EnHome() {
+export default function EnUsCouples() {
   const reviews = (["lital", "hgafla", "michal"] as const).map(translatedReview);
 
   return (
@@ -41,11 +41,10 @@ export default function EnHome() {
         lang="en"
         title="Israeli Wedding DJ for Jewish Couples from the US | DJ Assaf Aricha"
         description="Israeli wedding DJ for Jewish couples from the US, for weddings in Israel and in America. Israeli, Mizrahi and international music, planned in English over Zoom."
-        canonicalUrl="/en"
-        alternates={[
-          { hrefLang: "en", path: "/en" },
-          { hrefLang: "he", path: "/" },
-          { hrefLang: "x-default", path: "/" },
+        canonicalUrl="/en/us-couples"
+        breadcrumbs={[
+          { name: "English", path: "/en" },
+          { name: "US couples", path: "/en/us-couples" },
         ]}
         schema={[faqSchema(enHomeFaq)]}
       />
