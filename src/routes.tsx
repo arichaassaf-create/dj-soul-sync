@@ -19,6 +19,7 @@ import IsraelisAbroad from "./pages/IsraelisAbroad";
 import EnHome from "./pages/en/EnHome";
 import EnIsraelWedding from "./pages/en/EnIsraelWedding";
 import EnUsWedding from "./pages/en/EnUsWedding";
+import EnReviews from "./pages/en/EnReviews";
 import { blogPosts } from "./data/blogPosts";
 
 export interface AppRoute {
@@ -39,6 +40,7 @@ export const routes: AppRoute[] = [
   { path: "/en", element: <EnHome />, sitemap: true, priority: 0.9 },
   { path: "/en/destination-wedding-dj-israel", element: <EnIsraelWedding />, sitemap: true, priority: 0.9 },
   { path: "/en/israeli-wedding-dj-usa", element: <EnUsWedding />, sitemap: true, priority: 0.8 },
+  { path: "/en/reviews", element: <EnReviews />, sitemap: true, priority: 0.7 },
   { path: "/about", element: <About />, sitemap: true, priority: 0.8 },
   { path: "/services", element: <Services />, sitemap: true, priority: 0.8 },
   { path: "/contact", element: <Contact />, sitemap: true, priority: 0.8 },
