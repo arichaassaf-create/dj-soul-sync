@@ -2,6 +2,32 @@
   command = "npm run build"
   publish = "dist"
 
+# Legacy URLs from the old Wix site that Google still knows. Must stay above the 404 catch-all.
+[[redirects]]
+  from = "/wedding-playlist"
+  to = "/blog/perfect-wedding-playlist"
+  status = 301
+
+[[redirects]]
+  from = "/picz"
+  to = "/about"
+  status = 301
+
+[[redirects]]
+  from = "/inst4gr4m"
+  to = "/about"
+  status = 301
+
+[[redirects]]
+  from = "/single-post/*"
+  to = "/blog"
+  status = 301
+
+[[redirects]]
+  from = "/post/*"
+  to = "/blog"
+  status = 301
+
 # Every known route is prerendered to its own HTML file, which Netlify serves directly.
 # Unknown URLs get the prerendered 404 page with a real 404 status (no more soft 404s).
 # The JS bundle still loads on 404.html, so a route added in code but missing from
