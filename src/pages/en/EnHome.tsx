@@ -91,8 +91,8 @@ export default function EnHome() {
               </Button>
             </div>
             <p className="text-sm text-muted-foreground mt-6">
-              {REVIEW_SOURCES.mit4mit.count} reviews from couples on Israel's leading wedding review site, rated{" "}
-              {REVIEW_SOURCES.mit4mit.score}, and 5.0 on Google.
+              All {REVIEW_SOURCES.mit4mit.count} couples who reviewed Assaf on Israel's leading wedding review site gave
+              him the top rating, and he is rated 5.0 on Google.
             </p>
           </div>
         </div>

@@ -69,9 +69,11 @@ export default function EnReviews() {
                 <p className="text-sm text-muted-foreground mb-1">Mit4Mit, Israel's wedding review site</p>
                 <p className="flex items-center gap-2 text-3xl font-heading font-bold">
                   <Star className="h-6 w-6 fill-primary text-primary" aria-hidden="true" />
-                  {mit4mit.score}
+                  100%
                 </p>
-                <p className="text-sm text-muted-foreground mt-1">{mit4mit.count} reviews (in Hebrew)</p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {mit4mit.topRated} of {mit4mit.count} reviews at the top rating (in Hebrew)
+                </p>
               </div>
               <ExternalLink className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
             </a>

@@ -188,10 +188,10 @@ export default function Index() {
                 <Link to="/reviews" className="group">
                   <div className="flex items-center gap-1.5">
                     <Star className="h-5 w-5 fill-primary text-primary" />
-                    <span className="text-3xl font-bold font-heading">{REVIEW_SOURCES.mit4mit.score.split("/")[0]}</span>
+                    <span className="text-3xl font-bold font-heading">100%</span>
                   </div>
                   <div className="text-xs text-muted-foreground tracking-wide mt-0.5 group-hover:text-primary">
-                    {REVIEW_SOURCES.mit4mit.count} ביקורות במתחתנים למען מתחתנים
+                    {REVIEW_SOURCES.mit4mit.count} מתוך {REVIEW_SOURCES.mit4mit.count} זוגות: דירוג מרבי
                   </div>
                 </Link>
               </div>
@@ -411,7 +411,7 @@ export default function Index() {
               מה <span className="text-primary">זוגות</span> כותבים
             </h2>
             <p className="text-muted-foreground max-w-2xl">
-              ציטוטים מתוך {REVIEW_SOURCES.mit4mit.count} ביקורות אמיתיות של זוגות באתר מתחתנים למען מתחתנים, בציון {REVIEW_SOURCES.mit4mit.score}.
+              ציטוטים מתוך {REVIEW_SOURCES.mit4mit.count} ביקורות אמיתיות של זוגות באתר מתחתנים למען מתחתנים. כל {REVIEW_SOURCES.mit4mit.topRated} הזוגות דירגו בדירוג הגבוה ביותר.
             </p>
           </div>
 
