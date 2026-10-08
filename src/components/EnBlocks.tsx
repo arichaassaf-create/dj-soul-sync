@@ -9,7 +9,7 @@ import {
 import type { TranslatedReview } from "@/data/enContent";
 import type { FaqItem } from "@/data/faq";
 import { ENTITY } from "@/lib/site";
-import { EN_WHATSAPP } from "@/components/EnLayout";
+import { EN_WHATSAPP, copyEmailOnClick } from "@/components/EnLayout";
 
 export function EnReviewCard({ review }: { review: TranslatedReview }) {
   return (
@@ -72,7 +72,7 @@ export function EnCta({ title, text }: { title: string; text: string }) {
             </a>
           </Button>
           <Button variant="outline" size="lg" asChild>
-            <a href={`mailto:${ENTITY.email}?subject=${encodeURIComponent("Wedding DJ inquiry")}`}>
+            <a href={`mailto:${ENTITY.email}?subject=${encodeURIComponent("Wedding DJ inquiry")}`} onClick={copyEmailOnClick}>
               <Mail className="h-5 w-5" /> Email Assaf
             </a>
           </Button>

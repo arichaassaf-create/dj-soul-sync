@@ -2,11 +2,30 @@ import { ReactNode, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, MessageCircle, Mail, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 import { ENTITY, WHATSAPP_URL } from "@/lib/site";
 
 export const EN_WHATSAPP = `${WHATSAPP_URL}?text=${encodeURIComponent(
   "Hi Assaf, we're planning our wedding and would love to check your availability."
 )}`;
+
+/**
+ * mailto: does nothing for visitors without a desktop mail app (most Gmail-in-the-browser users).
+ * So the click also copies the address and says so; the mailto still opens a mail app where one exists.
+ */
+export function copyEmailOnClick() {
+  const email = ENTITY.email;
+  const done = () => toast.success(`Email copied: ${email}`, { description: "Paste it into your email app to write to Assaf." });
+  try {
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(email).then(done, () => toast(`Assaf's email: ${email}`));
+      return;
+    }
+  } catch {
+    /* fall through */
+  }
+  toast(`Assaf's email: ${email}`);
+}
 
 const nav = [
   { href: "/en", label: "Home" },
@@ -114,7 +133,7 @@ function EnFooter() {
               </a>
             </li>
             <li>
-              <a href={`mailto:${ENTITY.email}`} className="inline-flex items-center gap-2 hover:text-primary">
+              <a href={`mailto:${ENTITY.email}`} onClick={copyEmailOnClick} className="inline-flex items-center gap-2 hover:text-primary">
                 <Mail className="h-4 w-4" /> {ENTITY.email}
               </a>
             </li>
