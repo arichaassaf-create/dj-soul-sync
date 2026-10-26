@@ -4,6 +4,7 @@ import { Menu, X, MessageCircle, Mail, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { ENTITY, WHATSAPP_URL } from "@/lib/site";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 export const EN_WHATSAPP = `${WHATSAPP_URL}?text=${encodeURIComponent(
   "Hi Assaf, we're planning our wedding and would love to check your availability."
@@ -42,6 +43,7 @@ function EnHeader() {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
   return (
+    <>
     <header className="fixed top-0 left-0 right-0 z-50 glass shadow-card py-3">
       <nav className="container-custom flex items-center justify-between" aria-label="Main navigation">
         <Link to="/en" className="text-xl font-heading font-bold text-gradient-gold">
@@ -80,8 +82,11 @@ function EnHeader() {
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </nav>
-      {open && (
-        <div className="xl:hidden container-custom pt-4 pb-2 flex flex-col gap-3">
+    </header>
+    {/* Sibling of the header, not a child: the glass header's backdrop-filter would clip a fixed child to the header box. */}
+    {open && (
+      <div className="xl:hidden fixed inset-0 z-40 bg-background overflow-y-auto menu-in">
+        <div className="container-custom pt-24 pb-12 flex flex-col gap-3 text-lg">
           {nav.map((l) => (
             <Link key={l.href} to={l.href} onClick={() => setOpen(false)} className="py-2 text-foreground/90">
               {l.label}
@@ -91,8 +96,9 @@ function EnHeader() {
             עברית
           </Link>
         </div>
-      )}
-    </header>
+      </div>
+    )}
+    </>
   );
 }
 
@@ -148,8 +154,10 @@ function EnFooter() {
 }
 
 export function EnLayout({ children }: { children: ReactNode }) {
+  useScrollReveal();
   return (
     <div className="min-h-screen flex flex-col" dir="ltr" lang="en" style={{ textAlign: "left" }}>
+      <div className="scroll-progress" aria-hidden="true" />
       <EnHeader />
       <main className="flex-1">{children}</main>
       <EnFooter />

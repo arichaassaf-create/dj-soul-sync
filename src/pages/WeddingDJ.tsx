@@ -119,7 +119,7 @@ export default function WeddingDJ() {
               <Link to="/contact">בדיקת זמינות לתאריך שלכם</Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <Link to="/reviews">{REVIEW_SOURCES.mit4mit.count} ביקורות של זוגות</Link>
+              <Link to="/reviews">עשרות ביקורות של זוגות</Link>
             </Button>
           </div>
 

@@ -17,7 +17,7 @@ export default function Reviews() {
     <Layout>
       <SEO
         title="ביקורות על DJ אסף אריכא | מה זוגות כותבים"
-        description={`${mit4mit.count} ביקורות של זוגות על DJ אסף אריכא באתר מתחתנים למען מתחתנים, וכולם בדירוג הגבוה ביותר. ציטוטים מקוריים עם קישור למקור.`}
+        description={`עשרות ביקורות של זוגות על DJ אסף אריכא באתר מתחתנים למען מתחתנים, וכולם בדירוג הגבוה ביותר. ציטוטים מקוריים עם קישור למקור.`}
         canonicalUrl="/reviews"
         alternates={[
           { hrefLang: "he", path: "/reviews" },
@@ -74,7 +74,7 @@ export default function Reviews() {
                   100%
                 </p>
                 <p className="text-sm text-muted-foreground mt-1">
-                  {mit4mit.topRated} מתוך {mit4mit.count} ביקורות בדירוג הגבוה ביותר
+                  כל הביקורות בדירוג הגבוה ביותר
                 </p>
               </div>
               <ExternalLink className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
@@ -110,7 +110,7 @@ export default function Reviews() {
           <div className="mt-10 text-center">
             <Button variant="outline" size="lg" asChild>
               <a href={mit4mit.url} target="_blank" rel="noopener noreferrer">
-                לכל {mit4mit.count} הביקורות במתחתנים למען מתחתנים <ExternalLink className="h-4 w-4" />
+                לכל הביקורות במתחתנים למען מתחתנים <ExternalLink className="h-4 w-4" />
               </a>
             </Button>
           </div>

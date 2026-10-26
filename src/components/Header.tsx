@@ -34,6 +34,7 @@ export function Header() {
   }, [location.pathname]);
 
   return (
+    <>
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? "glass shadow-card py-3" : "bg-transparent py-5"
@@ -84,7 +85,7 @@ export function Header() {
 
         {/* Mobile Menu Button */}
         <button
-          className="lg:hidden p-2 text-foreground"
+          className="lg:hidden p-2 text-foreground order-first"
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? "סגור תפריט" : "פתח תפריט"}
           aria-expanded={isOpen}
@@ -92,13 +93,18 @@ export function Header() {
           {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
 
-        {/* Mobile Navigation */}
-        <div
-          className={`lg:hidden fixed inset-0 top-16 bg-background/98 backdrop-blur-lg transition-all duration-300 ${
-            isOpen ? "opacity-100 visible" : "opacity-0 invisible"
-          }`}
-        >
-          <ul className="flex flex-col items-center gap-6 pt-10">
+      </nav>
+    </header>
+
+    {/* Mobile Navigation. Sibling of the header, not a child: the scrolled header has a
+        backdrop-filter, which would turn it into the containing block and shrink this panel. */}
+    <div
+      className={`lg:hidden fixed inset-0 z-40 bg-background overflow-y-auto transition-all duration-300 ${
+        isOpen ? "opacity-100 visible" : "opacity-0 invisible"
+      }`}
+      aria-hidden={!isOpen}
+    >
+          <ul className="flex flex-col items-center gap-6 pt-28 pb-12">
             {navLinks.map((link, index) => (
               <li
                 key={link.href}
@@ -136,8 +142,7 @@ export function Header() {
               </Button>
             </li>
           </ul>
-        </div>
-      </nav>
-    </header>
+    </div>
+    </>
   );
 }

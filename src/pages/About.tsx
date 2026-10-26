@@ -107,7 +107,7 @@ export default function About() {
                   עם כל זוג אני בונה את המוזיקה בפגישה אישית, ובערב עצמו מקשיב לקהל ומתאים את הרחבה בזמן אמת.{" "}
                   <Link to="/wedding-dj" className="text-primary hover:underline">כך נראה התהליך עם זוגות</Link>, ו
                   <Link to="/reviews" className="text-primary hover:underline">כך זוגות מתארים אותו</Link>{" "}
-                  ({REVIEW_SOURCES.mit4mit.count} ביקורות במתחתנים למען מתחתנים).
+                  (עשרות ביקורות במתחתנים למען מתחתנים).
                 </p>
               </div>
 

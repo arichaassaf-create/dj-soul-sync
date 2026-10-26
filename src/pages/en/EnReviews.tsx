@@ -72,7 +72,7 @@ export default function EnReviews() {
                   100%
                 </p>
                 <p className="text-sm text-muted-foreground mt-1">
-                  {mit4mit.topRated} of {mit4mit.count} reviews at the top rating (in Hebrew)
+                  All reviews at the top rating (in Hebrew)
                 </p>
               </div>
               <ExternalLink className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
@@ -114,7 +114,7 @@ export default function EnReviews() {
             ))}
           </div>
           <p className="text-sm text-muted-foreground mt-6">
-            Read all {mit4mit.count} reviews in the original Hebrew on{" "}
+            Read all the reviews in the original Hebrew on{" "}
             <a href={mit4mit.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
               Mit4Mit
             </a>
