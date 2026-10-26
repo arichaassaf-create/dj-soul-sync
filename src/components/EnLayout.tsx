@@ -4,6 +4,7 @@ import { Menu, X, MessageCircle, Mail, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { ENTITY, WHATSAPP_URL } from "@/lib/site";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 export const EN_WHATSAPP = `${WHATSAPP_URL}?text=${encodeURIComponent(
   "Hi Assaf, we're planning our wedding and would love to check your availability."
@@ -81,7 +82,7 @@ function EnHeader() {
         </button>
       </nav>
       {open && (
-        <div className="xl:hidden container-custom pt-4 pb-2 flex flex-col gap-3">
+        <div className="xl:hidden container-custom pt-4 pb-2 flex flex-col gap-3 menu-in">
           {nav.map((l) => (
             <Link key={l.href} to={l.href} onClick={() => setOpen(false)} className="py-2 text-foreground/90">
               {l.label}
@@ -148,8 +149,10 @@ function EnFooter() {
 }
 
 export function EnLayout({ children }: { children: ReactNode }) {
+  useScrollReveal();
   return (
     <div className="min-h-screen flex flex-col" dir="ltr" lang="en" style={{ textAlign: "left" }}>
+      <div className="scroll-progress" aria-hidden="true" />
       <EnHeader />
       <main className="flex-1">{children}</main>
       <EnFooter />

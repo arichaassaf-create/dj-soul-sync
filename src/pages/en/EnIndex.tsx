@@ -9,7 +9,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Phone, MessageCircle, Star, Music, Heart, ChevronRight } from "lucide-react";
-import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { EnReviewCard } from "@/components/EnBlocks";
 import { HeroAmbience } from "@/components/HeroAmbience";
 import { translatedReview, enTranslatedHomeFaq } from "@/data/enContent";
@@ -66,7 +65,6 @@ const marqueeItems = [
 ];
 
 export default function EnIndex() {
-  useScrollReveal();
 
   return (
     <EnLayout>

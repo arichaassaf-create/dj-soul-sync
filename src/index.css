@@ -286,24 +286,80 @@
 /* ─────────────────────────────────────────────────────────
    SCROLL REVEAL SYSTEM
    ───────────────────────────────────────────────────────── */
+/* Enter recipe: opacity + translateY + blur, materialising into focus.
+   Applied to hand-tagged blocks on the homepages and auto-tagged blocks everywhere else. */
 .js [data-reveal] {
   opacity: 0;
-  transform: scale(0.96) translateY(14px);
+  transform: translateY(14px);
+  filter: blur(4px);
   transition:
-    opacity 0.55s cubic-bezier(0.23, 1, 0.32, 1),
-    transform 0.55s cubic-bezier(0.23, 1, 0.32, 1);
+    opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+    transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+    filter 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
+/* filter must return to none, not blur(0): any filter value makes the element a containing block. */
 [data-reveal][data-visible="true"] {
   opacity: 1;
   transform: none;
+  filter: none;
 }
 
-[data-reveal][data-delay="1"][data-visible="true"] { transition-delay: 50ms; }
-[data-reveal][data-delay="2"][data-visible="true"] { transition-delay: 100ms; }
-[data-reveal][data-delay="3"][data-visible="true"] { transition-delay: 150ms; }
-[data-reveal][data-delay="4"][data-visible="true"] { transition-delay: 200ms; }
-[data-reveal][data-delay="5"][data-visible="true"] { transition-delay: 250ms; }
+[data-reveal][data-delay="1"][data-visible="true"] { transition-delay: 60ms; }
+[data-reveal][data-delay="2"][data-visible="true"] { transition-delay: 120ms; }
+[data-reveal][data-delay="3"][data-visible="true"] { transition-delay: 180ms; }
+[data-reveal][data-delay="4"][data-visible="true"] { transition-delay: 240ms; }
+[data-reveal][data-delay="5"][data-visible="true"] { transition-delay: 300ms; }
+
+/* ─────────────────────────────────────────────────────────
+   SCROLL PROGRESS (gold hairline under the header)
+   Progressive enhancement: only browsers with scroll-driven animations draw it.
+   ───────────────────────────────────────────────────────── */
+.scroll-progress {
+  display: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 60;
+    pointer-events: none;
+    background: linear-gradient(90deg, hsl(43 74% 49%), hsl(35 80% 55%));
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    animation: scroll-progress-grow linear both;
+    animation-timeline: scroll(root block);
+  }
+
+  html[dir="rtl"] .scroll-progress {
+    transform-origin: 100% 50%;
+  }
+}
+
+@keyframes scroll-progress-grow {
+  to { transform: scaleX(1); }
+}
+
+/* Mobile menu: short settle-in. Opened occasionally, so quick and soft. */
+@keyframes menu-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.menu-in {
+  animation: menu-in 0.22s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+/* Primary buttons answer the press everywhere, not only where btn-active was added by hand. */
+a[class*="inline-flex"]:active,
+button[class*="inline-flex"]:active {
+  transform: scale(0.97);
+}
 
 /* ─────────────────────────────────────────────────────────
    EQ BARS (DJ equalizer decoration)
@@ -536,7 +592,21 @@
   [data-reveal] {
     opacity: 1 !important;
     transform: none !important;
+    filter: none !important;
     transition: none !important;
+  }
+
+  .scroll-progress {
+    display: none !important;
+  }
+
+  .menu-in {
+    animation: none;
+  }
+
+  a[class*="inline-flex"]:active,
+  button[class*="inline-flex"]:active {
+    transform: none;
   }
 }
 
