@@ -56,7 +56,7 @@ export function Footer() {
             </p>
             <p className="text-sm text-muted-foreground mb-6">
               <a href="https://www.mit4mit.co.il/biz/25035" target="_blank" rel="noopener noreferrer" className="hover:text-primary">
-                33 ביקורות במתחתנים למען מתחתנים
+                עשרות ביקורות במתחתנים למען מתחתנים
               </a>
               {" · "}
               <a href="https://www.youtube.com/c/AssAfArichA" target="_blank" rel="noopener noreferrer" className="hover:text-primary">

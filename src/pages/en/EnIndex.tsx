@@ -190,7 +190,7 @@ export default function EnIndex() {
                     <span className="text-3xl font-bold font-heading">100%</span>
                   </div>
                   <div className="text-xs text-muted-foreground tracking-wide mt-0.5 group-hover:text-primary">
-                    {REVIEW_SOURCES.mit4mit.count} of {REVIEW_SOURCES.mit4mit.count} couples: top rating
+                    dozens of couples: all top rated
                   </div>
                 </Link>
               </div>
@@ -410,7 +410,7 @@ export default function EnIndex() {
               What <span className="text-primary">couples</span> say
             </h2>
             <p className="text-muted-foreground max-w-2xl">
-              Translated quotes from {REVIEW_SOURCES.mit4mit.count} real reviews on Israel's leading wedding review site. All {REVIEW_SOURCES.mit4mit.topRated} couples gave the top rating.
+              Translated quotes from dozens of real reviews on Israel's leading wedding review site. All couples gave the top rating.
             </p>
           </div>
 

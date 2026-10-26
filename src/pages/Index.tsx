@@ -70,7 +70,7 @@ export default function Index() {
     <Layout>
       <SEO
         title="DJ אסף אריכא | DJ לחתונה במרכז ובשרון"
-        description="DJ אסף אריכא, תקליטן לחתונות במרכז ובשרון. פגישת מוזיקה אישית, קריאת קהל בזמן אמת ורחבה מלאה מהחופה ועד השיר האחרון. 33 ביקורות של זוגות במתחתנים למען מתחתנים."
+        description="DJ אסף אריכא, תקליטן לחתונות במרכז ובשרון. פגישת מוזיקה אישית, קריאת קהל בזמן אמת ורחבה מלאה מהחופה ועד השיר האחרון. עשרות ביקורות של זוגות במתחתנים למען מתחתנים."
         canonicalUrl="/"
         alternates={[
           { hrefLang: "he", path: "/" },
@@ -189,7 +189,7 @@ export default function Index() {
                     <span className="text-3xl font-bold font-heading">100%</span>
                   </div>
                   <div className="text-xs text-muted-foreground tracking-wide mt-0.5 group-hover:text-primary">
-                    {REVIEW_SOURCES.mit4mit.count} מתוך {REVIEW_SOURCES.mit4mit.count} זוגות: דירוג מרבי
+                    עשרות זוגות: כולם בדירוג מרבי
                   </div>
                 </Link>
               </div>
@@ -409,7 +409,7 @@ export default function Index() {
               מה <span className="text-primary">זוגות</span> כותבים
             </h2>
             <p className="text-muted-foreground max-w-2xl">
-              ציטוטים מתוך {REVIEW_SOURCES.mit4mit.count} ביקורות אמיתיות של זוגות באתר מתחתנים למען מתחתנים. כל {REVIEW_SOURCES.mit4mit.topRated} הזוגות דירגו בדירוג הגבוה ביותר.
+              ציטוטים מתוך עשרות ביקורות אמיתיות של זוגות באתר מתחתנים למען מתחתנים. כל הזוגות דירגו בדירוג הגבוה ביותר.
             </p>
           </div>
 
