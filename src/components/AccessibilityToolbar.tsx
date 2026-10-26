@@ -82,7 +82,7 @@ export function AccessibilityToolbar() {
       {/* Accessibility Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-4 left-4 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
+        className="fixed bottom-24 lg:bottom-4 left-4 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
         aria-label="פתח תפריט נגישות"
         title="נגישות"
       >
@@ -92,7 +92,7 @@ export function AccessibilityToolbar() {
       {/* Accessibility Panel */}
       {isOpen && (
         <div 
-          className="fixed bottom-20 left-4 z-50 w-80 bg-card border border-border rounded-2xl shadow-2xl overflow-hidden animate-fade-in"
+          className="fixed bottom-40 lg:bottom-20 left-4 z-50 w-80 max-w-[calc(100vw-2rem)] max-h-[70dvh] overflow-y-auto bg-card border border-border rounded-2xl shadow-2xl overflow-hidden animate-fade-in"
           role="dialog"
           aria-label="תפריט נגישות"
         >
