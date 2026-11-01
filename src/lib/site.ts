@@ -21,7 +21,7 @@ export const ENTITY = {
   logo: `${SITE_URL}/favicon.jpg`,
   image: `${SITE_URL}/og-image.jpg`,
   description:
-    "DJ אסף אריכא הוא תקליטן לחתונות ואירועים בישראל, עם דגש על התאמה אישית לזוג וקריאת קהל בזמן אמת. פועל מכרמי יוסף ומתקלט בחתונות באזור המרכז והשרון.",
+    "DJ אסף אריכא הוא תקליטן לחתונות ואירועים בישראל, עם דגש על התאמה אישית לזוג וקריאת קהל בזמן אמת. פועל מכרמי יוסף ומתקלט בחתונות בכל הארץ.",
   // Only profiles that were verified to exist and belong to Assaf.
   sameAs: [
     "https://maps.google.com/?cid=17206966637446661136",

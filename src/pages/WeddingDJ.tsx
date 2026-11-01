@@ -70,7 +70,7 @@ export default function WeddingDJ() {
   const articleSchema = {
     "@type": "Article",
     "@id": `${url}#article`,
-    headline: "DJ לחתונה במרכז ובשרון: המדריך של DJ אסף אריכא",
+    headline: "DJ לחתונה: המדריך המלא של DJ אסף אריכא",
     author: { "@id": ids.person },
     publisher: { "@id": ids.business },
     dateModified: UPDATED,
@@ -83,7 +83,7 @@ export default function WeddingDJ() {
   return (
     <Layout>
       <SEO
-        title="DJ לחתונה במרכז ובשרון | המדריך של DJ אסף אריכא"
+        title="DJ לחתונה: המדריך המלא | DJ אסף אריכא"
         description="איך בוחרים DJ לחתונה, איך נראית פגישת המוזיקה, איך בוחרים שיר כניסה לחופה ושבירת כוס, ואיך בונים רחבה לקהל מגוון. מהניסיון של DJ אסף אריכא."
         canonicalUrl="/wedding-dj"
         modifiedTime={UPDATED}
@@ -103,7 +103,7 @@ export default function WeddingDJ() {
           </nav>
 
           <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6 leading-tight">
-            <span className="text-gradient-gold">DJ לחתונה</span> במרכז ובשרון
+            <span className="text-gradient-gold">DJ לחתונה</span>: המדריך המלא
           </h1>
           <p className="text-xl text-muted-foreground leading-relaxed mb-4">
             DJ אסף אריכא הוא תקליטן המתמחה בחתונות, שבונה עם כל זוג את המוזיקה בפגישה אישית וקורא את הרחבה בזמן אמת,

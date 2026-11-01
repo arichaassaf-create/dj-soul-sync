@@ -69,8 +69,8 @@ export default function Index() {
   return (
     <Layout>
       <SEO
-        title="DJ אסף אריכא | DJ לחתונה במרכז ובשרון"
-        description="DJ אסף אריכא, תקליטן לחתונות במרכז ובשרון. פגישת מוזיקה אישית, קריאת קהל בזמן אמת ורחבה מלאה מהחופה ועד השיר האחרון. עשרות ביקורות של זוגות במתחתנים למען מתחתנים."
+        title="DJ אסף אריכא | DJ לחתונה ולאירועים בכל הארץ"
+        description="DJ אסף אריכא, תקליטן לחתונות ואירועים בכל הארץ. פגישת מוזיקה אישית, קריאת קהל בזמן אמת ורחבה מלאה מהחופה ועד השיר האחרון. עשרות ביקורות של זוגות במתחתנים למען מתחתנים."
         canonicalUrl="/"
         alternates={[
           { hrefLang: "he", path: "/" },
@@ -123,7 +123,7 @@ export default function Index() {
               >
                 <EQBars count={6} />
                 <span className="text-primary text-xs font-medium tracking-[0.22em] uppercase">
-                  DJ לחתונות ואירועים · מרכז ושרון
+                  DJ לחתונות ואירועים · בכל הארץ
                 </span>
               </div>
 
@@ -137,7 +137,7 @@ export default function Index() {
                 <br />
                 <span className="text-primary">אריכא</span>
                 <span className="block text-xl md:text-2xl lg:text-3xl font-medium text-foreground/80 tracking-normal mt-5">
-                  DJ לחתונה במרכז ובשרון
+                  DJ לחתונה בכל הארץ
                 </span>
               </h1>
 

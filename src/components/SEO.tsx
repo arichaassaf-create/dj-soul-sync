@@ -35,7 +35,7 @@ function toPath(canonicalUrl?: string) {
 }
 
 export function SEO({
-  title = "DJ אסף אריכא | DJ לחתונה במרכז ובשרון",
+  title = "DJ אסף אריכא | DJ לחתונה ולאירועים",
   description = ENTITY.description,
   canonicalUrl,
   ogImage = ENTITY.image,

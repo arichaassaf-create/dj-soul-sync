@@ -24,7 +24,7 @@ const footerLinks = {
     { href: "/contact", label: "צור קשר" },
   ],
   services: [
-    { href: "/wedding-dj", label: "DJ לחתונה במרכז ובשרון" },
+    { href: "/wedding-dj", label: "DJ לחתונה" },
     { href: "/services#private", label: "מסיבות פרטיות" },
     { href: "/services#corporate", label: "אירועי חברה" },
     { href: "/wedding-form", label: "שאלון חתונה" },
@@ -52,7 +52,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              DJ לחתונות ואירועים באזור המרכז והשרון. פגישת מוזיקה אישית, קריאת קהל ורחבה מלאה. כרמי יוסף, 050-5567078.
+              DJ לחתונות ואירועים בכל הארץ. פגישת מוזיקה אישית, קריאת קהל ורחבה מלאה. כרמי יוסף, 050-5567078.
             </p>
             <p className="text-sm text-muted-foreground mb-6">
               <a href="https://www.mit4mit.co.il/biz/25035" target="_blank" rel="noopener noreferrer" className="hover:text-primary">
