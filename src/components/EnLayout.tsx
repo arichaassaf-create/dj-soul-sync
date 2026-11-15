@@ -147,7 +147,8 @@ function EnFooter() {
         </div>
       </div>
       <p className="text-center text-xs text-muted-foreground pb-24 lg:pb-8">
-        © {new Date().getFullYear()} DJ Assaf Aricha
+        © {new Date().getFullYear()} DJ Assaf Aricha · Website by{" "}
+        <a href="https://ai-mentor.info/en/web-development.html" className="hover:text-primary underline-offset-2 hover:underline">AI Mentor, web development and AI agents</a>
       </p>
     </footer>
   );
