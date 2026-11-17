@@ -190,8 +190,10 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-muted-foreground text-sm">
             © {currentYear} די ג'יי אסף אריכא. כל הזכויות שמורות.
-            {" "}האתר נבנה על ידי{" "}
-            <a href="https://ai-mentor.info/bniyat-atarim.html" className="hover:text-primary transition-colors underline-offset-2 hover:underline">AI Mentor, בניית אתרים וסוכני AI לעסקים</a>
+          </p>
+          <p className="text-sm font-semibold text-foreground/85 text-center">
+            האתר נבנה על ידי{" "}
+            <a href="https://ai-mentor.info/bniyat-atarim.html" target="_blank" rel="noopener" dir="ltr" title="AI Mentor, בניית אתרים וסוכני AI לעסקים" className="text-foreground underline underline-offset-4 hover:text-primary transition-colors">AI Mentor</a>
           </p>
           <ul className="flex gap-6">
             {footerLinks.legal.map((link) => (
