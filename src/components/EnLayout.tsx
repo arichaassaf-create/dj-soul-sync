@@ -146,9 +146,12 @@ function EnFooter() {
           </ul>
         </div>
       </div>
-      <p className="text-center text-xs text-muted-foreground pb-24 lg:pb-8">
-        © {new Date().getFullYear()} DJ Assaf Aricha · Website by{" "}
-        <a href="https://ai-mentor.info/en/web-development.html" className="hover:text-primary underline-offset-2 hover:underline">AI Mentor, web development and AI agents</a>
+      <p className="text-center text-xs text-muted-foreground">
+        © {new Date().getFullYear()} DJ Assaf Aricha. All rights reserved.
+      </p>
+      <p className="text-center text-sm font-semibold text-foreground/85 mt-2 pb-24 lg:pb-8">
+        Website by{" "}
+        <a href="https://ai-mentor.info/en/web-development.html" target="_blank" rel="noopener" title="AI Mentor, web development and AI agents" className="text-foreground underline underline-offset-4 hover:text-primary transition-colors">AI Mentor</a>
       </p>
     </footer>
   );
